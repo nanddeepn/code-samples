@@ -1,20 +1,15 @@
 <#
+  .SYNOPSIS
+  This example is used to disable a specific web part(s) at the tenant level.
+  It is not meant to use as a production baseline.
 
-#>
-
-
-<#
-.SYNOPSIS
-	This example is used to disable a specific web part(s) at the tenant level.
-	It is not meant to use as a production baseline.
-
-	Allows administrators prevent certain, specific web parts from being added to pages or rendering on pages on which they were previously added.
-	Reference: https://docs.microsoft.com/en-us/powershell/module/sharepoint-online/set-spotenant
+  Allows administrators prevent certain, specific web parts from being added to pages or rendering on pages on which they were previously added.
+  Reference: https://docs.microsoft.com/en-us/powershell/module/sharepoint-online/set-spotenant
  
- .PARAMETER tenantName
+  .PARAMETER tenantName
   Office 365 tenant name.
  
- .PARAMETER webPartIds
+  .PARAMETER webPartIds
   IDs of web parts to disable.
 #>
  

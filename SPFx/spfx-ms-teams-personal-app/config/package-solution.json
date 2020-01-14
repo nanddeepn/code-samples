@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-ms-teams-personal-app-client-side-solution",
+    "id": "26558199-3248-4397-8eed-fd779063eb6c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-msteams-personal-app.sppkg"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.10.0",
+    "libraryName": "spfx-ms-teams-personal-app",
+    "libraryId": "26558199-3248-4397-8eed-fd779063eb6b",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

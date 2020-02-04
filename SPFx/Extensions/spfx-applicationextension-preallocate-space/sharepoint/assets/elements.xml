@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="PreallocateSpace"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="d1a63535-2e2a-4cb9-8e78-f29d4743c396"
+        ClientSideComponentProperties="{&quot;Top&quot;:&quot;Test message&quot;}"
+        HostProperties="{&quot;preAllocatedApplicationCustomizerTopHeight&quot;:&quot;50&quot;,&quot;preAllocatedApplicationCustomizerBottomHeight&quot;:&quot;50&quot;}">
+    </CustomAction>
+</Elements>

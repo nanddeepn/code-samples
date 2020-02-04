@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "preallocate-space-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/preallocateSpace/PreallocateSpaceApplicationCustomizer.js",
+          "manifest": "./src/extensions/preallocateSpace/PreallocateSpaceApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PreallocateSpaceApplicationCustomizerStrings": "lib/extensions/preallocateSpace/loc/{locale}.js"
+  }
+}

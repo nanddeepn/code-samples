@@ -7,5 +7,6 @@ export interface ITreeItemProps {
     key: string;
     label: string;
     subLabel?: string;
+    PathDepth?: number;
     actions?: IContextualMenuItem[];
 }

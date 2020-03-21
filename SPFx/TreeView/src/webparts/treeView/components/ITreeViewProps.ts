@@ -1,3 +1,5 @@
+import { ITreeItem } from './ITreeItem';
+
 export interface ITreeViewProps {
-  description: string;
+  TermItems?: ITreeItem[];
 }

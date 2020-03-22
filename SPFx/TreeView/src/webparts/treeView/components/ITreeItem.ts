@@ -8,5 +8,6 @@ export interface ITreeItem {
     IsRoot?: boolean;
     PathDepth?: number;
     ParentId?: string;
-    children?: ITreeItem[]
+    children?: ITreeItem[];
+   
   }

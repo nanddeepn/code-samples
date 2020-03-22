@@ -9,4 +9,8 @@ export interface ITreeItemProps {
     subLabel?: string;
     PathDepth?: number;
     actions?: IContextualMenuItem[];
+    createChildrenNodes:any;
+    leftOffset:number;
+    isFirstRender:boolean;
+    defaultCollapsed:boolean;
 }

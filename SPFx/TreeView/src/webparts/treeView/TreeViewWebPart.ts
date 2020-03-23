@@ -31,8 +31,8 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
     const element: React.ReactElement<ITreeViewProps> = React.createElement(
       TreeView,
       {
-        TermItems: treeItems,
-        defaultCollapsed:true
+        TreeItems: treeItems,
+        defaultCollapsed: true
       }
     );
 

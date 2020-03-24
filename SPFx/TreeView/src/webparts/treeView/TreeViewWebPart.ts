@@ -20,7 +20,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
 
   public render(): void {
     var treeItems: Array<ITreeItem> = new Array<ITreeItem>();
-    treeItems.push({ Id: "0", Name: "A", IsRoot: true });
+    treeItems.push({ Id: "0", Name: "A" });
     treeItems.push({ Id: "1", Name: "B", ParentId: "0" });
     treeItems.push({ Id: "2", Name: "C", ParentId: "0" });
     treeItems.push({ Id: "3", Name: "D", ParentId: "1" });

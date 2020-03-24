@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "rich-text-control-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/richTextControl/RichTextControlWebPart.js",
+          "manifest": "./src/webparts/richTextControl/RichTextControlWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RichTextControlWebPartStrings": "lib/webparts/richTextControl/loc/{locale}.js"
+  }
+}

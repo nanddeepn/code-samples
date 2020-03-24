@@ -18,6 +18,7 @@ export interface ITreeItemProps {
   leftOffset:number;
   isFirstRender:boolean;
   defaultExpanded:boolean;
+  parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
 }
 
 export interface ITreeItemState {
@@ -43,6 +44,8 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     this.setState({
       expanded: !this.state.expanded
     });
+
+    this.props.parentCallbackExpandCollapse(this.props.treeNodeItem, this.state.expanded);
   }
 
   public render(): React.ReactElement<ITreeItemProps> {

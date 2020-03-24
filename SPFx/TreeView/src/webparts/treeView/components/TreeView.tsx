@@ -51,12 +51,17 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
+            parentCallbackExpandCollapse={this._onExpandCollapse}
           />
         );
       });
 
       return childrenWithHandlers;
     }
+  }
+
+  private _onExpandCollapse(item: ITreeItem, isExpanded: boolean) {
+    this.props.onExpandCollapse(item, isExpanded);
   }
 
   /**
@@ -109,6 +114,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           leftOffset={20}
           isFirstRender={true}
           defaultExpanded={true}
+          parentCallbackExpandCollapse={this._onExpandCollapse}
         />
       </React.Fragment>
     );

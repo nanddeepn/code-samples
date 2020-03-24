@@ -22,4 +22,10 @@ export interface ITreeViewProps {
    * By default this is set to none.
    */
   selectionMode: SelectionMode;
+  
+  /**
+   * Callback function called after a item is expanded / collapsed
+   * @argument item The expanded / collapsed item
+   */
+  onExpandCollapse?: (item: ITreeItem, isExpanded: boolean) => void;
 }

@@ -33,11 +33,16 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
       {
         items: treeItems,
         defaultExpanded: false,
-        selectionMode: SelectionMode.None
+        selectionMode: SelectionMode.None,
+        onExpandCollapse: this.onExpandCollapseTree
       }
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  private onExpandCollapseTree(item: ITreeItem, isExpanded: boolean) {
+    console.log(item);
   }
 
   protected onDispose(): void {

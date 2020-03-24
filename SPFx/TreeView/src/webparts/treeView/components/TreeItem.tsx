@@ -45,7 +45,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: !this.state.expanded
     });
 
-    this.props.parentCallbackExpandCollapse(this.props.treeNodeItem, this.state.expanded);
+    this.props.parentCallbackExpandCollapse(this.props.treeNodeItem, !this.state.expanded);
   }
 
   public render(): React.ReactElement<ITreeItemProps> {

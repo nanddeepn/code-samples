@@ -20,27 +20,14 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       loaded: true,
       defaultExpanded: this.props.defaultExpanded
     };
-    this._handleClick = this._handleClick.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleTreeExpandCollapse = this.handleTreeExpandCollapse.bind(this);
   }
 
-  private groupBy(list, keyGetter) {
-    const map = new Map();
-
-    list.forEach((item) => {
-      const key = keyGetter(item);
-      const collection = map.get(key);
-
-      if (!collection) {
-        map.set(key, [item]);
-      }
-      else {
-        collection.push(item);
-      }
-    });
-
-    return map;
-  }
-
+  /**
+   * Process the child nodes
+   */
   public createChildrenNodes = (list, paddingLeft) => {
     if (list.length) {
       let childrenWithHandlers = list.map((item, index) => {
@@ -51,7 +38,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
-            parentCallbackExpandCollapse={this._onExpandCollapse}
+            parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
           />
         );
       });
@@ -60,7 +47,12 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     }
   }
 
-  private _onExpandCollapse(item: ITreeItem, isExpanded: boolean) {
+  /**
+  * Fires When expand / collapse item in TreeView
+  * @argument item The expanded / collapsed item
+  * @argument isExpanded The status of item  (expanded / collapsed)
+  */
+  private handleTreeExpandCollapse(item: ITreeItem, isExpanded: boolean) {
     this.props.onExpandCollapse(item, isExpanded);
   }
 
@@ -114,7 +106,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           leftOffset={20}
           isFirstRender={true}
           defaultExpanded={true}
-          parentCallbackExpandCollapse={this._onExpandCollapse}
+          parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
         />
       </React.Fragment>
     );
@@ -123,7 +115,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   /**
    * Handle the click event: collapse or expand
    */
-  private _handleClick() {
+  private handleClick() {
     this.setState({
       defaultExpanded: !this.state.defaultExpanded
     });

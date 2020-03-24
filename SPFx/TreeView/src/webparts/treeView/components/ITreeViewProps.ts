@@ -13,9 +13,9 @@ export interface ITreeViewProps {
   items: ITreeItem[];
 
   /**
-   * Default collapsed behavior
+   * Default expand / collapse behavior
    */
-  defaultCollapsed: boolean;
+  defaultExpanded: boolean;
 
   /**
    * Specify the item selection mode.

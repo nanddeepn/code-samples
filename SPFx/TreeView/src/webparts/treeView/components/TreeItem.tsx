@@ -14,7 +14,7 @@ export const EXPANDED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AA
 
 
 export interface ITreeItemState {
-  collapsed?: boolean;
+  expanded?: boolean;
 }
 
 export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemState> {
@@ -23,13 +23,18 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
     this._handleChange = this._handleChange.bind(this);
     this.state = {
-      collapsed: this.props.defaultCollapsed
+      expanded: this.props.defaultExpanded
     };
   }
 
-  private clickHandler = () => this.setState({
-    collapsed: !this.state.collapsed
-  })
+  /**
+   * Handle the click event: collapse or expand
+   */
+  private _expandCollapseClickHandler(){
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  }
 
   public render(): React.ReactElement<ITreeItemProps> {
 
@@ -44,14 +49,14 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
     return (
       <React.Fragment>
-        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this.clickHandler()}>
+        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this._expandCollapseClickHandler()}>
 
           <div>
             {
               data &&
-              <img src={this.state.collapsed ? COLLAPSED_IMG : EXPANDED_IMG}
-                alt={this.state.collapsed ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
-                title={this.state.collapsed ? strings.TreeCollapseTitle : strings.TreeExpandTitle} />
+              <img src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
+                alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
+                title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
             }
             <Checkbox
               className={styles.treeSelector}
@@ -62,7 +67,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         </div>
         <div>
           {
-            !this.state.collapsed && data
+            this.state.expanded && data
               ? createChildrenNodes(data, 2 * leftOffset) // we double left padding on every recursion/depth
               : null
           }

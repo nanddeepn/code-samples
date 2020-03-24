@@ -18,7 +18,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     this._treeItems = this.props.items;
     this.state = {
       loaded: true,
-      defaultCollapsed: this.props.defaultCollapsed
+      defaultExpanded: this.props.defaultExpanded
     };
     this._handleClick = this._handleClick.bind(this);
   }
@@ -49,7 +49,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             key={index}
             label={item.Name}
             data={item.children}
-            defaultCollapsed={this.state.defaultCollapsed}
+            defaultExpanded={this.state.defaultExpanded}
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
@@ -112,7 +112,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           createChildrenNodes={this.createChildrenNodes}
           leftOffset={20}
           isFirstRender={true}
-          defaultCollapsed={false}
+          defaultExpanded={true}
         />
       </React.Fragment>
     );
@@ -123,7 +123,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    */
   private _handleClick() {
     this.setState({
-      defaultCollapsed: !this.state.defaultCollapsed
+      defaultExpanded: !this.state.defaultExpanded
     });
   }
 

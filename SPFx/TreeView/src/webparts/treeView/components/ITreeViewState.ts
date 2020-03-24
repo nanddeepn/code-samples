@@ -1,4 +1,4 @@
 export interface ITreeViewState {
     loaded?: boolean;
-    defaultCollapsed?: boolean;
+    defaultExpanded?: boolean;
 }

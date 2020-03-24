@@ -32,7 +32,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
       TreeView,
       {
         items: treeItems,
-        defaultCollapsed: true,
+        defaultExpanded: false,
         selectionMode: SelectionMode.None
       }
     );

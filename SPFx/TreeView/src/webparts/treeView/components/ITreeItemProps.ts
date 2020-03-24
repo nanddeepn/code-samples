@@ -12,5 +12,5 @@ export interface ITreeItemProps {
     createChildrenNodes:any;
     leftOffset:number;
     isFirstRender:boolean;
-    defaultCollapsed:boolean;
+    defaultExpanded:boolean;
 }

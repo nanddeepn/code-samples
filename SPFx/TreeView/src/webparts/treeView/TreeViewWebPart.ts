@@ -20,13 +20,13 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
 
   public render(): void {
     var treeItems: Array<ITreeItem> = new Array<ITreeItem>();
-    treeItems.push({ Id: "0", Name: "A" });
-    treeItems.push({ Id: "1", Name: "B", ParentId: "0" });
-    treeItems.push({ Id: "2", Name: "C", ParentId: "0" });
-    treeItems.push({ Id: "3", Name: "D", ParentId: "1" });
-    treeItems.push({ Id: "4", Name: "E", ParentId: "1" });
-    treeItems.push({ Id: "5", Name: "F", ParentId: "0" });
-    treeItems.push({ Id: "6", Name: "G", ParentId: "0" });
+    treeItems.push({ key: "0", label: "A" });
+    treeItems.push({ key: "1", label: "B", parentKey: "0" });
+    treeItems.push({ key: "2", label: "C", parentKey: "0" });
+    treeItems.push({ key: "3", label: "D", parentKey: "1" });
+    treeItems.push({ key: "4", label: "E", parentKey: "1" });
+    treeItems.push({ key: "5", label: "F", parentKey: "0" });
+    treeItems.push({ key: "6", label: "G", parentKey: "0" });
 
     const element: React.ReactElement<ITreeViewProps> = React.createElement(
       TreeView,

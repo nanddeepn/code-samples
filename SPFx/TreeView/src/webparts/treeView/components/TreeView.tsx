@@ -5,12 +5,12 @@ import { ITreeViewProps } from './ITreeViewProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 import { ITreeViewState } from './ITreeViewState';
-import { ITreeItem } from './ITreeItem';
+import { ITreeItem, ITreeNodeItem } from './ITreeItem';
 import TreeItem from './TreeItem';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 
 export default class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
-  private _treeItems: ITreeItem[];
+  private _treeItems: ITreeNodeItem[];
 
   constructor(props: ITreeViewProps) {
     super(props);
@@ -32,7 +32,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
 
       if (!collection) {
         map.set(key, [item]);
-      } 
+      }
       else {
         collection.push(item);
       }
@@ -46,9 +46,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       let childrenWithHandlers = list.map((item, index) => {
         return (
           <TreeItem
-            key={index}
-            label={item.Name}
-            data={item.children}
+            treeNodeItem={item}
             defaultExpanded={this.state.defaultExpanded}
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
@@ -72,7 +70,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   private buildTreeStructure(): any {
     // Create a mapping of our element IDs to array index. This will help us to add references to an element's parent.
     const idMapping = this._treeItems.reduce((acc, el, i) => {
-      acc[el.Id] = i;
+      acc[el.key] = i;
       return acc;
     }, {});
 
@@ -82,14 +80,14 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
 
     this._treeItems.forEach(el => {
       // Handle the root element
-      if (el.ParentId === undefined || el.ParentId === null) {
+      if (el.parentKey === undefined || el.parentKey === null) {
         root = el;
         return;
       }
 
       // Use our mapping to locate the parent element in our data array
-      const parentEl = this._treeItems[idMapping[el.ParentId]];
-      
+      const parentEl = this._treeItems[idMapping[el.parentKey]];
+
       // Add our current el to its parent's `children` array
       parentEl.children = [...(parentEl.children || []), el];
     });
@@ -101,14 +99,12 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    * Default React render method
    */
   public render(): JSX.Element {
-    let root: any = this.buildTreeStructure();      
+    let root: any = this.buildTreeStructure();
 
     return (
       <React.Fragment>
         <TreeItem
-          key={root.Id}
-          label={root.Name}
-          data={root.children}
+          treeNodeItem={root}
           createChildrenNodes={this.createChildrenNodes}
           leftOffset={20}
           isFirstRender={true}

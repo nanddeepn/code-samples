@@ -15,7 +15,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   constructor(props: ITreeViewProps) {
     super(props);
 
-    this._treeItems = this.props.TreeItems;
+    this._treeItems = this.props.items;
     this.state = {
       loaded: true,
       defaultCollapsed: this.props.defaultCollapsed

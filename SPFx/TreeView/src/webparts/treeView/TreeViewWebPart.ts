@@ -9,7 +9,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'TreeViewWebPartStrings';
 import TreeView from './components/TreeView';
-import { ITreeViewProps } from './components/ITreeViewProps';
+import { ITreeViewProps, SelectionMode } from './components/ITreeViewProps';
 import { ITreeItem } from './components/ITreeItem';
 
 export interface ITreeViewWebPartProps {
@@ -31,8 +31,9 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
     const element: React.ReactElement<ITreeViewProps> = React.createElement(
       TreeView,
       {
-        TreeItems: treeItems,
-        defaultCollapsed: true
+        items: treeItems,
+        defaultCollapsed: true,
+        selectionMode: SelectionMode.None
       }
     );
 

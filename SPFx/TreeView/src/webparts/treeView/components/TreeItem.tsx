@@ -21,16 +21,18 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   constructor(props: ITreeItemProps, state: ITreeItemState) {
     super(props);
 
-    this._handleChange = this._handleChange.bind(this);
     this.state = {
       expanded: this.props.defaultExpanded
     };
+
+    this._handleChange = this._handleChange.bind(this);
+    this._handleExpandCollapse = this._handleExpandCollapse.bind(this);
   }
 
   /**
    * Handle the click event: collapse or expand
    */
-  private _expandCollapseClickHandler(){
+  private _handleExpandCollapse(){
     this.setState({
       expanded: !this.state.expanded
     });
@@ -49,7 +51,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
     return (
       <React.Fragment>
-        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this._expandCollapseClickHandler()}>
+        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this._handleExpandCollapse()}>
 
           <div>
             {

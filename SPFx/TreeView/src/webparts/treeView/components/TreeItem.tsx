@@ -23,6 +23,7 @@ export interface ITreeItemProps {
   activeItems: ITreeItem[];
   parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
   parentCallbackonSelect: (item: ITreeItem, isSelected: boolean) => void;
+  onRenderItem?: (item: ITreeItem) => JSX.Element;
   treeItem: ITreeItem;
   selectionMode: SelectionMode;
 }
@@ -31,6 +32,10 @@ export interface ITreeItemState {
   selected?: boolean;
   expanded?: boolean;
 }
+
+const checkBoxStyle: React.CSSProperties = {
+  display: "inline-flex"
+};
 
 export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemState> {
   constructor(props: ITreeItemProps, state: ITreeItemState) {
@@ -82,15 +87,22 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     }
   }
 
-  public render(): React.ReactElement<ITreeItemProps> {
+  private renderItem(item: ITreeItem): JSX.Element {
+    if (typeof this.props.onRenderItem === "function") {
+      return this.props.onRenderItem(item);
+    } 
+    else {
+      return (
+        <Label className={styles.treeSelector} style={checkBoxStyle}>{item.label}</Label>
+      );
+    }
+  }
 
+  public render(): React.ReactElement<ITreeItemProps> {
     const { treeNodeItem, leftOffset, isFirstRender, createChildrenNodes } = this.props;
 
     const styleProps: React.CSSProperties = {
       marginLeft: isFirstRender ? '0px' : `${leftOffset}px`
-    };
-    const checkBoxStyle: React.CSSProperties = {
-      display: "inline-flex"
     };
 
     return (
@@ -113,7 +125,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
                   label={treeNodeItem.label}
                   onChange={this._itemSelected} />
                 :
-                <Label className={styles.treeSelector} style={checkBoxStyle}>{treeNodeItem.label}</Label>
+                this.renderItem(treeNodeItem)
             }
 
           </div>

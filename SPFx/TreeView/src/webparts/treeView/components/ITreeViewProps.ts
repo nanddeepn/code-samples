@@ -36,4 +36,10 @@ export interface ITreeViewProps {
    * @argument isSelected The status of item selection
    */
   onSelect?: (item: ITreeItem, isSelected: boolean) => void;
+
+  /**
+   * Customize how items are rendered
+   * @argument item The tree item
+   */
+  onRenderItem?: (item: ITreeItem) => JSX.Element;
 }

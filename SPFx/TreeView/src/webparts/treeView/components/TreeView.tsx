@@ -45,6 +45,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
             parentCallbackonSelect={this.handleOnSelect}
+            onRenderItem={this.props.onRenderItem}
             treeItem={item}
           />
         );
@@ -150,6 +151,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           activeItems={this.state.activeItems}
           parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
           parentCallbackonSelect={this.handleOnSelect}
+          onRenderItem={this.props.onRenderItem}
           treeItem={root}
         />
       </React.Fragment>

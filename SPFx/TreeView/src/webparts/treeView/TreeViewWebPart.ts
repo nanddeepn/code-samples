@@ -32,9 +32,10 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
       TreeView,
       {
         items: treeItems,
-        defaultExpanded: false,
+        defaultExpanded: true,
         selectionMode: SelectionMode.None,
-        onExpandCollapse: this.onExpandCollapseTree
+        onExpandCollapse: this.onExpandCollapseTree,
+        onSelect:this.onItemSelected
       }
     );
 
@@ -42,6 +43,11 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
   }
 
   private onExpandCollapseTree(item: ITreeItem, isExpanded: boolean) {
+    console.log(item);
+  }
+
+  private onItemSelected(item:ITreeItem){
+    console.log("itemselected");
     console.log(item);
   }
 

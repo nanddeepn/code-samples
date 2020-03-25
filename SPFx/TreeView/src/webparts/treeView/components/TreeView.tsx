@@ -23,6 +23,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
 
     this.handleClick = this.handleClick.bind(this);
     this.handleTreeExpandCollapse = this.handleTreeExpandCollapse.bind(this);
+    this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
   /**
@@ -39,6 +40,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             leftOffset={paddingLeft}
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
+            parentCallbackonSelect={this.handleOnSelect}
+            treeItem={item}
           />
         );
       });
@@ -55,6 +58,14 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   private handleTreeExpandCollapse(item: ITreeItem, isExpanded: boolean) {
     this.props.onExpandCollapse(item, isExpanded);
   }
+
+   /**
+  * Fires When Tree Item is selected in TreeView
+  * @argument item The selected item
+  */
+ private handleOnSelect(item: ITreeItem) {
+  this.props.onSelect(item);
+}
 
   /**
    * Build a Tree structure from flat array with below logic:
@@ -107,6 +118,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           isFirstRender={true}
           defaultExpanded={true}
           parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
+          parentCallbackonSelect={this.handleOnSelect}
+          treeItem={root}
         />
       </React.Fragment>
     );

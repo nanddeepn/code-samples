@@ -29,4 +29,11 @@ export interface ITreeViewProps {
    * @argument isExpanded The status of item  (expanded / collapsed)
    */
   onExpandCollapse?: (item: ITreeItem, isExpanded: boolean) => void;
+
+  /**
+   * Callback function called after a item is selected
+   * @argument item The selected item
+   */
+  onSelect?: (item: ITreeItem) => void;
+
 }

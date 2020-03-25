@@ -19,6 +19,8 @@ export interface ITreeItemProps {
   isFirstRender:boolean;
   defaultExpanded:boolean;
   parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
+  parentCallbackonSelect:(item:ITreeItem)=>void;
+  treeItem:ITreeItem;
 }
 
 export interface ITreeItemState {
@@ -33,7 +35,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: this.props.defaultExpanded
     };
 
-    this._handleChange = this._handleChange.bind(this);
+    this._itemSelected = this._itemSelected.bind(this);
     this._handleExpandCollapse = this._handleExpandCollapse.bind(this);
   }
 
@@ -74,7 +76,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
               className={styles.treeSelector}
               style={checkBoxStyle}
               label={treeNodeItem.label}
-              onChange={this._handleChange} />
+              onChange={this._itemSelected} />
           </div>
         </div>
         <div>
@@ -91,10 +93,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   /**
    * Handle the checkbox change trigger
    */
-  private _handleChange(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
-    // this.setState({
-    //   selected: isChecked
-    // });
-    // this.props.changedCallback(this.props.term, isChecked);
+  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
+    this.props.parentCallbackonSelect(this.props.treeItem);
   }
 }

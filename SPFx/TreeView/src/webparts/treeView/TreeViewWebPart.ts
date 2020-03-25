@@ -32,8 +32,8 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
       TreeView,
       {
         items: treeItems,
-        defaultExpanded: true,
-        selectionMode: SelectionMode.None,
+        defaultExpanded: false,
+        selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,
         onSelect:this.onItemSelected
       }

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import styles from './TreeView.module.scss';
-import { ITreeViewProps } from './ITreeViewProps';
+import { ITreeViewProps, SelectionMode } from './ITreeViewProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { sortBy, uniqBy, cloneDeep, isEqual } from '@microsoft/sp-lodash-subset';
 
 import { ITreeViewState } from './ITreeViewState';
 import { ITreeItem, ITreeNodeItem } from './ITreeItem';
@@ -18,7 +19,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     this._treeItems = this.props.items;
     this.state = {
       loaded: true,
-      defaultExpanded: this.props.defaultExpanded
+      defaultExpanded: this.props.defaultExpanded,
+      activeItems: []
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -38,6 +40,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             defaultExpanded={this.state.defaultExpanded}
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
+            selectionMode={this.props.selectionMode}
+            activeItems={this.state.activeItems}
             isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
             parentCallbackonSelect={this.handleOnSelect}
@@ -59,13 +63,29 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     this.props.onExpandCollapse(item, isExpanded);
   }
 
-   /**
-  * Fires When Tree Item is selected in TreeView
-  * @argument item The selected item
-  */
- private handleOnSelect(item: ITreeItem) {
-  this.props.onSelect(item);
-}
+  /**
+   * Fires When Tree Item is selected in TreeView
+   * @argument item The selected item
+   */
+  private handleOnSelect(item: ITreeItem) {
+    this.props.onSelect(item);
+
+    if (this.props.selectionMode == SelectionMode.Multiple) {      
+      // Add the checked term
+      this.state.activeItems.push(item);
+
+      // Filter out the duplicate terms
+      this.setState({
+        activeItems: uniqBy(this.state.activeItems, 'key')
+      }); 
+    }
+    else {
+      // Only store the current selected item
+      this.setState({
+        activeItems: [item]
+      });
+    }
+  }
 
   /**
    * Build a Tree structure from flat array with below logic:
@@ -117,6 +137,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           leftOffset={20}
           isFirstRender={true}
           defaultExpanded={true}
+          selectionMode={this.props.selectionMode}
+          activeItems={this.state.activeItems}
           parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
           parentCallbackonSelect={this.handleOnSelect}
           treeItem={root}

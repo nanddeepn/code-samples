@@ -3,7 +3,6 @@ import styles from './TreeView.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem, ITreeNodeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
@@ -121,6 +120,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
                 <Checkbox
                   checked={this.state.selected}
                   disabled={treeNodeItem.disabled}
+                  checkmarkIconProps={treeNodeItem.iconProps}
                   className={styles.treeSelector}
                   style={checkBoxStyle}
                   label={treeNodeItem.label}

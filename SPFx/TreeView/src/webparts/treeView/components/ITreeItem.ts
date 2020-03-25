@@ -1,5 +1,5 @@
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { Icon, IIconProps } from 'office-ui-fabric-react/lib/Icon';
+import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**
  * Tree Item

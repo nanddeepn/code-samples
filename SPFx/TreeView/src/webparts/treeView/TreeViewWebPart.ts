@@ -46,7 +46,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
     console.log(item);
   }
 
-  private onItemSelected(item:ITreeItem){
+  private onItemSelected(item:ITreeItem, isSelected: boolean){
     console.log("itemselected");
     console.log(item);
   }

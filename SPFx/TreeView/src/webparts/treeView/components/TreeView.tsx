@@ -66,23 +66,32 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   /**
    * Fires When Tree Item is selected in TreeView
    * @argument item The selected item
+   *  @argument isSelected The status of item selection
    */
-  private handleOnSelect(item: ITreeItem) {
-    this.props.onSelect(item);
+  private handleOnSelect(item: ITreeItem, isSelected: boolean) {
+    this.props.onSelect(item, isSelected);
 
-    if (this.props.selectionMode == SelectionMode.Multiple) {      
-      // Add the checked term
-      this.state.activeItems.push(item);
+    if (isSelected) {
+      if (this.props.selectionMode == SelectionMode.Multiple) {
+        // Add the checked term
+        this.state.activeItems.push(item);
 
-      // Filter out the duplicate terms
-      this.setState({
-        activeItems: uniqBy(this.state.activeItems, 'key')
-      }); 
+        // Filter out the duplicate terms
+        this.setState({
+          activeItems: uniqBy(this.state.activeItems, 'key')
+        });
+      }
+      else {
+        // Only store the current selected item
+        this.setState({
+          activeItems: [item]
+        });
+      }
     }
     else {
-      // Only store the current selected item
+      // Remove the term from the list of active nodes
       this.setState({
-        activeItems: [item]
+        activeItems: this.state.activeItems.filter(i => i.key !== item.key)
       });
     }
   }

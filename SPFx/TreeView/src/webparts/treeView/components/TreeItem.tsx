@@ -22,7 +22,7 @@ export interface ITreeItemProps {
   defaultExpanded: boolean;
   activeItems: ITreeItem[];
   parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
-  parentCallbackonSelect: (item: ITreeItem) => void;
+  parentCallbackonSelect: (item: ITreeItem, isSelected: boolean) => void;
   treeItem: ITreeItem;
   selectionMode: SelectionMode;
 }
@@ -49,6 +49,13 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   }
 
   /**
+   * Handle the checkbox change trigger
+   */
+  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
+    this.props.parentCallbackonSelect(this.props.treeItem, isChecked);
+  }
+
+  /**
    * Handle the click event: collapse or expand
    */
   private _handleExpandCollapse() {
@@ -58,7 +65,6 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
     this.props.parentCallbackExpandCollapse(this.props.treeNodeItem, !this.state.expanded);
   }
-
 
   /**
    * Lifecycle event hook when component retrieves new properties
@@ -121,12 +127,5 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         </div>
       </React.Fragment>
     );
-  }
-
-  /**
-   * Handle the checkbox change trigger
-   */
-  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
-    this.props.parentCallbackonSelect(this.props.treeItem);
   }
 }

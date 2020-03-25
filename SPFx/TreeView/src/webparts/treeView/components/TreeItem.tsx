@@ -120,6 +120,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
               this.props.selectionMode != SelectionMode.None ?
                 <Checkbox
                   checked={this.state.selected}
+                  disabled={treeNodeItem.disabled}
                   className={styles.treeSelector}
                   style={checkBoxStyle}
                   label={treeNodeItem.label}

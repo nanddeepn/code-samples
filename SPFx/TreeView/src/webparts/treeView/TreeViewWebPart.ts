@@ -23,7 +23,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
     treeItems.push({ key: "0", label: "A" });
     treeItems.push({ key: "1", label: "B", parentKey: "0" });
     treeItems.push({ key: "2", label: "C", parentKey: "0" });
-    treeItems.push({ key: "3", label: "D", parentKey: "1" });
+    treeItems.push({ key: "3", label: "D", parentKey: "1", disabled: true });
     treeItems.push({ key: "4", label: "E", parentKey: "1" });
     treeItems.push({ key: "5", label: "F", parentKey: "0" });
     treeItems.push({ key: "6", label: "G", parentKey: "0" });

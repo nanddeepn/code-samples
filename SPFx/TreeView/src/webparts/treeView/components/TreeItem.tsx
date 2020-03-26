@@ -3,6 +3,7 @@ import styles from './TreeView.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
+import { IconButton, IIconProps, IContextualMenuItem, IContextualMenuProps, Stack, Link } from 'office-ui-fabric-react';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem, ITreeNodeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
@@ -35,6 +36,7 @@ export interface ITreeItemState {
 const checkBoxStyle: React.CSSProperties = {
   display: "inline-flex"
 };
+
 
 export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemState> {
   constructor(props: ITreeItemProps, state: ITreeItemState) {
@@ -91,9 +93,21 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       return this.props.onRenderItem(item);
     }
     else {
+      // Contextual Menu Item icon
+      const moreIcon: IIconProps = { iconName: 'More' };
+
+      const contextualMenuProps: IContextualMenuProps = {
+        items: item.actions
+      };
+
       return (
         <React.Fragment>
-          <Label className={`${styles.treeSelector} ${styles.itemLabel}`} style={checkBoxStyle}>{item.label}</Label>
+          <div className={`${styles.treeSelector} ${styles.itemLabel}`}>
+            <Label style={checkBoxStyle}>{item.label}</Label>
+            {item.actions &&
+              <IconButton  className={styles.itemMenu} menuProps={contextualMenuProps} iconProps={moreIcon} title="More" ariaLabel="More" />
+            }
+          </div>
           {item.subLabel &&
             <Label className={`${styles.treeSelector} ${styles.itemSubLabel}`} style={checkBoxStyle}>{item.subLabel}</Label>
           }

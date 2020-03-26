@@ -29,9 +29,17 @@
 
 .itemSubLabel {
   position: relative;
-  top: 20px;
+  top: 25px;
+  margin-bottom: 10px;
   font-size: 12px;
   color: #666666;
+}
+
+.itemMenu {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 15px;
+  height: 20px;
 }
 
 .tree {

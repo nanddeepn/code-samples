@@ -1,4 +1,4 @@
-import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**

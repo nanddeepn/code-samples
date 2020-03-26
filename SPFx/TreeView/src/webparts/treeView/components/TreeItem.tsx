@@ -89,10 +89,15 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   private renderItem(item: ITreeItem): JSX.Element {
     if (typeof this.props.onRenderItem === "function") {
       return this.props.onRenderItem(item);
-    } 
+    }
     else {
       return (
-        <Label className={styles.treeSelector} style={checkBoxStyle}>{item.label}</Label>
+        <React.Fragment>
+          <Label className={`${styles.treeSelector} ${styles.itemLabel}`} style={checkBoxStyle}>{item.label}</Label>
+          {item.subLabel &&
+            <Label className={`${styles.treeSelector} ${styles.itemSubLabel}`} style={checkBoxStyle}>{item.subLabel}</Label>
+          }
+        </React.Fragment>
       );
     }
   }
@@ -116,17 +121,17 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
                 title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
             }
             {
-              this.props.selectionMode != SelectionMode.None ?
-                <Checkbox
-                  checked={this.state.selected}
-                  disabled={treeNodeItem.disabled}
-                  checkmarkIconProps={treeNodeItem.iconProps}
-                  className={styles.treeSelector}
-                  style={checkBoxStyle}
-                  label={treeNodeItem.label}
-                  onChange={this._itemSelected} />
-                :
-                this.renderItem(treeNodeItem)
+              this.props.selectionMode != SelectionMode.None &&
+              <Checkbox
+                checked={this.state.selected}
+                disabled={treeNodeItem.disabled}
+                checkmarkIconProps={treeNodeItem.iconProps}
+                className={styles.treeSelector}
+                style={checkBoxStyle}
+                onChange={this._itemSelected} />
+            }
+            {
+              this.renderItem(treeNodeItem)
             }
 
           </div>

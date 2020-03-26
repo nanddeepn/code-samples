@@ -8,6 +8,7 @@ export interface ITreeItem {
   parentKey?: string;
   key: string;
   label: string;
+  subLabel?: string;
   iconProps?: IIconProps;
   disabled?: boolean;
   data?: any;

@@ -1,11 +1,11 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
 
 .listItem {
   min-height: 36px;
   line-height: 36px;
   cursor: pointer;
 
-  >div {
+  > div {
     display: inline-block;
     margin-right: 10px;
   }
@@ -22,6 +22,18 @@
   vertical-align: middle;
 }
 
+.itemLabel {
+  position: absolute;
+  height: 20px;
+}
+
+.itemSubLabel {
+  position: relative;
+  top: 20px;
+  font-size: 12px;
+  color: #666666;
+}
+
 .tree {
   padding-left: 20px;
 
@@ -32,18 +44,17 @@
   }
 
   .treeEnabled {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVDhPY2AYNKCoqIgTiOcD8X8S8F6wB4Aa1IH4akNDw+mPHz++/E8EuHTp0jmQRSDNCcXFxa/XrVt3gAh9KEpgBvx/9OjRLVI1g9TDDYBp3rlz5//Kysr/IJoYgGEASPPatWsbQDQxAMOAbdu2gZ0FookBcAOePHlyhxgN6GqQY+Hdhg0bDpJqCNgAaDrQAnJuNDY2nvr06dMbYgw6e/bsabgBUEN4yEiJ2wdNViLfIQC3sTh2vtJcswAAAABJRU5ErkJggg==');
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVDhPY2AYNKCoqIgTiOcD8X8S8F6wB4Aa1IH4akNDw+mPHz++/E8EuHTp0jmQRSDNCcXFxa/XrVt3gAh9KEpgBvx/9OjRLVI1g9TDDYBp3rlz5//Kysr/IJoYgGEASPPatWsbQDQxAMOAbdu2gZ0FookBcAOePHlyhxgN6GqQY+Hdhg0bDpJqCNgAaDrQAnJuNDY2nvr06dMbYgw6e/bsabgBUEN4yEiJ2wdNViLfIQC3sTh2vtJcswAAAABJRU5ErkJggg==");
   }
 
   .treeDisabled {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFMSURBVDhPzZPNSsNAFIULQqEQEPoSQqAg7gqC0HdwXxAElyYgBBGSZ+gDdOUyIauULATdKrgIKCKuQjbiDySCkNV4TrkzpJW2cefAxwwzc86de2em0/k3zXGcHpgC9Qeu5glAsAMefN+/K8vyVbVoWZbdMxDFY9d136Ioum6hW9iiDVSe588rxDXmJ+AAdAWOOVcbAy1O01R5nqfYoxVglyk+Hu7Z4FiwOcc1GBRMwQSnOAxDHz0jDyCwwCVQS3DO0gU0BkmSzG8A/UQiz7DxC5yLGQ1PwDeYGYOiKF6WarCPDUOJeor+A4z0m8P4SNaG+hY+4zi+aZh0scEBNeB41DTBuCcGjj6FjaM/BUFwW1XVO6vdMNiSdIzJLwN5TJZ+iSLQKYwbR9cmZyaFdX+JhZIiMue+cLFQxA0G22uusd/6I8OEb4LXRwZN4Q+3Ys8Mb9+nRgAAAABJRU5ErkJggg==');
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFMSURBVDhPzZPNSsNAFIULQqEQEPoSQqAg7gqC0HdwXxAElyYgBBGSZ+gDdOUyIauULATdKrgIKCKuQjbiDySCkNV4TrkzpJW2cefAxwwzc86de2em0/k3zXGcHpgC9Qeu5glAsAMefN+/K8vyVbVoWZbdMxDFY9d136Ioum6hW9iiDVSe588rxDXmJ+AAdAWOOVcbAy1O01R5nqfYoxVglyk+Hu7Z4FiwOcc1GBRMwQSnOAxDHz0jDyCwwCVQS3DO0gU0BkmSzG8A/UQiz7DxC5yLGQ1PwDeYGYOiKF6WarCPDUOJeor+A4z0m8P4SNaG+hY+4zi+aZh0scEBNeB41DTBuCcGjj6FjaM/BUFwW1XVO6vdMNiSdIzJLwN5TJZ+iSLQKYwbR9cmZyaFdX+JhZIiMue+cLFQxA0G22uusd/6I8OEb4LXRwZN4Q+3Ys8Mb9+nRgAAAABJRU5ErkJggg==");
   }
 
-  label>span {
+  label > span {
     padding-left: 0px;
   }
 }
-
 
 .treeView {
   .container {
@@ -96,7 +107,8 @@
     // Basic Button
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+    font-family: "Segoe UI WestEuropean", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue",
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: $ms-font-size-m;
     font-weight: $ms-font-weight-regular;

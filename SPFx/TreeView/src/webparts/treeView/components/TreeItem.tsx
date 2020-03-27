@@ -78,12 +78,13 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    * @param nextContext
    */
   public componentWillReceiveProps?(nextProps: ITreeItemProps, nextContext: any): void {
-    // If multi-selection is turned off, only a single term can be selected
-    if (this.props.selectionMode != SelectionMode.Multiple) {
+    // If selection is turned on, set the item as selected
+    if (this.props.selectionMode != SelectionMode.None) {
       let active = nextProps.activeItems.filter(item => item.key === this.props.treeNodeItem.key);
 
       this.state = {
-        selected: active.length > 0
+        selected: active.length > 0,
+        expanded: this.state.expanded
       };
     }
   }

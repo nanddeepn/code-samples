@@ -127,6 +127,9 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       const parentEl = this._treeItems[idMapping[el.parentKey]];
 
       // Add our current el to its parent's `children` array
+      if (parentEl.children) {
+        parentEl.children = parentEl.children.filter(i => i.key !== el.key);
+      }
       parentEl.children = [...(parentEl.children || []), el];
     });
 

@@ -3,10 +3,11 @@ import styles from './TreeView.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
-import { IconButton, IIconProps, IContextualMenuItem, IContextualMenuProps, Stack, Link } from 'office-ui-fabric-react';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem, ITreeNodeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
+import TreeItemActionsControl from './TreeItemActionsControl';
+import { ITreeItemActions } from './ITreeItemActions';
 
 /**
  * Image URLs / Base64
@@ -15,17 +16,18 @@ export const COLLAPSED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8A
 export const EXPANDED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjEwcrIlkgAAAFtJREFUOE9j/P//PwPZAKSZXEy2RrCLybV1CGjetWvX/46ODqBLUQOXoJ9BGtXU1MCYJM0wjZGRkaRpRtZIkmZ0jSRpBgUOzJ8wmqwAw5eICIb2qGYSkyfNAgwAasU+UQcFvD8AAAAASUVORK5CYII='; // /_layouts/15/images/MDNExpanded.png
 
 export interface ITreeItemProps {
+  treeItem: ITreeItem;
+  selectionMode: SelectionMode;
   treeNodeItem: ITreeNodeItem;
   createChildrenNodes: any;
   leftOffset: number;
   isFirstRender: boolean;
   defaultExpanded: boolean;
   activeItems: ITreeItem[];
+  treeItemActions?: ITreeItemActions;
   parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
   parentCallbackonSelect: (item: ITreeItem, isSelected: boolean) => void;
   onRenderItem?: (item: ITreeItem) => JSX.Element;
-  treeItem: ITreeItem;
-  selectionMode: SelectionMode;
 }
 
 export interface ITreeItemState {
@@ -94,27 +96,18 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       return this.props.onRenderItem(item);
     }
     else {
-      // Contextual Menu Item icon
-      const moreIcon: IIconProps = { iconName: 'More' };
-
-      const contextualMenuProps: IContextualMenuProps = {
-        items: item.actions
-      };
-
       return (
         <React.Fragment>
-          <div className={`${styles.treeSelector} ${styles.itemLabel}`}>
-            <Label style={checkBoxStyle}>{item.label}</Label>
-            {item.actions &&
-              <IconButton  className={styles.itemMenu} menuProps={contextualMenuProps} iconProps={moreIcon} title="More" ariaLabel="More" />
-            }
-          </div>
+          <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
           {item.subLabel &&
-            <Label className={`${styles.treeSelector} ${styles.itemSubLabel}`} style={checkBoxStyle}>{item.subLabel}</Label>
+            <Label className={styles.itemSubLabel} style={checkBoxStyle}>{item.subLabel}</Label>
           }
         </React.Fragment>
       );
     }
+  }
+
+  private treeItemActionCallback = (): void => {
   }
 
   public render(): React.ReactElement<ITreeItemProps> {
@@ -127,14 +120,13 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     return (
       <React.Fragment>
         <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this._handleExpandCollapse()}>
-
-          <div>
-            {
-              treeNodeItem.children &&
-              <img src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
-                alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
-                title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
-            }
+          {
+            treeNodeItem.children &&
+            <img src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
+              alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
+              title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
+          }
+          <div className={`${styles.treeSelector}`}>
             {
               this.props.selectionMode != SelectionMode.None &&
               <Checkbox
@@ -148,8 +140,15 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             {
               this.renderItem(treeNodeItem)
             }
-
           </div>
+          {
+            this.props.treeItemActions &&
+            <div className={styles.itemMenu}>
+              <TreeItemActionsControl treeItem={this.props.treeItem}
+                treeItemActions={this.props.treeItemActions}
+                treeItemActionCallback={this.treeItemActionCallback} />
+            </div>
+          }
         </div>
         <div>
           {

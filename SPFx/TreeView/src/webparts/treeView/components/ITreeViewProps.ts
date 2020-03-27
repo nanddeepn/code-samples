@@ -1,4 +1,5 @@
 import { ITreeItem } from './ITreeItem';
+import { ITreeItemActions } from './ITreeItemActions';
 
 export enum SelectionMode {
   None = 0,
@@ -22,7 +23,9 @@ export interface ITreeViewProps {
    * By default this is set to none.
    */
   selectionMode: SelectionMode;
-  
+
+  treeItemActions?: ITreeItemActions;
+
   /**
    * Callback function called after a item is expanded / collapsed
    * @argument item The expanded / collapsed item
@@ -41,5 +44,5 @@ export interface ITreeViewProps {
    * Customize how items are rendered
    * @argument item The tree item
    */
-  onRenderItem?: (item: ITreeItem) => JSX.Element;
+  onRenderItem?: (item: ITreeItem) => JSX.Element;  
 }

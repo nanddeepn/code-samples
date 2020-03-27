@@ -36,6 +36,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       let childrenWithHandlers = list.map((item, index) => {
         return (
           <TreeItem
+            treeItem={item}
             treeNodeItem={item}
             defaultExpanded={this.state.defaultExpanded}
             createChildrenNodes={this.createChildrenNodes}
@@ -46,7 +47,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
             parentCallbackonSelect={this.handleOnSelect}
             onRenderItem={this.props.onRenderItem}
-            treeItem={item}
+            treeItemActions={this.props.treeItemActions}
           />
         );
       });
@@ -145,6 +146,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     return (
       <React.Fragment>
         <TreeItem
+          treeItem={root}
           treeNodeItem={root}
           createChildrenNodes={this.createChildrenNodes}
           leftOffset={20}
@@ -155,7 +157,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
           parentCallbackonSelect={this.handleOnSelect}
           onRenderItem={this.props.onRenderItem}
-          treeItem={root}
+          treeItemActions={this.props.treeItemActions}
         />
       </React.Fragment>
     );

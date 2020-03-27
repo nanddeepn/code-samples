@@ -12,6 +12,7 @@ import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 
 export default class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
   private _treeItems: ITreeNodeItem[];
+  private unselectArray = [];
 
   constructor(props: ITreeViewProps) {
     super(props);
@@ -65,6 +66,34 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     this.props.onExpandCollapse(item, isExpanded);
   }
 
+  
+private selectAllChildren(item){
+  var tempItem:any = item;
+  if(tempItem.children){
+  tempItem.children.forEach(element => {
+    this.state.activeItems.push(element);
+    if(element.children){
+      this.selectAllChildren(element);
+    }
+  });
+  }
+}
+
+
+private unSelectChildren(item){
+
+  var tempItem:any = item;
+  if(tempItem.children){
+  tempItem.children.forEach(element => {
+    this.unselectArray.push(element.key);
+    if(element.children){
+      this.unSelectChildren(element);
+    }
+    });
+  }
+
+}
+
   /**
    * Fires When Tree Item is selected in TreeView
    * @argument item The selected item
@@ -77,6 +106,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       if (this.props.selectionMode == SelectionMode.Multiple) {
         // Add the checked term
         this.state.activeItems.push(item);
+
+        this.selectAllChildren(item);
 
         // Filter out the duplicate terms
         this.setState({
@@ -91,10 +122,20 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       }
     }
     else {
-      // Remove the term from the list of active nodes
-      this.setState({
-        activeItems: this.state.activeItems.filter(i => i.key !== item.key)
+    // Remove the item from the list of active nodes
+      this.unselectArray = [];
+      this.unselectArray.push(item.key);
+      this.unSelectChildren(item);
+      var tempItems = this.state.activeItems;
+      this.unselectArray.forEach(element => {
+         tempItems = tempItems.filter(i => i.key !=  element);
       });
+      
+      this.setState({
+        activeItems: tempItems
+      });
+      
+      
     }
   }
 

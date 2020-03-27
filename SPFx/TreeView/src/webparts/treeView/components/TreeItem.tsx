@@ -119,10 +119,10 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
     return (
       <React.Fragment>
-        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} onClick={() => this._handleExpandCollapse()}>
+        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} >
           {
             treeNodeItem.children &&
-            <img src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
+            <img onClick={() => this._handleExpandCollapse()} src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
               alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
               title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
           }

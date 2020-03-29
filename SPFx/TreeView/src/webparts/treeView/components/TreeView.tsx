@@ -1,18 +1,23 @@
 import * as React from 'react';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import styles from './TreeView.module.scss';
+import { uniqBy } from '@microsoft/sp-lodash-subset';
 import { ITreeViewProps, SelectionMode } from './ITreeViewProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import { sortBy, uniqBy, cloneDeep, isEqual } from '@microsoft/sp-lodash-subset';
-
 import { ITreeViewState } from './ITreeViewState';
 import { ITreeItem } from './ITreeItem';
 import TreeItem from './TreeItem';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 
+/**
+ * Renders the controls for TreeItem component
+ */
 export default class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
 
   private unselectArray = [];
+
+  /**
+   * Constructor method
+   * @param props properties interface
+   */
   constructor(props: ITreeViewProps) {
     super(props);
 
@@ -22,7 +27,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       activeItems: []
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    // Bind control events
     this.handleTreeExpandCollapse = this.handleTreeExpandCollapse.bind(this);
     this.handleOnSelect = this.handleOnSelect.bind(this);
   }
@@ -30,20 +35,20 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   /**
    * Process the child nodes
    */
-  public createChildrenNodes = (list, paddingLeft) => {
+  public createChildNodes = (list, paddingLeft) => {
     if (list.length) {
       let childrenWithHandlers = list.map((item, index) => {
         return (
           <TreeItem
             treeItem={item}
             defaultExpanded={this.state.defaultExpanded}
-            createChildrenNodes={this.createChildrenNodes}
+            createChildNodes={this.createChildNodes}
             leftOffset={paddingLeft}
             selectionMode={this.props.selectionMode}
             activeItems={this.state.activeItems}
-            isFirstRender={!paddingLeft ? true : false} // TODO: make better usage of this logic or remove it
+            isFirstRender={!paddingLeft ? true : false}
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
-            parentCallbackonSelect={this.handleOnSelect}
+            parentCallbackOnSelect={this.handleOnSelect}
             onRenderItem={this.props.onRenderItem}
             treeItemActions={this.props.treeItemActions}
           />
@@ -55,46 +60,54 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   }
 
   /**
-  * Fires When expand / collapse item in TreeView
-  * @argument item The expanded / collapsed item
-  * @argument isExpanded The status of item  (expanded / collapsed)
-  */
+   * Fires When expand / collapse item in TreeView
+   * @argument item The expanded / collapsed item
+   * @argument isExpanded The status of item  (expanded / collapsed)
+   */
   private handleTreeExpandCollapse(item: ITreeItem, isExpanded: boolean) {
     this.props.onExpandCollapse(item, isExpanded);
   }
 
-  
-private selectAllChildren(item){
-  var tempItem:any = item;
-  if(tempItem.children){
-  tempItem.children.forEach(element => {
-    this.state.activeItems.push(element);
-    if(element.children){
-      this.selectAllChildren(element);
+  /**
+   * Selects all child nodes when parent node is selected. 
+   * @param item current tree item
+   */
+  private selectAllChildren(item) {
+    var tempItem: any = item;
+
+    if (tempItem.children) {
+      tempItem.children.forEach(element => {
+        this.state.activeItems.push(element);
+
+        if (element.children) {
+          this.selectAllChildren(element);
+        }
+      });
     }
-  });
-  }
-}
-
-
-private unSelectChildren(item){
-
-  var tempItem:any = item;
-  if(tempItem.children){
-  tempItem.children.forEach(element => {
-    this.unselectArray.push(element.key);
-    if(element.children){
-      this.unSelectChildren(element);
-    }
-    });
   }
 
-}
+  /**
+   * Unselects all child noes of selected parent.
+   */
+  private unSelectChildren(item) {
+    var tempItem: any = item;
+
+    if (tempItem.children) {
+      tempItem.children.forEach(element => {
+        this.unselectArray.push(element.key);
+
+        if (element.children) {
+          this.unSelectChildren(element);
+        }
+      });
+    }
+
+  }
 
   /**
    * Fires When Tree Item is selected in TreeView
    * @argument item The selected item
-   *  @argument isSelected The status of item selection
+   * @argument isSelected The status of item selection
    */
   private handleOnSelect(item: ITreeItem, isSelected: boolean) {
     this.props.onSelect(item, isSelected);
@@ -119,23 +132,21 @@ private unSelectChildren(item){
       }
     }
     else {
-    // Remove the item from the list of active nodes
+      // Remove the item from the list of active nodes
       this.unselectArray = [];
       this.unselectArray.push(item.key);
       this.unSelectChildren(item);
       var tempItems = this.state.activeItems;
       this.unselectArray.forEach(element => {
-         tempItems = tempItems.filter(i => i.key !=  element);
+        tempItems = tempItems.filter(i => i.key != element);
       });
-      
+
       this.setState({
         activeItems: tempItems
       });
-      
-      
     }
   }
-
+  
   /**
    * Default React render method
    */
@@ -144,34 +155,18 @@ private unSelectChildren(item){
       <React.Fragment>
         <TreeItem
           treeItem={this.props.items[0]}
-          createChildrenNodes={this.createChildrenNodes}
+          createChildNodes={this.createChildNodes}
           leftOffset={20}
           isFirstRender={true}
           defaultExpanded={true}
           selectionMode={this.props.selectionMode}
           activeItems={this.state.activeItems}
           parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
-          parentCallbackonSelect={this.handleOnSelect}
+          parentCallbackOnSelect={this.handleOnSelect}
           onRenderItem={this.props.onRenderItem}
           treeItemActions={this.props.treeItemActions}
         />
       </React.Fragment>
     );
-  }
-
-  /**
-   * Handle the click event: collapse or expand
-   */
-  private handleClick() {
-    this.setState({
-      defaultExpanded: !this.state.defaultExpanded
-    });
-  }
-
-  /**
-   * The tree view selection changed
-   */
-  private treeViewSelectionChange = (ev: React.FormEvent<HTMLElement>, isChecked: boolean): void => {
-    // this.props.termSetSelectedChange(this.props.termset, isChecked);
   }
 }

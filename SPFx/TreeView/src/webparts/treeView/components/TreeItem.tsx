@@ -23,30 +23,78 @@ export interface ITreeItemProps {
    */
   treeItem: ITreeItem;
   /**
-   * Selection mode of tree item
+   * Selection mode of tree item.
    */
   selectionMode: SelectionMode;
-  createChildrenNodes: any;
+  /**
+   * Create child nodes.
+   */
+  createChildNodes: any;
+  /**
+   * Specifies the left padding for current tree item based on hierarchy.
+   */
   leftOffset: number;
+  /**
+   * Specifies whether current tree item is root.
+   */
   isFirstRender: boolean;
+  /**
+   * Specifies whether current tree item should be rendered as an expanded. 
+   */
   defaultExpanded: boolean;
+  /**
+   * Stores the selected tree items
+   */
   activeItems: ITreeItem[];
+  /**
+   * List of actions.
+   */
   treeItemActions?: ITreeItemActions;
+
+  /**
+   * Callback function called after a item is expanded / collapsed.
+   */
   parentCallbackExpandCollapse: (item: ITreeItem, isExpanded: boolean) => void;
-  parentCallbackonSelect: (item: ITreeItem, isSelected: boolean) => void;
+  /**
+   * Callback function called after a item is selected.
+   */
+  parentCallbackOnSelect: (item: ITreeItem, isSelected: boolean) => void;
+  /**
+   * Customize how item is rendered.
+   */
   onRenderItem?: (item: ITreeItem) => JSX.Element;
 }
 
+/**
+ * TreeItem state interface
+ */
 export interface ITreeItemState {
+  /**
+   * Specifies whether current tree item is selected
+   */
   selected?: boolean;
+  /**
+   * Specifies whether current tree item is expanded
+   */
   expanded?: boolean;
 }
 
+/**
+ * CSS styles for checkbox
+ */
 const checkBoxStyle: React.CSSProperties = {
   display: "inline-flex"
 };
 
+/**
+ * Renders the controls for TreeItem component
+ */
 export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemState> {
+
+  /**
+   * Constructor method
+   * @param props properties interface
+   */
   constructor(props: ITreeItemProps, state: ITreeItemState) {
     super(props);
 
@@ -58,6 +106,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: this.props.defaultExpanded
     };
 
+    // Bind control events
     this._itemSelected = this._itemSelected.bind(this);
     this._handleExpandCollapse = this._handleExpandCollapse.bind(this);
   }
@@ -66,7 +115,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    * Handle the checkbox change trigger
    */
   private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
-    this.props.parentCallbackonSelect(this.props.treeItem, isChecked);
+    this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
   }
 
   /**
@@ -97,12 +146,17 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     }
   }
 
+  /**
+   * Default or custom rendering of tree item 
+   */
   private renderItem(item: ITreeItem): JSX.Element {
     if (typeof this.props.onRenderItem === "function") {
+      // Custom rendering of tree item 
       return this.props.onRenderItem(item);
     }
     else {
       return (
+        // Default rendering of tree item 
         <React.Fragment>
           <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
           {item.subLabel &&
@@ -113,11 +167,17 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     }
   }
 
+  /**
+   * Default action callback
+   */
   private treeItemActionCallback = (): void => {
   }
 
+  /**
+   * Default React render method
+   */
   public render(): React.ReactElement<ITreeItemProps> {
-    const { treeItem, leftOffset, isFirstRender, createChildrenNodes } = this.props;
+    const { treeItem, leftOffset, isFirstRender, createChildNodes } = this.props;
 
     const styleProps: React.CSSProperties = {
       marginLeft: isFirstRender ? '0px' : `${leftOffset}px`
@@ -159,7 +219,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         <div>
           {
             this.state.expanded && treeItem.children
-              ? createChildrenNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
+              ? createChildNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
               : null
           }
         </div>

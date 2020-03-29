@@ -51,7 +51,6 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                   {
                     key: "3",
                     label: "Child 1",
-                    disabled: true,
                     subLabel: "This is a sub label for node"
                   },
                   {
@@ -67,7 +66,8 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
               },
               {
                 key: "5",
-                label: "Parent 3"
+                label: "Parent 3",
+                disabled: true
               },
               {
                 key: "6",

@@ -3,8 +3,15 @@ import { ITreeItemAction, ITreeItemActionsControlProps, ITreeItemActionsControlS
 import { DropdownTreeItemAction } from './DropdownTreeItemAction';
 import ButtonTreeItemAction from './ButtonTreeItemAction';
 
+/**
+ * Renders the controls for TreeItem actions component
+ */
 export default class TreeItemActionsControl extends React.Component<ITreeItemActionsControlProps, ITreeItemActionsControlState> {
 
+    /**
+     * Constructor method
+     * @param props properties interface
+     */
     constructor(props: ITreeItemActionsControlProps) {
         super(props);
 
@@ -39,6 +46,7 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
         if (treeItemActions.actions) {
             for (const action of treeItemActions.actions) {
                 const available = await action.applyToTreeItem(treeItem);
+
                 if (available) {
                     availableActions.push(action);
                 }

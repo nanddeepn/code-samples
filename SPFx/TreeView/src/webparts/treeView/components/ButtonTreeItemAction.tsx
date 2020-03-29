@@ -2,6 +2,9 @@ import * as React from 'react';
 import { CommandBarButton } from 'office-ui-fabric-react/lib/Button';
 import { ITreeItemAction, TreeItemActionsDisplayStyle, IConcreteTreeItemActionProps } from './ITreeItemActions';
 
+/**
+ * Renders the controls for Button TreeItem action component
+ */
 export default class ButtonTreeItemAction extends React.Component<IConcreteTreeItemActionProps> {
 
   /**

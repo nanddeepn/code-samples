@@ -4,6 +4,9 @@ import { ITreeItem } from './ITreeItem';
 import { ITreeItemAction, TreeItemActionsDisplayStyle, IConcreteTreeItemActionProps } from './ITreeItemActions';
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
 
+/**
+ * Renders the controls for Dropdown TreeItem action component
+ */
 export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemActionProps> {
 
   /**

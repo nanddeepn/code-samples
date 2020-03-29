@@ -24,6 +24,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
       name = treeItemAction.title;
       text = treeItemAction.title;
     }
+
     if (this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.icon || this.props.displayStyle === TreeItemActionsDisplayStyle.textAndIcon)) {
       iconName = treeItemAction.iconName;
     }
@@ -51,6 +52,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
    */
   private checkForImmediateInvocations() {
     const { treeItemActions } = this.props;
+
     for (const action of treeItemActions) {
       if (action.invokeActionOnRender) {
         this.onActionExecute(action);
@@ -62,7 +64,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
    * On action execution
    */
   private onActionExecute = async (treeItemAction: ITreeItemAction) => {
-    const updateAction = await treeItemAction.actionCallback(this.props.treeItem);
+    await treeItemAction.actionCallback(this.props.treeItem);
     this.props.treeItemActionCallback();
   }
 
@@ -88,20 +90,20 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
               treeItemAction.hidden ? (
                 null
               ) : (
-                <div>
-                  <CommandBarButton split={true}
-                                    onClick={() => { this.onActionExecute(treeItemAction); }}
-                                    iconProps={{
-                                      iconName: iconName || null,
-                                      style: { display: iconName ? null : "none"}
-                                    }}
-                                    text={text}
-                                    title={btnTitle}
-                                    name={name}
-                                    key={treeItem.key}
-                                    style={this.getTreeItemActionActionButtonStyle()} />
-                </div>
-              )
+                  <div>
+                    <CommandBarButton split={true}
+                      onClick={() => { this.onActionExecute(treeItemAction); }}
+                      iconProps={{
+                        iconName: iconName || null,
+                        style: { display: iconName ? null : "none" }
+                      }}
+                      text={text}
+                      title={btnTitle}
+                      name={name}
+                      key={treeItem.key}
+                      style={this.getTreeItemActionActionButtonStyle()} />
+                  </div>
+                )
             );
           })
         }

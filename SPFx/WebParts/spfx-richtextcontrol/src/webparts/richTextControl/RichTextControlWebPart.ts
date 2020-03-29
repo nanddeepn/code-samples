@@ -10,12 +10,21 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'RichTextControlWebPartStrings';
 import RichTextControl from './components/RichTextControl';
 import { IRichTextControlProps } from './components/IRichTextControlProps';
+import { sp } from "@pnp/sp/presets/all";
 
 export interface IRichTextControlWebPartProps {
   description: string;
 }
 
 export default class RichTextControlWebPart extends BaseClientSideWebPart <IRichTextControlWebPartProps> {
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      sp.setup({
+        spfxContext: this.context
+      });
+    });
+  }
 
   public render(): void {
     const element: React.ReactElement<IRichTextControlProps> = React.createElement(

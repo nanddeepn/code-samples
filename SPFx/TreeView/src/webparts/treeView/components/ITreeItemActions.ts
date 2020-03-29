@@ -17,12 +17,27 @@ export enum TreeItemActionsDisplayStyle {
     textAndIcon
 }
 
+/**
+ * Tree item actions.
+ */
 export interface ITreeItemActions {
+    /**
+     * List of actions.
+     */
     actions: ITreeItemAction[];
+    /**
+     * Style applied to display actions.
+     */
     treeItemActionsDisplayStyle?: TreeItemActionsDisplayStyle;
+    /**
+     * Display mode of the tree item actions.
+     */
     treeItemActionsDisplayMode?: TreeItemActionsDisplayMode;
 }
 
+/**
+ * TreeItemActionsControl properties interface
+ */
 export interface ITreeItemActionsControlProps {
     /**
      * Current tree item.
@@ -38,6 +53,9 @@ export interface ITreeItemActionsControlProps {
     treeItemActionCallback: () => void;
 }
 
+/**
+ * TreeItemActionsControl state interface
+ */
 export interface ITreeItemActionsControlState {
     /**
      * Specifies the list of the available actions for the tree item.
@@ -53,10 +71,26 @@ export interface ITreeItemActionsControlState {
     displayStyle: TreeItemActionsDisplayStyle;
 }
 
+/**
+ * ConcreteTreeItemAction properties interface
+ */
 export interface IConcreteTreeItemActionProps {
+    /**
+     * Specifies the list of the available actions for the tree item.
+     */
     treeItemActions: ITreeItemAction[];
+    /**
+     * Current tree item
+     */
     treeItem: ITreeItem;
+    /**
+     * TreeItemAction display style.
+     */
     displayStyle: TreeItemActionsDisplayStyle;
+
+    /**
+     * Method to be executed when action is fired.
+     */
     treeItemActionCallback: () => void;
 }
 
@@ -92,6 +126,7 @@ export interface ITreeItemAction {
     applyToTreeItem?: (currentTreeItem: ITreeItem) => Promise<boolean> | boolean;
     /**
      * Method to be executed when action is fired.
+     *  @param currentTreeItem
      */
     actionCallback: (currentTreeItem: ITreeItem) => void;
 }

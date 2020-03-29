@@ -26,19 +26,55 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
 
   public render(): void {
 
-    var treeItems: Array<ITreeItem> = new Array<ITreeItem>();
-    treeItems.push({ key: "0", label: "Root", subLabel: "This is a sub label for node" });
-    treeItems.push({ key: "1", label: "Parent 1", parentKey: "0" });
-    treeItems.push({ key: "2", label: "Parent 2", parentKey: "0" });
-    treeItems.push({ key: "3", label: "Child 1", parentKey: "1", disabled: true, subLabel: "This is a sub label for node" });
-    treeItems.push({ key: "4", label: "Child 2", parentKey: "1", iconProps: skypeCheckIcon });
-    treeItems.push({ key: "5", label: "Parent 3", parentKey: "0" });
-    treeItems.push({ key: "6", label: "Parent 4", parentKey: "0" });
+    // var treeItems: Array<ITreeItem> = new Array<ITreeItem>();
+    // treeItems.push({ key: "0", label: "Root", subLabel: "This is a sub label for node" });
+    // treeItems.push({ key: "1", label: "Parent 1", parentKey: "0" });
+    // treeItems.push({ key: "2", label: "Parent 2", parentKey: "0" });
+    // treeItems.push({ key: "3", label: "Child 1", parentKey: "1", disabled: true, subLabel: "This is a sub label for node" });
+    // treeItems.push({ key: "4", label: "Child 2", parentKey: "1", iconProps: skypeCheckIcon });
+    // treeItems.push({ key: "5", label: "Parent 3", parentKey: "0" });
+    // treeItems.push({ key: "6", label: "Parent 4", parentKey: "0" });
 
     const element: React.ReactElement<ITreeViewProps> = React.createElement(
       TreeView,
       {
-        items: treeItems,
+        items: [
+          {
+            key: "0",
+            label: "Root",
+            subLabel: "This is a sub label for node",
+            children: [
+              {
+                key: "1",
+                label: "Parent 1",
+                children: [
+                  {
+                    key: "3",
+                    label: "Child 1",
+                    disabled: true,
+                    subLabel: "This is a sub label for node"
+                  },
+                  {
+                    key: "4",
+                    label: "Child 2",
+                    iconProps: skypeCheckIcon
+                  }
+                ]
+              },
+              {
+                key: "2",
+                label: "Parent 2"
+              },
+              {
+                key: "5",
+                label: "Parent 3"
+              },
+              {
+                key: "6",
+                label: "Parent 4"
+              }
+            ]
+          }],
         defaultExpanded: false,
         selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,

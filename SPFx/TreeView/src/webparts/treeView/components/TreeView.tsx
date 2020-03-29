@@ -6,17 +6,15 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import { sortBy, uniqBy, cloneDeep, isEqual } from '@microsoft/sp-lodash-subset';
 
 import { ITreeViewState } from './ITreeViewState';
-import { ITreeItem, ITreeNodeItem } from './ITreeItem';
+import { ITreeItem } from './ITreeItem';
 import TreeItem from './TreeItem';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 
 export default class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
-  private _treeItems: ITreeNodeItem[];
 
   constructor(props: ITreeViewProps) {
     super(props);
 
-    this._treeItems = this.props.items;
     this.state = {
       loaded: true,
       defaultExpanded: this.props.defaultExpanded,
@@ -37,7 +35,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         return (
           <TreeItem
             treeItem={item}
-            treeNodeItem={item}
             defaultExpanded={this.state.defaultExpanded}
             createChildrenNodes={this.createChildrenNodes}
             leftOffset={paddingLeft}
@@ -99,55 +96,13 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   }
 
   /**
-   * Build a Tree structure from flat array with below logic:
-   * 1. Iterate through the data array
-   * 2. Find the parent element of the current element
-   * 3. In the parent element's object, add a reference to the child
-   * 4. If there is no parent for an element, we know that will be our tree's "root" element
-   * Reference: https://typeofnan.dev/an-easy-way-to-build-a-tree-with-object-references/
-   */
-  private buildTreeStructure(): any {
-    // Create a mapping of our element IDs to array index. This will help us to add references to an element's parent.
-    const idMapping = this._treeItems.reduce((acc, el, i) => {
-      acc[el.key] = i;
-      return acc;
-    }, {});
-
-    // Iterate through the object and assign references to each item's parent. 
-    // Use idMapping to help locate the parent.
-    let root: any;
-
-    this._treeItems.forEach(el => {
-      // Handle the root element
-      if (el.parentKey === undefined || el.parentKey === null) {
-        root = el;
-        return;
-      }
-
-      // Use our mapping to locate the parent element in our data array
-      const parentEl = this._treeItems[idMapping[el.parentKey]];
-
-      // Add our current el to its parent's `children` array
-      if (parentEl.children) {
-        parentEl.children = parentEl.children.filter(i => i.key !== el.key);
-      }
-      parentEl.children = [...(parentEl.children || []), el];
-    });
-
-    return root;
-  }
-
-  /**
    * Default React render method
    */
   public render(): JSX.Element {
-    let root: any = this.buildTreeStructure();
-
     return (
       <React.Fragment>
         <TreeItem
-          treeItem={root}
-          treeNodeItem={root}
+          treeItem={this.props.items[0]}
           createChildrenNodes={this.createChildrenNodes}
           leftOffset={20}
           isFirstRender={true}

@@ -114,14 +114,14 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   /**
    * Handle the checkbox change trigger
    */
-  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
+  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {
     this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
   }
 
   /**
    * Handle the click event: collapse or expand
    */
-  private _handleExpandCollapse() {
+  private _handleExpandCollapse(): void {
     this.setState({
       expanded: !this.state.expanded
     });

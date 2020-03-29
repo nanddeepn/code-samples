@@ -64,15 +64,17 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    * @argument item The expanded / collapsed item
    * @argument isExpanded The status of item  (expanded / collapsed)
    */
-  private handleTreeExpandCollapse(item: ITreeItem, isExpanded: boolean) {
-    this.props.onExpandCollapse(item, isExpanded);
+  private handleTreeExpandCollapse(item: ITreeItem, isExpanded: boolean): void {
+    if (typeof this.props.onExpandCollapse === "function") {
+      this.props.onExpandCollapse(item, isExpanded);
+    }
   }
 
   /**
    * Selects all child nodes when parent node is selected. 
    * @param item current tree item
    */
-  private selectAllChildren(item) {
+  private selectAllChildren(item): void {
     var tempItem: any = item;
 
     if (tempItem.children) {
@@ -87,9 +89,9 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   }
 
   /**
-   * Unselects all child noes of selected parent.
+   * Unselects all child nodes of selected parent.
    */
-  private unSelectChildren(item) {
+  private unSelectChildren(item): void {
     var tempItem: any = item;
 
     if (tempItem.children) {
@@ -109,9 +111,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    * @argument item The selected item
    * @argument isSelected The status of item selection
    */
-  private handleOnSelect(item: ITreeItem, isSelected: boolean) {
-    this.props.onSelect(item, isSelected);
-
+  private handleOnSelect(item: ITreeItem, isSelected: boolean): void {
     if (isSelected) {
       if (this.props.selectionMode == SelectionMode.Multiple) {
         // Add the checked term
@@ -145,8 +145,12 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         activeItems: tempItems
       });
     }
+
+    if (typeof this.props.onSelect === "function") {
+      this.props.onSelect(this.state.activeItems);
+    }
   }
-  
+
   /**
    * Default React render method
    */

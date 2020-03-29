@@ -41,10 +41,9 @@ export interface ITreeViewProps {
 
   /**
    * Callback function called after a item is selected.
-   * @argument item The selected item.
-   * @argument isSelected The status of item selection.
+   * @argument items The selected items.
    */
-  onSelect?: (item: ITreeItem, isSelected: boolean) => void;
+  onSelect?: (items: ITreeItem[]) => void;
 
   /**
    * Customize how items are rendered.

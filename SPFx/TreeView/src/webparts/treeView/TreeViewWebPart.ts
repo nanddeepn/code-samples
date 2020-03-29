@@ -99,12 +99,11 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
   }
 
   private onExpandCollapseTree(item: ITreeItem, isExpanded: boolean) {
-    console.log(item);
+    console.log((isExpanded ? "item expanded: " : "item collapsed: ") + item);
   }
 
   private onItemSelected(item: ITreeItem, isSelected: boolean) {
-    console.log("itemselected");
-    console.log(item);
+    console.log("item selected: " + item);
   }
 
   protected onDispose(): void {

@@ -90,10 +90,10 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     if (this.props.selectionMode != SelectionMode.None) {
       let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
 
-      this.state = {
+      this.setState({
         selected: active.length > 0,
         expanded: this.state.expanded
-      };
+      });
     }
   }
 

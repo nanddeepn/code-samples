@@ -1,10 +1,9 @@
 import * as React from 'react';
 import styles from './TreeView.module.scss';
-import { escape } from '@microsoft/sp-lodash-subset';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import * as strings from 'TreeViewWebPartStrings';
-import { ITreeItem, ITreeNodeItem } from './ITreeItem';
+import { ITreeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
 import TreeItemActionsControl from './TreeItemActionsControl';
 import { ITreeItemActions } from './ITreeItemActions';
@@ -15,10 +14,18 @@ import { ITreeItemActions } from './ITreeItemActions';
 export const COLLAPSED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjEwcrIlkgAAAIJJREFUOE/NkjEKwCAMRdu7ewZXJ/EqHkJwE9TBCwR+a6FLUQsRwYBTeD8/35wADnZVmPvY4OOYO3UNbK1FKeUWH+fRtK21hjEG3vuhQBdOKUEpBedcV6ALExFijJBSIufcFBjCVSCEACEEqpNvBmsmT+3MTnvqn/+O4+1vdtv7274APmNjtuXVz6sAAAAASUVORK5CYII='; // /_layouts/15/images/MDNCollapsed.png
 export const EXPANDED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjEwcrIlkgAAAFtJREFUOE9j/P//PwPZAKSZXEy2RrCLybV1CGjetWvX/46ODqBLUQOXoJ9BGtXU1MCYJM0wjZGRkaRpRtZIkmZ0jSRpBgUOzJ8wmqwAw5eICIb2qGYSkyfNAgwAasU+UQcFvD8AAAAASUVORK5CYII='; // /_layouts/15/images/MDNExpanded.png
 
+/**
+ * TreeItem properties interface
+ */
 export interface ITreeItemProps {
+  /**
+   * Current tree item.
+   */
   treeItem: ITreeItem;
+  /**
+   * Selection mode of tree item
+   */
   selectionMode: SelectionMode;
-  treeNodeItem: ITreeNodeItem;
   createChildrenNodes: any;
   leftOffset: number;
   isFirstRender: boolean;
@@ -39,13 +46,12 @@ const checkBoxStyle: React.CSSProperties = {
   display: "inline-flex"
 };
 
-
 export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemState> {
   constructor(props: ITreeItemProps, state: ITreeItemState) {
     super(props);
 
     // Check if current item is selected
-    let active = this.props.activeItems.filter(item => item.key === this.props.treeNodeItem.key);
+    let active = this.props.activeItems.filter(item => item.key === this.props.treeItem.key);
 
     this.state = {
       selected: active.length > 0,
@@ -71,7 +77,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: !this.state.expanded
     });
 
-    this.props.parentCallbackExpandCollapse(this.props.treeNodeItem, !this.state.expanded);
+    this.props.parentCallbackExpandCollapse(this.props.treeItem, !this.state.expanded);
   }
 
   /**
@@ -82,12 +88,12 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   public componentWillReceiveProps?(nextProps: ITreeItemProps, nextContext: any): void {
     // If selection is turned on, set the item as selected
     if (this.props.selectionMode != SelectionMode.None) {
-      let active = nextProps.activeItems.filter(item => item.key === this.props.treeNodeItem.key);
+      let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
 
-      this.state = {
+      this.setState({
         selected: active.length > 0,
         expanded: this.state.expanded
-      };
+      });
     }
   }
 
@@ -111,7 +117,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   }
 
   public render(): React.ReactElement<ITreeItemProps> {
-    const { treeNodeItem, leftOffset, isFirstRender, createChildrenNodes } = this.props;
+    const { treeItem, leftOffset, isFirstRender, createChildrenNodes } = this.props;
 
     const styleProps: React.CSSProperties = {
       marginLeft: isFirstRender ? '0px' : `${leftOffset}px`
@@ -121,7 +127,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       <React.Fragment>
         <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} >
           {
-            treeNodeItem.children &&
+            treeItem.children &&
             <img onClick={() => this._handleExpandCollapse()} src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
               alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
               title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
@@ -131,14 +137,14 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
               this.props.selectionMode != SelectionMode.None &&
               <Checkbox
                 checked={this.state.selected}
-                disabled={treeNodeItem.disabled}
-                checkmarkIconProps={treeNodeItem.iconProps}
+                disabled={treeItem.disabled}
+                checkmarkIconProps={treeItem.iconProps}
                 className={styles.treeSelector}
                 style={checkBoxStyle}
                 onChange={this._itemSelected} />
             }
             {
-              this.renderItem(treeNodeItem)
+              this.renderItem(treeItem)
             }
           </div>
           {
@@ -152,8 +158,8 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         </div>
         <div>
           {
-            this.state.expanded && treeNodeItem.children
-              ? createChildrenNodes(treeNodeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
+            this.state.expanded && treeItem.children
+              ? createChildrenNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
               : null
           }
         </div>

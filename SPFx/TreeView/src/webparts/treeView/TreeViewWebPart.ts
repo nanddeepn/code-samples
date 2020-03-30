@@ -40,7 +40,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
       {
         items: [
           {
-            key: "0",
+            key: "R1",
             label: "Root",
             subLabel: "This is a sub label for node",
             children: [
@@ -51,7 +51,13 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                   {
                     key: "3",
                     label: "Child 1",
-                    subLabel: "This is a sub label for node"
+                    subLabel: "This is a sub label for node",
+                    children: [
+                      {
+                        key: "gc1",
+                        label: "Grand Child 1"
+                      }
+                    ]
                   },
                   {
                     key: "4",
@@ -74,7 +80,18 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                 label: "Parent 4"
               }
             ]
-          }],
+          },
+          {
+            key: "R2",
+            label: "Root 2",
+            children: [
+              {
+                key: "8",
+                label: "Parent 5"
+              }
+            ]
+          }
+        ],
         defaultExpanded: false,
         selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,

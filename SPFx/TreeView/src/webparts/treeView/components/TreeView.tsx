@@ -157,19 +157,23 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   public render(): JSX.Element {
     return (
       <React.Fragment>
-        <TreeItem
-          treeItem={this.props.items[0]}
-          createChildNodes={this.createChildNodes}
-          leftOffset={20}
-          isFirstRender={true}
-          defaultExpanded={true}
-          selectionMode={this.props.selectionMode}
-          activeItems={this.state.activeItems}
-          parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
-          parentCallbackOnSelect={this.handleOnSelect}
-          onRenderItem={this.props.onRenderItem}
-          treeItemActions={this.props.treeItemActions}
-        />
+        {
+          this.props.items.map((treeNodeItem, index) => (
+            <TreeItem
+              treeItem={treeNodeItem}
+              createChildNodes={this.createChildNodes}
+              leftOffset={20}
+              isFirstRender={true}
+              defaultExpanded={true}
+              selectionMode={this.props.selectionMode}
+              activeItems={this.state.activeItems}
+              parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
+              parentCallbackOnSelect={this.handleOnSelect}
+              onRenderItem={this.props.onRenderItem}
+              treeItemActions={this.props.treeItemActions}
+            />
+          ))
+        }
       </React.Fragment>
     );
   }

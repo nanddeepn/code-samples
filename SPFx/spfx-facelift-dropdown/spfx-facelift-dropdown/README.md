@@ -1,6 +1,6 @@
 ## spfx-facelift-dropdown
 
-This is where you include your WebPart documentation.
+The sample code demonstrates the capabilities provided by Office UI Fabric dropdown control and how we can extend it to enhance the visual appearance of dropdowns to make them more appealing.
 
 ### Building the code
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { IconButton, IIconProps } from 'office-ui-fabric-react';
 import { ITreeItem } from './ITreeItem';
@@ -87,7 +86,6 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
   public render(): React.ReactElement<IConcreteTreeItemActionProps> {
     const { treeItem, treeItemActions } = this.props;
 
-    const moreVerticalIcon: IIconProps = { iconName: 'MoreVertical' };
     const treeItemActionButtonStyle = this.getTreeItemActionActionButtonStyle();
     const contextualMenuProps = this.prepareContextualMenuProps(treeItem, treeItemActions);
 
@@ -95,7 +93,7 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
       <div style={{ display: 'flex', alignItems: 'stretch', height: '32px' }}>
         <IconButton
           menuProps={contextualMenuProps}
-          iconProps={moreVerticalIcon}
+          menuIconProps={{ iconName: 'MoreVertical' }}
           style={treeItemActionButtonStyle}
           title="More"
           ariaLabel="More"

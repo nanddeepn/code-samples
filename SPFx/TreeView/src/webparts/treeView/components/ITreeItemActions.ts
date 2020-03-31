@@ -1,4 +1,5 @@
 import { ITreeItem } from './ITreeItem';
+import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**
  * Specifies the display mode of the tree item actions.
@@ -84,11 +85,11 @@ export interface ITreeItemAction {
     /**
      * Action title
      */
-    title: string;
+    title?: string;
     /**
-     * Icon class name to be displayed for the action.
+     * Icon to be displayed for the action.
      */
-    iconName?: string;
+    iconProps?: IIconProps;
     /**
      * Specify if the action is hidden. This could be used for instance when you want to invoke the action right after rendering.
      */
@@ -98,11 +99,6 @@ export interface ITreeItemAction {
      */
     invokeActionOnRender?: boolean;
 
-    /**
-    * Method checks if the current tree item is supported.
-    * @param currentTreeItem
-    */
-    applyToTreeItem?: (currentTreeItem: ITreeItem) => Promise<boolean> | boolean;
     /**
      * Method to be executed when action is fired.
      *  @param currentTreeItem

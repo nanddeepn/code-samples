@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ITreeItem } from './ITreeItem';
 import { ITreeItemAction, IConcreteTreeItemActionProps } from './ITreeItemActions';
-import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
 
 /**
  * Renders the controls for Dropdown TreeItem action component
@@ -32,15 +32,9 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
 
         treeItemActionMenuItem.text = treeItemAction.title;
         treeItemActionMenuItem.name = treeItemAction.title;
+        treeItemActionMenuItem.iconProps = treeItemAction.iconProps;
+        useTargetWidth = treeItemActionMenuItem.iconProps ? false : true;
 
-        if (treeItemAction.iconName) {
-          treeItemActionMenuItem.iconProps = { iconName: treeItemAction.iconName };
-          useTargetWidth = false;
-        }
-        else {
-          useTargetWidth = true;
-        }
-        
         items.push(treeItemActionMenuItem);
       }
     }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CommandBarButton } from 'office-ui-fabric-react/lib/Button';
+import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 import { ITreeItemAction, IConcreteTreeItemActionProps } from './ITreeItemActions';
 
 /**
@@ -17,13 +18,13 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
   /**
    * Prepares the command bar button
    */
-  private prepareCommandBarButton = (treeItemAction: ITreeItemAction): { name: string, text: string, iconName: string, btnTitle: string } => {
+  private prepareCommandBarButton = (treeItemAction: ITreeItemAction): { name: string, text: string, iconProps: IIconProps, btnTitle: string } => {
     let name: string = treeItemAction.title;
     let text: string = treeItemAction.title;
-    let iconName: string = treeItemAction.iconName;
+    let iconProps: IIconProps = treeItemAction.iconProps;
     let btnTitle: string = treeItemAction.title;
 
-    return { name, text, iconName, btnTitle };
+    return { name, text, iconProps, btnTitle };
   }
 
   /**
@@ -32,7 +33,6 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
   private getTreeItemActionButtonStyle = (treeItemAction: ITreeItemAction): React.CSSProperties => {
     let result: React.CSSProperties = {
       backgroundColor: "transparent",
-      width: treeItemAction.iconName ? "32px" : null,
       height: "32px"
     };
 
@@ -77,7 +77,8 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
         {
           treeItemActions &&
           treeItemActions.map(treeItemAction => {
-            const { name, text, iconName, btnTitle } = this.prepareCommandBarButton(treeItemAction);
+            const { name, text, iconProps, btnTitle } = this.prepareCommandBarButton(treeItemAction);
+
             return (
               treeItemAction.hidden ? (
                 null
@@ -85,10 +86,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
                   <div>
                     <CommandBarButton split={true}
                       onClick={() => { this.onActionExecute(treeItemAction); }}
-                      iconProps={{
-                        iconName: iconName || null,
-                        style: { display: iconName ? null : "none" }
-                      }}
+                      iconProps={iconProps}
                       text={text}
                       title={btnTitle}
                       name={name}

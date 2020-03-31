@@ -35,18 +35,14 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
      * Get the available treeItem actions
      */
     private async getAvailableActions(): Promise<void> {
-        const { treeItem, treeItemActions } = this.props;
+        const { treeItemActions } = this.props;
 
         // Prepare list of the available actions
         const availableActions: ITreeItemAction[] = [];
 
         if (treeItemActions.actions) {
             for (const action of treeItemActions.actions) {
-                const available = await action.applyToTreeItem(treeItem);
-
-                if (available) {
-                    availableActions.push(action);
-                }
+                availableActions.push(action);
             }
         }
 

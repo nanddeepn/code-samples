@@ -5,7 +5,7 @@ import { ITreeItem } from './ITreeItem';
  */
 export enum TreeItemActionsDisplayMode {
     Buttons = 1,
-    Dropdown
+    ContextualMenu
 }
 
 /**

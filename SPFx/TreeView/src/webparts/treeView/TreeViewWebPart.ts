@@ -105,7 +105,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
             },
             applyToTreeItem: (treeItem: ITreeItem) => (true)
           }],
-          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Dropdown,
+          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
           treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
         }
       }

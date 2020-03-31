@@ -13,7 +13,7 @@ import { ITreeViewProps, SelectionMode } from './components/ITreeViewProps';
 import { ITreeItem } from './components/ITreeItem';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { TreeItemActionsDisplayMode, TreeItemActionsDisplayStyle } from './components/ITreeItemActions';
+import { TreeItemActionsDisplayMode } from './components/ITreeItemActions';
 
 export interface ITreeViewWebPartProps {
   description: string;
@@ -52,8 +52,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                 },
                 applyToTreeItem: (treeItem: ITreeItem) => (true)
               }],
-              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
-              treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
+              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
             },
             children: [
               {
@@ -78,8 +77,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                             },
                             applyToTreeItem: (treeItem: ITreeItem) => (true)
                           }],
-                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
-                          treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
+                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
                         }
                       }
                     ]

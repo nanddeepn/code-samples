@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CommandBarButton } from 'office-ui-fabric-react/lib/Button';
-import { ITreeItemAction, TreeItemActionsDisplayStyle, IConcreteTreeItemActionProps } from './ITreeItemActions';
+import { ITreeItemAction, IConcreteTreeItemActionProps } from './ITreeItemActions';
 
 /**
  * Renders the controls for Button TreeItem action component
@@ -18,21 +18,10 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
    * Prepares the command bar button
    */
   private prepareCommandBarButton = (treeItemAction: ITreeItemAction): { name: string, text: string, iconName: string, btnTitle: string } => {
-    let name: string = "";
-    let text: string = "";
-    let iconName: string = "";
-    let btnTitle: string = "";
-
-    if ((this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.Text || this.props.displayStyle === TreeItemActionsDisplayStyle.TextAndIcon))) {
-      name = treeItemAction.title;
-      text = treeItemAction.title;
-    }
-
-    if (this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.Icon || this.props.displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
-      iconName = treeItemAction.iconName;
-    }
-
-    btnTitle = treeItemAction.title;
+    let name: string = treeItemAction.title;
+    let text: string = treeItemAction.title;
+    let iconName: string = treeItemAction.iconName;
+    let btnTitle: string = treeItemAction.title;
 
     return { name, text, iconName, btnTitle };
   }
@@ -40,10 +29,10 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
   /**
    * Gets the action button styling
    */
-  private getTreeItemActionActionButtonStyle = (): React.CSSProperties => {
+  private getTreeItemActionButtonStyle = (treeItemAction: ITreeItemAction): React.CSSProperties => {
     let result: React.CSSProperties = {
       backgroundColor: "transparent",
-      width: this.props.displayStyle === TreeItemActionsDisplayStyle.Icon ? "32px" : null,
+      width: treeItemAction.iconName ? "32px" : null,
       height: "32px"
     };
 
@@ -104,7 +93,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
                       title={btnTitle}
                       name={name}
                       key={treeItem.key}
-                      style={this.getTreeItemActionActionButtonStyle()} />
+                      style={this.getTreeItemActionButtonStyle(treeItemAction)} />
                   </div>
                 )
             );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { ITreeItem } from './ITreeItem';
-import { ITreeItemAction, TreeItemActionsDisplayStyle, IConcreteTreeItemActionProps } from './ITreeItemActions';
+import { ITreeItemAction, IConcreteTreeItemActionProps } from './ITreeItemActions';
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu';
 
 /**
@@ -21,7 +21,6 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
    */
   private prepareContextualMenuProps = (treeItem: ITreeItem, treeItemActions: ITreeItemAction[]): IContextualMenuProps => {
     let items: IContextualMenuItem[] = [];
-    const displayStyle = this.props.displayStyle;
     let useTargetWidth = true;
 
     for (const treeItemAction of treeItemActions) {
@@ -31,16 +30,17 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
           onClick: () => { this.onActionExecute(treeItemAction); }
         };
 
-        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.Text || displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
-          treeItemActionMenuItem.text = treeItemAction.title;
-          treeItemActionMenuItem.name = treeItemAction.title;
+        treeItemActionMenuItem.text = treeItemAction.title;
+        treeItemActionMenuItem.name = treeItemAction.title;
+
+        if (treeItemAction.iconName) {
+          treeItemActionMenuItem.iconProps = { iconName: treeItemAction.iconName };
           useTargetWidth = false;
         }
-        
-        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.Icon || displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
-          treeItemActionMenuItem.iconProps = { iconName: treeItemAction.iconName };
+        else {
+          useTargetWidth = true;
         }
-
+        
         items.push(treeItemActionMenuItem);
       }
     }

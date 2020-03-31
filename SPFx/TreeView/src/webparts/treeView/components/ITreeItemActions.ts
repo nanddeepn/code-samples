@@ -9,15 +9,6 @@ export enum TreeItemActionsDisplayMode {
 }
 
 /**
- * Specifies the style which is applied to display actions.
- */
-export enum TreeItemActionsDisplayStyle {
-    Text = 1,
-    Icon,
-    TextAndIcon
-}
-
-/**
  * Tree item actions.
  */
 export interface ITreeItemActions {
@@ -25,10 +16,6 @@ export interface ITreeItemActions {
      * List of actions.
      */
     actions: ITreeItemAction[];
-    /**
-     * Style applied to display actions.
-     */
-    treeItemActionsDisplayStyle?: TreeItemActionsDisplayStyle;
     /**
      * Display mode of the tree item actions.
      */
@@ -65,10 +52,6 @@ export interface ITreeItemActionsControlState {
      * TreeItemAction display mode.
      */
     displayMode: TreeItemActionsDisplayMode;
-    /**
-     * Specifies how the concreate tree item action is going to be displayed (icon/text/both).
-     */
-    displayStyle: TreeItemActionsDisplayStyle;
 }
 
 /**
@@ -83,10 +66,6 @@ export interface IConcreteTreeItemActionProps {
      * Current tree item
      */
     treeItem: ITreeItem;
-    /**
-     * TreeItemAction display style.
-     */
-    displayStyle: TreeItemActionsDisplayStyle;
 
     /**
      * Method to be executed when action is fired.

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITreeItemAction, ITreeItemActionsControlProps, ITreeItemActionsControlState, TreeItemActionsDisplayMode, TreeItemActionsDisplayStyle } from './ITreeItemActions';
+import { ITreeItemAction, ITreeItemActionsControlProps, ITreeItemActionsControlState, TreeItemActionsDisplayMode } from './ITreeItemActions';
 import { DropdownTreeItemAction } from './DropdownTreeItemAction';
 import ButtonTreeItemAction from './ButtonTreeItemAction';
 
@@ -16,14 +16,11 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
         super(props);
 
         const { treeItemActions } = this.props;
-
         const displayMode = treeItemActions.treeItemActionsDisplayMode ? treeItemActions.treeItemActionsDisplayMode : TreeItemActionsDisplayMode.Buttons;
-        const displayStyle = treeItemActions.treeItemActionsDisplayStyle ? treeItemActions.treeItemActionsDisplayStyle : TreeItemActionsDisplayStyle.Text;
 
         this.state = {
             availableActions: [],
-            displayMode,
-            displayStyle
+            displayMode
         };
     }
 
@@ -63,7 +60,7 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
      */
     public render(): React.ReactElement<ITreeItemActionsControlProps> {
         const { treeItem } = this.props;
-        const { displayStyle, displayMode, availableActions } = this.state;
+        const { displayMode, availableActions } = this.state;
 
         if (!availableActions || availableActions.length <= 0 || !treeItem) {
             return null;
@@ -73,9 +70,9 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
             <div>
                 {
                     displayMode == TreeItemActionsDisplayMode.ContextualMenu ?
-                        <DropdownTreeItemAction key={`DdAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} displayStyle={displayStyle} treeItemActionCallback={this.props.treeItemActionCallback} />
+                        <DropdownTreeItemAction key={`DdAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} treeItemActionCallback={this.props.treeItemActionCallback} />
                         :
-                        <ButtonTreeItemAction key={`BtnAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} displayStyle={displayStyle} treeItemActionCallback={this.props.treeItemActionCallback} />
+                        <ButtonTreeItemAction key={`BtnAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} treeItemActionCallback={this.props.treeItemActionCallback} />
                 }
             </div>
         );

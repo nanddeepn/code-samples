@@ -46,10 +46,6 @@ export interface ITreeItemProps {
    * Stores the selected tree items
    */
   activeItems: ITreeItem[];
-  /**
-   * List of actions.
-   */
-  treeItemActions?: ITreeItemActions;
 
   /**
    * Callback function called after a item is expanded / collapsed.
@@ -208,10 +204,10 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             }
           </div>
           {
-            this.props.treeItemActions &&
+            treeItem.treeItemActions &&
             <div className={styles.itemMenu}>
               <TreeItemActionsControl treeItem={this.props.treeItem}
-                treeItemActions={this.props.treeItemActions}
+                treeItemActions={treeItem.treeItemActions}
                 treeItemActionCallback={this.treeItemActionCallback} />
             </div>
           }

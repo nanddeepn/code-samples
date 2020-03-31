@@ -41,7 +41,20 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
           {
             key: "R1",
             label: "Root",
-            subLabel: "This is a sub label for node",
+            subLabel: "This is a sub label for node",            
+            treeItemActions: {
+              actions: [{
+                title: "Get item",
+                iconName: "LocaleLanguage",
+                id: "GetItem",
+                actionCallback: async (treeItem: ITreeItem) => {
+                  console.log(treeItem);
+                },
+                applyToTreeItem: (treeItem: ITreeItem) => (true)
+              }],
+              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
+              treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
+            },
             children: [
               {
                 key: "1",
@@ -54,7 +67,20 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                     children: [
                       {
                         key: "gc1",
-                        label: "Grand Child 1"
+                        label: "Grand Child 1",            
+                        treeItemActions: {
+                          actions: [{
+                            title: "Get Grand Child item",
+                            iconName: "LocaleLanguage",
+                            id: "GetItem",
+                            actionCallback: async (treeItem: ITreeItem) => {
+                              console.log(treeItem);
+                            },
+                            applyToTreeItem: (treeItem: ITreeItem) => (true)
+                          }],
+                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
+                          treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
+                        }
                       }
                     ]
                   },
@@ -94,20 +120,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
         defaultExpanded: false,
         selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,
-        onSelect: this.onItemSelected,
-        treeItemActions: {
-          actions: [{
-            title: "Get item",
-            iconName: "LocaleLanguage",
-            id: "GetItem",
-            actionCallback: async (treeItem: ITreeItem) => {
-              console.log(treeItem);
-            },
-            applyToTreeItem: (treeItem: ITreeItem) => (true)
-          }],
-          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
-          treeItemActionsDisplayStyle: TreeItemActionsDisplayStyle.TextAndIcon
-        }
+        onSelect: this.onItemSelected
       }
     );
 

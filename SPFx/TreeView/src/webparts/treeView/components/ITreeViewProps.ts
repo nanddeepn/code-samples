@@ -1,5 +1,4 @@
 import { ITreeItem } from './ITreeItem';
-import { ITreeItemActions } from './ITreeItemActions';
 
 /**
  * Selection mode of tree item
@@ -26,11 +25,7 @@ export interface ITreeViewProps {
    * Specify the item selection mode.
    * By default this is set to none.
    */
-  selectionMode: SelectionMode;
-  /**
-   * List of actions.
-   */
-  treeItemActions?: ITreeItemActions;
+  selectionMode: SelectionMode;  
 
   /**
    * Callback function called after a item is expanded / collapsed.

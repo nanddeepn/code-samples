@@ -50,7 +50,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
             parentCallbackOnSelect={this.handleOnSelect}
             onRenderItem={this.props.onRenderItem}
-            treeItemActions={this.props.treeItemActions}
           />
         );
       });
@@ -170,7 +169,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
               parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
               parentCallbackOnSelect={this.handleOnSelect}
               onRenderItem={this.props.onRenderItem}
-              treeItemActions={this.props.treeItemActions}
             />
           ))
         }

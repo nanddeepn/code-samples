@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { ITreeItemActions } from './ITreeItemActions';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**
@@ -32,7 +32,7 @@ export interface ITreeItem {
   /**
    * List of actions.
    */
-  actions?: IContextualMenuItem[];
+  treeItemActions?: ITreeItemActions;
   /**
    * List of child tree items.
    */

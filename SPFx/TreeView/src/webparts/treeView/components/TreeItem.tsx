@@ -2,17 +2,11 @@ import * as React from 'react';
 import styles from './TreeView.module.scss';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
+import { IconButton } from 'office-ui-fabric-react';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
 import TreeItemActionsControl from './TreeItemActionsControl';
-import { ITreeItemActions } from './ITreeItemActions';
-
-/**
- * Image URLs / Base64
- */
-export const COLLAPSED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjEwcrIlkgAAAIJJREFUOE/NkjEKwCAMRdu7ewZXJ/EqHkJwE9TBCwR+a6FLUQsRwYBTeD8/35wADnZVmPvY4OOYO3UNbK1FKeUWH+fRtK21hjEG3vuhQBdOKUEpBedcV6ALExFijJBSIufcFBjCVSCEACEEqpNvBmsmT+3MTnvqn/+O4+1vdtv7274APmNjtuXVz6sAAAAASUVORK5CYII='; // /_layouts/15/images/MDNCollapsed.png
-export const EXPANDED_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAUCAYAAABSx2cSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjEwcrIlkgAAAFtJREFUOE9j/P//PwPZAKSZXEy2RrCLybV1CGjetWvX/46ODqBLUQOXoJ9BGtXU1MCYJM0wjZGRkaRpRtZIkmZ0jSRpBgUOzJ8wmqwAw5eICIb2qGYSkyfNAgwAasU+UQcFvD8AAAAASUVORK5CYII='; // /_layouts/15/images/MDNExpanded.png
 
 /**
  * TreeItem properties interface
@@ -182,12 +176,16 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     return (
       <React.Fragment>
         <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} >
-          {
-            treeItem.children &&
-            <img onClick={() => this._handleExpandCollapse()} src={this.state.expanded ? EXPANDED_IMG : COLLAPSED_IMG}
-              alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
-              title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle} />
-          }
+          <div className={`${styles.treeSelector}`}>
+            {
+              treeItem.children &&
+              <IconButton
+                iconProps={this.state.expanded ? { iconName: 'ChevronDown' } : { iconName: 'ChevronRight' }}
+                alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
+                title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
+                onClick={() => this._handleExpandCollapse()}></IconButton>
+            }
+          </div>
           <div className={`${styles.treeSelector}`}>
             {
               this.props.selectionMode != SelectionMode.None &&

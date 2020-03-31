@@ -1,6 +1,6 @@
 ## spfx-richtextcontrol
 
-This is where you include your WebPart documentation.
+The sample code demonstrates using Rich Text control in SharePoint Framework solutions with Read, Add, and Update operations.
 
 ### Building the code
 

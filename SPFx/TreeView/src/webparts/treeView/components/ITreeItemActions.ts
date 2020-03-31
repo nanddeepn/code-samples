@@ -4,17 +4,17 @@ import { ITreeItem } from './ITreeItem';
  * Specifies the display mode of the tree item actions.
  */
 export enum TreeItemActionsDisplayMode {
-    buttons = 1,
-    dropdown
+    Buttons = 1,
+    Dropdown
 }
 
 /**
  * Specifies the style which is applied to display actions.
  */
 export enum TreeItemActionsDisplayStyle {
-    text = 1,
-    icon,
-    textAndIcon
+    Text = 1,
+    Icon,
+    TextAndIcon
 }
 
 /**

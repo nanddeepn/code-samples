@@ -31,12 +31,13 @@ export class DropdownTreeItemAction extends React.Component<IConcreteTreeItemAct
           onClick: () => { this.onActionExecute(treeItemAction); }
         };
 
-        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.text || displayStyle === TreeItemActionsDisplayStyle.textAndIcon)) {
+        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.Text || displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
           treeItemActionMenuItem.text = treeItemAction.title;
           treeItemActionMenuItem.name = treeItemAction.title;
           useTargetWidth = false;
         }
-        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.icon || displayStyle === TreeItemActionsDisplayStyle.textAndIcon)) {
+        
+        if (displayStyle && (displayStyle === TreeItemActionsDisplayStyle.Icon || displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
           treeItemActionMenuItem.iconProps = { iconName: treeItemAction.iconName };
         }
 

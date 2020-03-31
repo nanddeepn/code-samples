@@ -23,12 +23,12 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
     let iconName: string = "";
     let btnTitle: string = "";
 
-    if ((this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.text || this.props.displayStyle === TreeItemActionsDisplayStyle.textAndIcon))) {
+    if ((this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.Text || this.props.displayStyle === TreeItemActionsDisplayStyle.TextAndIcon))) {
       name = treeItemAction.title;
       text = treeItemAction.title;
     }
 
-    if (this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.icon || this.props.displayStyle === TreeItemActionsDisplayStyle.textAndIcon)) {
+    if (this.props.displayStyle && (this.props.displayStyle === TreeItemActionsDisplayStyle.Icon || this.props.displayStyle === TreeItemActionsDisplayStyle.TextAndIcon)) {
       iconName = treeItemAction.iconName;
     }
 
@@ -43,7 +43,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
   private getTreeItemActionActionButtonStyle = (): React.CSSProperties => {
     let result: React.CSSProperties = {
       backgroundColor: "transparent",
-      width: this.props.displayStyle === TreeItemActionsDisplayStyle.icon ? "32px" : null,
+      width: this.props.displayStyle === TreeItemActionsDisplayStyle.Icon ? "32px" : null,
       height: "32px"
     };
 

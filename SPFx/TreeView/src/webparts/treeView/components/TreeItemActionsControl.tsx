@@ -17,8 +17,8 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
 
         const { treeItemActions } = this.props;
 
-        const displayMode = treeItemActions.treeItemActionsDisplayMode ? treeItemActions.treeItemActionsDisplayMode : TreeItemActionsDisplayMode.buttons;
-        const displayStyle = treeItemActions.treeItemActionsDisplayStyle ? treeItemActions.treeItemActionsDisplayStyle : TreeItemActionsDisplayStyle.text;
+        const displayMode = treeItemActions.treeItemActionsDisplayMode ? treeItemActions.treeItemActionsDisplayMode : TreeItemActionsDisplayMode.Buttons;
+        const displayStyle = treeItemActions.treeItemActionsDisplayStyle ? treeItemActions.treeItemActionsDisplayStyle : TreeItemActionsDisplayStyle.Text;
 
         this.state = {
             availableActions: [],
@@ -72,7 +72,7 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
         return (
             <div>
                 {
-                    displayMode == TreeItemActionsDisplayMode.dropdown ?
+                    displayMode == TreeItemActionsDisplayMode.Dropdown ?
                         <DropdownTreeItemAction key={`DdAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} displayStyle={displayStyle} treeItemActionCallback={this.props.treeItemActionCallback} />
                         :
                         <ButtonTreeItemAction key={`BtnAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} displayStyle={displayStyle} treeItemActionCallback={this.props.treeItemActionCallback} />

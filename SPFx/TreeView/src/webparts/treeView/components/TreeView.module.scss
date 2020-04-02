@@ -16,31 +16,31 @@
   }
 }
 
-.navLabel{
+.navLabel {
   position: relative;
-    -webkit-font-smoothing: antialiased;
-    font-size: 14px;
-    font-weight: bold;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    padding: 0 20px 0 20px;    
-    height: 44px;
-    color: rgb(0, 0, 0);
-    background-color: rgb(237, 235, 233);
-    width: 100%;
-    line-height: 44px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    user-select: none;
-    outline: transparent;
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
-    border-image: initial;
-    text-decoration: none;
-    border-radius: 2px;
-    overflow: hidden;
+  margin-top: 5px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: bold;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 20px 0 20px;
+  height: 44px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(237, 235, 233);
+  line-height: 44px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+  outline: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+  text-decoration: none;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .treeSelector {
@@ -94,8 +94,7 @@
   label > span {
     padding-left: 0px;
   }
-  .blankspace{
-     padding-left:35px;
-
+  .blankspace {
+    padding-left: 35px;
   }
 }

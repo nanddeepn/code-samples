@@ -128,7 +128,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
         onExpandCollapse: this.onExpandCollapseTree,
         onSelect: this.onItemSelected,
         // selectChildrenIfParentSelected:false,
-        showCheckboxes: false
+        showCheckboxes: true
       }
     );
 

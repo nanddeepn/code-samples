@@ -107,7 +107,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   /**
    * Handle the checkbox change trigger
    */
-  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {    
+  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {
     this.setState({
       selected: !this.state.selected
     });
@@ -155,27 +155,32 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     else {
       return (
         // Default rendering of tree item 
-
         <React.Fragment>
-
-
           {item.iconProps &&
             <React.Fragment>
               <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
-          &nbsp;
+              &nbsp;
           </React.Fragment>
           }
-          {!this.props.showCheckboxes &&
-            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.navLabel : ""}`} onClick={(e) => this._itemSelected(e, true)} style={checkBoxStyle}>{item.label}</Label>
+
+          {
+            !this.props.showCheckboxes &&
+            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.navLabel : ""}`}
+              onClick={(e) => this._itemSelected(e, true)}
+              style={checkBoxStyle}
+              disabled={item.disabled}>
+              {item.label}
+            </Label>
           }
-          {this.props.showCheckboxes &&
-            <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
+
+          {
+            this.props.showCheckboxes &&
+            <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={this.props.showCheckboxes ? checkBoxStyle : null}>{item.label}</Label>
           }
 
           {item.subLabel &&
-            <Label className={styles.itemSubLabel} style={checkBoxStyle}>{item.subLabel}</Label>
+            <Label className={this.props.showCheckboxes ? styles.itemSubLabel : styles.itemSubLabelNav} style={this.props.showCheckboxes ? checkBoxStyle : null}>{item.subLabel}</Label>
           }
-
         </React.Fragment>
       );
     }
@@ -243,7 +248,6 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
               <Checkbox
                 checked={this.state.selected}
                 disabled={treeItem.disabled}
-                // checkmarkIconProps={treeItem.iconProps}
                 className={styles.treeSelector}
                 style={checkBoxStyle}
                 onChange={this._itemSelected} />

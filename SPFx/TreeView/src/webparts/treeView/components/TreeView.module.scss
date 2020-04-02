@@ -2,7 +2,7 @@
 
 .listItem {
   min-height: 36px;
-  line-height: 36px;
+  // line-height: 36px;
   cursor: pointer;
 
   > div {
@@ -18,18 +18,13 @@
 
 .navLabel{
   position: relative;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
     box-sizing: border-box;
-    display: block;
     text-align: center;
     cursor: pointer;
-    padding-top: 0px;
-    padding-right: 20px;
-    padding-bottom: 0px;
-    padding-left: 27px;
+    padding: 0 20px 0 20px;    
     height: 44px;
     color: rgb(0, 0, 0);
     background-color: rgb(237, 235, 233);
@@ -59,17 +54,24 @@
   height: 20px;
 }
 
+.itemSubLabelNav {
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #666666;
+}
+
 .itemSubLabel {
   position: relative;
   top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 12px;
   color: #666666;
 }
 
 .itemMenu {
   position: absolute;
-  margin-top: 10px;
+  // margin-top: 10px;
 }
 
 .tree {

@@ -35,7 +35,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
             subLabel: "This is a sub label for node",
             treeItemActions: {
               actions: [{
-                title: "Get item",                
+                title: "Get item",
                 iconProps: {
                   iconName: 'Warning',
                   style: {
@@ -124,11 +124,11 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
           }
         ],
         // defaultExpanded: false,
-         selectionMode: SelectionMode.Multiple,
+        selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,
         onSelect: this.onItemSelected,
         // selectChildrenIfParentSelected:false,
-         showCheckboxes:true
+        showCheckboxes: false
       }
     );
 

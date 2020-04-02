@@ -166,7 +166,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
           </React.Fragment>
           }
           {!this.props.showCheckboxes &&
-            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.selected : "maindiv"}`} onClick={(e) => this._itemSelected(e, true)} style={checkBoxStyle}>{item.label}</Label>
+            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.navLabel : ""}`} onClick={(e) => this._itemSelected(e, true)} style={checkBoxStyle}>{item.label}</Label>
           }
           {this.props.showCheckboxes &&
             <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>

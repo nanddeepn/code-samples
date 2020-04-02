@@ -16,8 +16,36 @@
   }
 }
 
-.selected{
-  background-color: cornflowerblue;
+.navLabel{
+  position: relative;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 600;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 27px;
+    height: 44px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(237, 235, 233);
+    width: 100%;
+    line-height: 44px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
+    outline: transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    text-decoration: none;
+    border-radius: 2px;
+    overflow: hidden;
 }
 
 .treeSelector {

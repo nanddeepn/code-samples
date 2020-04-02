@@ -22,10 +22,6 @@ export interface ITreeItemProps {
    */
   selectionMode: SelectionMode;
   /**
-   * Create child nodes.
-   */
-  createChildNodes: any;
-  /**
    * Specifies the left padding for current tree item based on hierarchy.
    */
   leftOffset: number;
@@ -111,9 +107,12 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   /**
    * Handle the checkbox change trigger
    */
-  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {
-   
-    this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
+  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {    
+    this.setState({
+      selected: !this.state.selected
+    });
+
+    // this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
   }
 
   /**
@@ -124,6 +123,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: !this.state.expanded
     });
 
+    //TODO
     this.props.parentCallbackExpandCollapse(this.props.treeItem, !this.state.expanded);
   }
 
@@ -134,14 +134,14 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    */
   public componentWillReceiveProps?(nextProps: ITreeItemProps, nextContext: any): void {
     // If selection is turned on, set the item as selected
-    if (this.props.selectionMode != SelectionMode.None) {
-      let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
+    // if (this.props.selectionMode != SelectionMode.None) {
+    //   let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
 
-      this.setState({
-        selected: active.length > 0,
-        expanded: this.state.expanded
-      });
-    }
+    //   this.setState({
+    //     selected: active.length > 0,
+    //     expanded: this.state.expanded
+    //   });
+    // }
   }
 
   /**
@@ -155,33 +155,58 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     else {
       return (
         // Default rendering of tree item 
-        
+
         <React.Fragment>
-          
-             
+
+
           {item.iconProps &&
-           <React.Fragment>
-          <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
+            <React.Fragment>
+              <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
           &nbsp;
           </React.Fragment>
           }
           {!this.props.showCheckboxes &&
-          <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.selected : "maindiv"}`} onClick={(e)=>this._itemSelected(e,true)}  style={checkBoxStyle}>{item.label}</Label>
+            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.selected : "maindiv"}`} onClick={(e) => this._itemSelected(e, true)} style={checkBoxStyle}>{item.label}</Label>
           }
           {this.props.showCheckboxes &&
-          <Label  className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
+            <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
           }
-          
+
           {item.subLabel &&
             <Label className={styles.itemSubLabel} style={checkBoxStyle}>{item.subLabel}</Label>
           }
-         
+
         </React.Fragment>
       );
     }
   }
 
-  
+
+  /**
+   * Process the child nodes
+   */
+  public createChildNodes = (list, paddingLeft) => {
+    if (list.length) {
+      let childrenWithHandlers = list.map((item, index) => {
+        return (
+          <TreeItem
+            treeItem={item}
+            defaultExpanded={this.props.treeItem.key === item.key ? this.state.expanded : false}
+            leftOffset={paddingLeft}
+            selectionMode={this.props.selectionMode}
+            activeItems={this.props.activeItems}
+            isFirstRender={!paddingLeft ? true : false}
+            parentCallbackExpandCollapse={this.props.parentCallbackExpandCollapse}
+            parentCallbackOnSelect={() => (this.props.treeItem, true)}
+            onRenderItem={this.props.onRenderItem}
+            showCheckboxes={this.props.showCheckboxes}
+          />
+        );
+      });
+
+      return childrenWithHandlers;
+    }
+  }
 
   /**
    * Default action callback
@@ -193,7 +218,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    * Default React render method
    */
   public render(): React.ReactElement<ITreeItemProps> {
-    const { treeItem, leftOffset, isFirstRender, createChildNodes } = this.props;
+    const { treeItem, leftOffset, isFirstRender } = this.props;
 
     const styleProps: React.CSSProperties = {
       marginLeft: isFirstRender ? '0px' : `${leftOffset}px`
@@ -207,8 +232,8 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
               treeItem.children &&
               <IconButton
                 iconProps={this.state.expanded ? { iconName: 'ChevronDown' } : { iconName: 'ChevronRight' }}
-                alt={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
-                title={this.state.expanded ? strings.TreeExpandTitle : strings.TreeCollapseTitle}
+                alt={this.state.expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
+                title={this.state.expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
                 onClick={() => this._handleExpandCollapse()}></IconButton>
             }
           </div>
@@ -239,7 +264,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         <div>
           {
             this.state.expanded && treeItem.children
-              ? createChildNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
+              ? this.createChildNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
               : null
           }
         </div>

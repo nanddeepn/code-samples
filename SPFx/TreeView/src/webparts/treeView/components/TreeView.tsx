@@ -33,33 +33,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   }
 
   /**
-   * Process the child nodes
-   */
-  public createChildNodes = (list, paddingLeft) => {
-    if (list.length) {
-      let childrenWithHandlers = list.map((item, index) => {
-        return (
-          <TreeItem
-            treeItem={item}
-            defaultExpanded={this.state.defaultExpanded}
-            createChildNodes={this.createChildNodes}
-            leftOffset={paddingLeft}
-            selectionMode={this.props.selectionMode}
-            activeItems={this.state.activeItems}
-            isFirstRender={!paddingLeft ? true : false}
-            parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
-            parentCallbackOnSelect={this.handleOnSelect}
-            onRenderItem={this.props.onRenderItem}
-            showCheckboxes={this.props.showCheckboxes}
-          />
-        );
-      });
-
-      return childrenWithHandlers;
-    }
-  }
-
-  /**
    * Fires When expand / collapse item in TreeView
    * @argument item The expanded / collapsed item
    * @argument isExpanded The status of item  (expanded / collapsed)
@@ -165,7 +138,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           this.props.items.map((treeNodeItem, index) => (
             <TreeItem
               treeItem={treeNodeItem}
-              createChildNodes={this.createChildNodes}
               leftOffset={20}
               isFirstRender={true}
               defaultExpanded={true}

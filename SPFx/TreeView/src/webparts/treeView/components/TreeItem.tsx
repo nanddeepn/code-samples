@@ -158,7 +158,9 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
 
         <React.Fragment>
 
-
+          {item.selectable == false  && !item.children &&
+              <span className={styles.blankspace}>&nbsp;</span>
+          }
           {item.iconProps &&
             <React.Fragment>
               <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
@@ -197,7 +199,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             activeItems={this.props.activeItems}
             isFirstRender={!paddingLeft ? true : false}
             parentCallbackExpandCollapse={this.props.parentCallbackExpandCollapse}
-            parentCallbackOnSelect={() => (this.props.treeItem, true)}
+            parentCallbackOnSelect={() => ("tes")}
             onRenderItem={this.props.onRenderItem}
             showCheckboxes={this.props.showCheckboxes}
           />
@@ -239,14 +241,15 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
           </div>
           <div className={`${styles.treeSelector}`}>
             {
-              this.props.selectionMode != SelectionMode.None && this.props.showCheckboxes &&
+              (treeItem.selectable != false) &&  this.props.selectionMode != SelectionMode.None && this.props.showCheckboxes &&
               <Checkbox
                 checked={this.state.selected}
                 disabled={treeItem.disabled}
                 // checkmarkIconProps={treeItem.iconProps}
                 className={styles.treeSelector}
                 style={checkBoxStyle}
-                onChange={this._itemSelected} />
+                onChange={this._itemSelected}
+                 />
             }
             {
               this.renderItem(treeItem)

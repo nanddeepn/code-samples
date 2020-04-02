@@ -53,6 +53,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
               {
                 key: "1",
                 label: "Parent 1",
+                selectable:false,
                 children: [
                   {
                     key: "3",
@@ -108,7 +109,8 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
               },
               {
                 key: "6",
-                label: "Parent 4"
+                label: "Parent 4",
+                selectable:false
               }
             ]
           },
@@ -128,7 +130,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
         onExpandCollapse: this.onExpandCollapseTree,
         onSelect: this.onItemSelected,
         // selectChildrenIfParentSelected:false,
-        showCheckboxes: false
+        showCheckboxes: true
       }
     );
 

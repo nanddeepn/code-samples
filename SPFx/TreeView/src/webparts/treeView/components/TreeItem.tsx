@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './TreeView.module.scss';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Label } from 'office-ui-fabric-react/lib/Label';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconButton } from 'office-ui-fabric-react';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem } from './ITreeItem';
@@ -36,6 +37,12 @@ export interface ITreeItemProps {
    * Specifies whether current tree item should be rendered as an expanded. 
    */
   defaultExpanded: boolean;
+
+  /**
+   * Specifies whether current tree item should be rendered as an expanded. 
+   */
+  showCheckboxes: boolean;
+
   /**
    * Stores the selected tree items
    */
@@ -105,6 +112,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    * Handle the checkbox change trigger
    */
   private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {
+   
     this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
   }
 
@@ -147,15 +155,33 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     else {
       return (
         // Default rendering of tree item 
+        
         <React.Fragment>
-          <Label className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
+          
+             
+          {item.iconProps &&
+           <React.Fragment>
+          <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
+          &nbsp;
+          </React.Fragment>
+          }
+          {!this.props.showCheckboxes &&
+          <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.selected : "maindiv"}`} onClick={(e)=>this._itemSelected(e,true)}  style={checkBoxStyle}>{item.label}</Label>
+          }
+          {this.props.showCheckboxes &&
+          <Label  className={`${item.subLabel ? styles.itemLabel : ""}`} style={checkBoxStyle}>{item.label}</Label>
+          }
+          
           {item.subLabel &&
             <Label className={styles.itemSubLabel} style={checkBoxStyle}>{item.subLabel}</Label>
           }
+         
         </React.Fragment>
       );
     }
   }
+
+  
 
   /**
    * Default action callback
@@ -188,11 +214,11 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
           </div>
           <div className={`${styles.treeSelector}`}>
             {
-              this.props.selectionMode != SelectionMode.None &&
+              this.props.selectionMode != SelectionMode.None && this.props.showCheckboxes &&
               <Checkbox
                 checked={this.state.selected}
                 disabled={treeItem.disabled}
-                checkmarkIconProps={treeItem.iconProps}
+                // checkmarkIconProps={treeItem.iconProps}
                 className={styles.treeSelector}
                 style={checkBoxStyle}
                 onChange={this._itemSelected} />
@@ -220,4 +246,6 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       </React.Fragment>
     );
   }
+
+
 }

@@ -50,6 +50,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
             parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
             parentCallbackOnSelect={this.handleOnSelect}
             onRenderItem={this.props.onRenderItem}
+            showCheckboxes={this.props.showCheckboxes}
           />
         );
       });
@@ -116,7 +117,9 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         // Add the checked term
         this.state.activeItems.push(item);
 
-        this.selectAllChildren(item);
+        if(this.props.selectChildrenIfParentSelected){
+            this.selectAllChildren(item);
+        }
 
         // Filter out the duplicate terms
         this.setState({
@@ -134,7 +137,9 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       // Remove the item from the list of active nodes
       this.unselectArray = [];
       this.unselectArray.push(item.key);
-      this.unSelectChildren(item);
+      if(this.props.selectChildrenIfParentSelected){
+        this.unSelectChildren(item);
+      }
       var tempItems = this.state.activeItems;
       this.unselectArray.forEach(element => {
         tempItems = tempItems.filter(i => i.key != element);
@@ -169,6 +174,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
               parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
               parentCallbackOnSelect={this.handleOnSelect}
               onRenderItem={this.props.onRenderItem}
+              showCheckboxes={this.props.showCheckboxes}
             />
           ))
         }

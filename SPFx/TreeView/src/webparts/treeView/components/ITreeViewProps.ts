@@ -4,9 +4,9 @@ import { ITreeItem } from './ITreeItem';
  * Selection mode of tree item
  */
 export enum SelectionMode {
-  None = 0,
-  Single = 1,
-  Multiple = 2
+  Single = 0,
+  Multiple =1,
+  None = 2
 }
 
 /**
@@ -19,13 +19,26 @@ export interface ITreeViewProps {
   items: ITreeItem[];
   /**
    * Default expand / collapse behavior.
+   * By default this is set to false.
    */
-  defaultExpanded: boolean;
+  defaultExpanded?: boolean;
   /**
    * Specify the item selection mode.
-   * By default this is set to none.
+   * By default this is set to Single.
    */
-  selectionMode: SelectionMode;  
+  selectionMode?: SelectionMode;  
+
+  /**
+   * Specify the if childrens should be selected when parent is selected
+   * By default this is set to false.
+   */
+  selectChildrenIfParentSelected?: boolean;  
+
+   /**
+   * Specify the if we need to display checkbox for selection
+   */
+  showCheckboxes: boolean;  
+
 
   /**
    * Callback function called after a item is expanded / collapsed.

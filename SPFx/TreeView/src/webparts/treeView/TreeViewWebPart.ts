@@ -37,7 +37,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
               actions: [{
                 title: "Get item",                
                 iconProps: {
-                  iconName: 'Upload',
+                  iconName: 'Warning',
                   style: {
                     color: 'salmon',
                   },
@@ -123,10 +123,12 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
             ]
           }
         ],
-        defaultExpanded: false,
-        selectionMode: SelectionMode.Multiple,
+        // defaultExpanded: false,
+         selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,
-        onSelect: this.onItemSelected
+        onSelect: this.onItemSelected,
+        // selectChildrenIfParentSelected:false,
+         showCheckboxes:false
       }
     );
 

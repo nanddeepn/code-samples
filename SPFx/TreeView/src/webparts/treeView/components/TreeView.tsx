@@ -47,12 +47,12 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    * Selects all child nodes when parent node is selected. 
    * @param item current tree item
    */
-  private selectAllChildren(item): void {
-    var tempItem: any = item;
-
-    if (tempItem.children) {
-      tempItem.children.forEach(element => {
-        this.state.activeItems.push(element);
+  private selectAllChildren(item: ITreeItem): void {
+    if (item.children) {
+      item.children.forEach(element => {
+        if (!element.disabled && element.selectable != false) {
+          this.state.activeItems.push(element);
+        }
 
         if (element.children) {
           this.selectAllChildren(element);
@@ -76,7 +76,6 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         }
       });
     }
-
   }
 
   /**
@@ -90,8 +89,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         // Add the checked term
         this.state.activeItems.push(item);
 
-        if(this.props.selectChildrenIfParentSelected){
-            this.selectAllChildren(item);
+        if (this.props.selectChildrenIfParentSelected) {
+          this.selectAllChildren(item);
         }
 
         // Filter out the duplicate terms
@@ -110,7 +109,7 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
       // Remove the item from the list of active nodes
       this.unselectArray = [];
       this.unselectArray.push(item.key);
-      if(this.props.selectChildrenIfParentSelected){
+      if (this.props.selectChildrenIfParentSelected) {
         this.unSelectChildren(item);
       }
       var tempItems = this.state.activeItems;

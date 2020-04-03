@@ -112,7 +112,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       selected: !this.state.selected
     });
 
-    // this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
+    this.props.parentCallbackOnSelect(this.props.treeItem, isChecked);
   }
 
   /**
@@ -123,7 +123,6 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
       expanded: !this.state.expanded
     });
 
-    //TODO
     this.props.parentCallbackExpandCollapse(this.props.treeItem, !this.state.expanded);
   }
 
@@ -190,7 +189,6 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
     }
   }
 
-
   /**
    * Process the child nodes
    */
@@ -206,7 +204,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             activeItems={this.props.activeItems}
             isFirstRender={!paddingLeft ? true : false}
             parentCallbackExpandCollapse={this.props.parentCallbackExpandCollapse}
-            parentCallbackOnSelect={() => ("tes")}
+            parentCallbackOnSelect={this.props.parentCallbackOnSelect}
             onRenderItem={this.props.onRenderItem}
             showCheckboxes={this.props.showCheckboxes}
           />

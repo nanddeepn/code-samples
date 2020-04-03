@@ -133,14 +133,14 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    */
   public componentWillReceiveProps?(nextProps: ITreeItemProps, nextContext: any): void {
     // If selection is turned on, set the item as selected
-    // if (this.props.selectionMode != SelectionMode.None) {
-    //   let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
+    if (this.props.selectionMode != SelectionMode.None) {
+      let active = nextProps.activeItems.filter(item => item.key === this.props.treeItem.key);
 
-    //   this.setState({
-    //     selected: active.length > 0,
-    //     expanded: this.state.expanded
-    //   });
-    // }
+      this.setState({
+        selected: active.length > 0,
+        expanded: this.state.expanded
+      });
+    }
   }
 
   /**

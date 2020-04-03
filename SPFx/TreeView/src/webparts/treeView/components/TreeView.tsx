@@ -84,6 +84,8 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
    * @argument isSelected The status of item selection
    */
   private handleOnSelect(item: ITreeItem, isSelected: boolean): void {
+    let selectedItems: ITreeItem[] = this.state.activeItems;
+
     if (isSelected) {
       if (this.props.selectionMode == SelectionMode.Multiple) {
         // Add the checked term
@@ -93,9 +95,11 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
           this.selectAllChildren(item);
         }
 
+        selectedItems = uniqBy(this.state.activeItems, 'key');
+
         // Filter out the duplicate terms
         this.setState({
-          activeItems: uniqBy(this.state.activeItems, 'key')
+          activeItems: selectedItems
         });
       }
       else {
@@ -103,27 +107,30 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
         this.setState({
           activeItems: [item]
         });
+
+        selectedItems = [item];
       }
     }
     else {
       // Remove the item from the list of active nodes
       this.unselectArray = [];
       this.unselectArray.push(item.key);
+
       if (this.props.selectChildrenIfParentSelected) {
         this.unSelectChildren(item);
       }
-      var tempItems = this.state.activeItems;
+
       this.unselectArray.forEach(element => {
-        tempItems = tempItems.filter(i => i.key != element);
+        selectedItems = selectedItems.filter(i => i.key != element);
       });
 
       this.setState({
-        activeItems: tempItems
+        activeItems: selectedItems
       });
     }
 
     if (typeof this.props.onSelect === "function") {
-      this.props.onSelect(this.state.activeItems);
+      this.props.onSelect(selectedItems);
     }
   }
 

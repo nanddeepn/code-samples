@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "parent-child-call-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/parentChildCall/ParentChildCallWebPart.js",
+          "manifest": "./src/webparts/parentChildCall/ParentChildCallWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ParentChildCallWebPartStrings": "lib/webparts/parentChildCall/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-react-parent-child-communication-client-side-solution",
+    "id": "8ce0943b-74cb-45d8-9fcf-c1b5c97e80c5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-react-parent-child-communication.sppkg"
+  }
+}

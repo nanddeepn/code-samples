@@ -1,0 +1,10 @@
+.ms-compositeHeader {
+    background-color: red;
+}
+.ms-siteLogoContainerOuter {
+    border-radius: 50%;
+    border-width: 3px;
+}
+.ms-siteLogo-actual {
+    border-radius: 50%;
+}

@@ -6,15 +6,15 @@ This graphical control allows to present a hierarchical view of information. Eac
 
 Here is an example of the control in action:
 
-![Tree View control](../treview/assets/controlinaction.gif)
+![Tree View control](/assets/controlinaction.gif)
 
 **With all possible options**
 
-![Tree View control](../treeview/assets/treeview.png)
+![Tree View control(assets/treeview.png)
 
 **Without check boxes or when selection mode is 'None'**
 
-![Tree View control](../treeview/assets/withoutcheckbox.png)
+![Tree View control](/assets/withoutcheckbox.png)
 
 ## How to use this control in your solutions
 

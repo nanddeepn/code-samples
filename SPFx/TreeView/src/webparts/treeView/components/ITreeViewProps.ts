@@ -5,7 +5,7 @@ import { ITreeItem } from './ITreeItem';
  */
 export enum SelectionMode {
   Single = 0,
-  Multiple =1,
+  Multiple = 1,
   None = 2
 }
 
@@ -26,18 +26,18 @@ export interface ITreeViewProps {
    * Specify the item selection mode.
    * By default this is set to Single.
    */
-  selectionMode?: SelectionMode;  
+  selectionMode?: SelectionMode;
 
   /**
-   * Specify the if childrens should be selected when parent is selected
+   * Specify if the childrens should be selected when parent is selected
    * By default this is set to false.
    */
-  selectChildrenIfParentSelected?: boolean;  
+  selectChildrenIfParentSelected?: boolean;
 
-   /**
-   * Specify the if we need to display checkbox for selection
-   */
-  showCheckboxes: boolean;  
+  /**
+  * Specify if the checkboxes should be displayed for selection
+  */
+  showCheckboxes: boolean;
 
 
   /**

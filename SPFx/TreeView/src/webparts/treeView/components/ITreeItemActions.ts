@@ -2,7 +2,7 @@ import { ITreeItem } from './ITreeItem';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**
- * Specifies the display mode of the tree item actions.
+ * Specifies the display mode of the tree item action.
  */
 export enum TreeItemActionsDisplayMode {
     Buttons = 1,

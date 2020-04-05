@@ -2,8 +2,19 @@
 
 This graphical control allows to present a hierarchical view of information. Each tree item can have a number of subitems. This is often visualized by indentation in a list. An tree item can be expanded to reveal subitems (if exists), and collapsed to hide subitems.
 
+
+
 Here is an example of the control in action:
-IMAGE HERE
+
+![Tree View control](../treview/assets/controlinaction.gif)
+
+**With all possible options**
+
+![Tree View control](../treeview/assets/treeview.png)
+
+**Without check boxes or when selection mode is 'None'**
+
+![Tree View control](../treeview/assets/withoutcheckbox.png)
 
 ## How to use this control in your solutions
 
@@ -53,7 +64,7 @@ Interface `ITreeItem`
 | key | string | yes | The unique ID of the tree item. |
 | label | string | yes | Text displayed above the tree item. |
 | subLabel | string | no | The sub label of the tree item. |
-| iconProps | IIconProps | no | Custom icon props for the check mark rendered by the checkbox. |
+| iconProps | IIconProps | no | Custom icon props to be rendered before label. |
 | disabled | boolean | no | Specify if the tree item needs to be disabled. |
 | selectable | boolean | no | Specify if the tree item can be selected. |
 | data | any | no | Specify an additional data of the tree item. |
@@ -125,4 +136,117 @@ Specifies the the selection mode of tree item.
 | Single |
 | Multiple |
 | None |
+
+## Example of Properties object used to render control as in main screenshot.
+
+```typescript
+
+{
+        items: [
+          {
+            key: "R1",
+            label: "Root",
+            subLabel: "This is a sub label for node",
+            treeItemActions: {
+              actions: [{
+                title: "Get item",
+                iconProps: {
+                  iconName: 'Warning',
+                  style: {
+                    color: 'salmon',
+                  },
+                },
+                id: "GetItem",
+                actionCallback: async (treeItem: ITreeItem) => {
+                  console.log(treeItem);
+                }
+              }],
+              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
+            },
+            children: [
+              {
+                key: "1",
+                label: "Parent 1",
+                selectable: false,
+                children: [
+                  {
+                    key: "3",
+                    label: "Child 1",
+                    subLabel: "This is a sub label for node",
+                    treeItemActions: {
+                      actions: [{
+                        iconProps: {
+                          iconName: 'Share'
+                        },
+                        id: "GetItem",
+                        actionCallback: async (treeItem: ITreeItem) => {
+                          console.log(treeItem);
+                        }
+                      }],
+                      treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
+                    },
+                    children: [
+                      {
+                        key: "gc1",
+                        label: "Grand Child 1",
+                        treeItemActions: {
+                          actions: [{
+                            title: "Get Grand Child item",
+                            iconProps: {
+                              iconName: 'Mail'
+                            },
+                            id: "GetItem",
+                            actionCallback: async (treeItem: ITreeItem) => {
+                              console.log(treeItem);
+                            }
+                          }],
+                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    key: "4",
+                    label: "Child 2",
+                    iconProps: skypeCheckIcon
+                  }
+                ]
+              },
+              {
+                key: "2",
+                label: "Parent 2"
+              },
+              {
+                key: "5",
+                label: "Parent 3",
+                disabled: true
+              },
+              {
+                key: "6",
+                label: "Parent 4",
+                selectable: true
+              }
+            ]
+          },
+          {
+            key: "R2",
+            label: "Root 2",
+            children: [
+              {
+                key: "8",
+                label: "Parent 5"
+              }
+            ]
+          }
+        ],
+        defaultExpanded: false,
+        selectionMode: SelectionMode.Multiple,
+        onExpandCollapse: this.onExpandCollapseTree,
+        onSelect: this.onItemSelected,
+        selectChildrenIfParentSelected: true,
+        showCheckboxes: true,
+        
+      }
+
+```
 

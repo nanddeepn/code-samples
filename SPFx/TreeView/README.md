@@ -62,11 +62,11 @@ Interface `ITreeItem`
 | Property | Type | Required | Description |
 | ---- | ---- | ---- | ---- |
 | key | string | yes | The unique ID of the tree item. |
-| label | string | yes | Text displayed above the tree item. |
+| label | string | yes | Text displayed next to checkbox. |
 | subLabel | string | no | The sub label of the tree item. |
-| iconProps | IIconProps | no | Custom icon props to be rendered before label. |
-| disabled | boolean | no | Specify if the tree item needs to be disabled. |
-| selectable | boolean | no | Specify if the tree item can be selected. |
+| iconProps | IIconProps | no | Custom icon to be rendered before label. |
+| disabled | boolean | no | Specify if the tree item needs to be disabled. Default is false |
+| selectable | boolean | no | Specify if the tree item can be selected. Default is true|
 | data | any | no | Specify an additional data of the tree item. |
 | treeItemActions | ITreeItemActions | no | Specify list of actions for the tree item. |
 | children | ITreeItem[] | no | Specify list of child tree items. |
@@ -119,7 +119,7 @@ The TreeView control can be configured with the following properties:
 
 | Property | Type | Required | Description |
 | ---- | ---- | ---- | ---- |
-| items | ITreeItem[] | yes | An array of tree items to display. |
+| items | ITreeItem[] | yes | An array of tree items to display. refer [example](#example-of-properties-object-used-to-render-control-as-in-main-screenshot) |
 | defaultExpanded | boolean | no | Specify if the tree items are displayed as expanded by default (defaults to false)|
 | selectionMode | enum | no | Specify the selection mode of tree view (defaults to Single selection)|
 | selectChildrenIfParentSelected | boolean | no | Specify if the childrens should be selected when parent item is selected (defaults to false)|
@@ -137,11 +137,10 @@ Specifies the the selection mode of tree item.
 | Multiple |
 | None |
 
-## Example of Properties object used to render control as in main screenshot.
+## Example of array of items used to render control as in first screenshot.
 
 ```typescript
 
-{
         items: [
           {
             key: "R1",
@@ -238,15 +237,6 @@ Specifies the the selection mode of tree item.
               }
             ]
           }
-        ],
-        defaultExpanded: false,
-        selectionMode: SelectionMode.Multiple,
-        onExpandCollapse: this.onExpandCollapseTree,
-        onSelect: this.onItemSelected,
-        selectChildrenIfParentSelected: true,
-        showCheckboxes: true,
-        
-      }
-
+        ]
 ```
 

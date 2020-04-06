@@ -7,7 +7,6 @@ import ButtonTreeItemAction from './ButtonTreeItemAction';
  * Renders the controls for TreeItem actions component
  */
 export default class TreeItemActionsControl extends React.Component<ITreeItemActionsControlProps, ITreeItemActionsControlState> {
-
     /**
      * Constructor method
      * @param props properties interface
@@ -66,9 +65,14 @@ export default class TreeItemActionsControl extends React.Component<ITreeItemAct
             <div>
                 {
                     displayMode == TreeItemActionsDisplayMode.ContextualMenu ?
-                        <DropdownTreeItemAction key={`DdAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} treeItemActionCallback={this.props.treeItemActionCallback} />
+                        <DropdownTreeItemAction key={`DdAction-${treeItem.key}`}
+                            treeItemActions={availableActions}
+                            treeItem={treeItem}
+                            treeItemActionCallback={this.props.treeItemActionCallback} />
                         :
-                        <ButtonTreeItemAction key={`BtnAction-${treeItem.key}`} treeItemActions={availableActions} treeItem={treeItem} treeItemActionCallback={this.props.treeItemActionCallback} />
+                        <ButtonTreeItemAction key={`BtnAction-${treeItem.key}`}
+                            treeItemActions={availableActions}
+                            treeItem={treeItem} treeItemActionCallback={this.props.treeItemActionCallback} />
                 }
             </div>
         );

@@ -25,9 +25,9 @@ export interface ITreeItem {
    * Disabled state of the tree item.
    */
   disabled?: boolean;
-   /**
-   * Selectable state of the tree item.
-   */
+  /**
+  * Selectable state of the tree item.
+  */
   selectable?: boolean;
   /**
    * Additional data of the tree item.

@@ -5,7 +5,7 @@ import { ITreeItem } from './ITreeItem';
  */
 export interface ITreeViewState {
     /**
-     * Specifies is the tree view is loaded.
+     * Specifies if the tree view is loaded.
      */
     loaded: boolean;
     /**

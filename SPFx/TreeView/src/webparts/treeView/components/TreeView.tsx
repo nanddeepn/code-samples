@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import styles from './TreeView.module.scss';
 import { uniqBy } from '@microsoft/sp-lodash-subset';
 import { ITreeViewProps, SelectionMode } from './ITreeViewProps';

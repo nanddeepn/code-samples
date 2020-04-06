@@ -137,106 +137,105 @@ Specifies the the selection mode of tree item.
 | Multiple |
 | None |
 
-## Example of array of items used to render control as in first screenshot.
+## Example of array of tree items used to render control as in first screenshot.
 
 ```typescript
-
-        items: [
+items: [
+  {
+    key: "R1",
+    label: "Root",
+    subLabel: "This is a sub label for node",
+    treeItemActions: {
+      actions: [{
+        title: "Get item",
+        iconProps: {
+          iconName: 'Warning',
+          style: {
+            color: 'salmon',
+          },
+        },
+        id: "GetItem",
+        actionCallback: async (treeItem: ITreeItem) => {
+          console.log(treeItem);
+        }
+      }],
+      treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
+    },
+    children: [
+      {
+        key: "1",
+        label: "Parent 1",
+        selectable: false,
+        children: [
           {
-            key: "R1",
-            label: "Root",
+            key: "3",
+            label: "Child 1",
             subLabel: "This is a sub label for node",
             treeItemActions: {
               actions: [{
-                title: "Get item",
                 iconProps: {
-                  iconName: 'Warning',
-                  style: {
-                    color: 'salmon',
-                  },
+                  iconName: 'Share'
                 },
                 id: "GetItem",
                 actionCallback: async (treeItem: ITreeItem) => {
                   console.log(treeItem);
                 }
               }],
-              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
+              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
             },
             children: [
               {
-                key: "1",
-                label: "Parent 1",
-                selectable: false,
-                children: [
-                  {
-                    key: "3",
-                    label: "Child 1",
-                    subLabel: "This is a sub label for node",
-                    treeItemActions: {
-                      actions: [{
-                        iconProps: {
-                          iconName: 'Share'
-                        },
-                        id: "GetItem",
-                        actionCallback: async (treeItem: ITreeItem) => {
-                          console.log(treeItem);
-                        }
-                      }],
-                      treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
+                key: "gc1",
+                label: "Grand Child 1",
+                treeItemActions: {
+                  actions: [{
+                    title: "Get Grand Child item",
+                    iconProps: {
+                      iconName: 'Mail'
                     },
-                    children: [
-                      {
-                        key: "gc1",
-                        label: "Grand Child 1",
-                        treeItemActions: {
-                          actions: [{
-                            title: "Get Grand Child item",
-                            iconProps: {
-                              iconName: 'Mail'
-                            },
-                            id: "GetItem",
-                            actionCallback: async (treeItem: ITreeItem) => {
-                              console.log(treeItem);
-                            }
-                          }],
-                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    key: "4",
-                    label: "Child 2",
-                    iconProps: skypeCheckIcon
-                  }
-                ]
-              },
-              {
-                key: "2",
-                label: "Parent 2"
-              },
-              {
-                key: "5",
-                label: "Parent 3",
-                disabled: true
-              },
-              {
-                key: "6",
-                label: "Parent 4",
-                selectable: true
+                    id: "GetItem",
+                    actionCallback: async (treeItem: ITreeItem) => {
+                      console.log(treeItem);
+                    }
+                  }],
+                  treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
+                }
               }
             ]
           },
           {
-            key: "R2",
-            label: "Root 2",
-            children: [
-              {
-                key: "8",
-                label: "Parent 5"
-              }
-            ]
+            key: "4",
+            label: "Child 2",
+            iconProps: skypeCheckIcon
           }
         ]
+      },
+      {
+        key: "2",
+        label: "Parent 2"
+      },
+      {
+        key: "5",
+        label: "Parent 3",
+        disabled: true
+      },
+      {
+        key: "6",
+        label: "Parent 4",
+        selectable: true
+      }
+    ]
+  },
+  {
+    key: "R2",
+    label: "Root 2",
+    children: [
+      {
+        key: "8",
+        label: "Parent 5"
+      }
+    ]
+  }
+]
 ```
 

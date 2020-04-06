@@ -29,16 +29,15 @@ export interface ITreeViewProps {
   selectionMode?: SelectionMode;
 
   /**
-   * Specify if the childrens should be selected when parent is selected
+   * Specify if the childrens should be selected when parent is selected.
    * By default this is set to false.
    */
   selectChildrenIfParentSelected?: boolean;
 
   /**
-  * Specify if the checkboxes should be displayed for selection
+  * Specify if the checkboxes should be displayed for selection.
   */
   showCheckboxes: boolean;
-
 
   /**
    * Callback function called after a item is expanded / collapsed.
@@ -48,7 +47,7 @@ export interface ITreeViewProps {
   onExpandCollapse?: (item: ITreeItem, isExpanded: boolean) => void;
 
   /**
-   * Callback function called after a item is selected.
+   * Callback function called after an item is selected.
    * @argument items The selected items.
    */
   onSelect?: (items: ITreeItem[]) => void;

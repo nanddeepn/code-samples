@@ -1,6 +1,6 @@
 ## spfx-react-parent-child-communication
 
-This is where you include your WebPart documentation.
+This sample demonstrates how to pass data between React components with Parent and Child relationship, a common scenario in SharePoint Framework development.
 
 ### Building the code
 

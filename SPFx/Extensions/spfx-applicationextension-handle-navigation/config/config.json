@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "handle-navigation-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/handleNavigation/HandleNavigationApplicationCustomizer.js",
+          "manifest": "./src/extensions/handleNavigation/HandleNavigationApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HandleNavigationApplicationCustomizerStrings": "lib/extensions/handleNavigation/loc/{locale}.js"
+  }
+}

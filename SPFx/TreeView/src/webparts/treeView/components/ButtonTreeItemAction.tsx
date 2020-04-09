@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CommandBarButton } from 'office-ui-fabric-react/lib/Button';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 import { ITreeItemAction, IConcreteTreeItemActionProps } from './ITreeItemActions';
+import styles from './TreeView.module.scss';
 
 /**
  * Renders the controls for Button TreeItem action component
@@ -73,7 +74,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
     }
 
     return (
-      <div style={{ display: 'flex', alignItems: 'stretch', height: '32px' }}>
+      <div>
         {
           treeItemActions &&
           treeItemActions.map(treeItemAction => {
@@ -91,7 +92,7 @@ export default class ButtonTreeItemAction extends React.Component<IConcreteTreeI
                       title={btnTitle}
                       name={name}
                       key={treeItem.key}
-                      style={this.getTreeItemActionButtonStyle(treeItemAction)} />
+                      className={styles.actionButton} />
                   </div>
                 )
             );

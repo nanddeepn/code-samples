@@ -117,14 +117,14 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
             ]
           }
         ],
-        // defaultExpanded: false,
+        defaultExpanded: false,
         selectionMode: SelectionMode.Multiple,
-        onExpandCollapse: this.onExpandCollapseTree,
-        onSelect: this.onItemSelected,
         selectChildrenIfParentSelected: false,
         showCheckboxes: true,
         treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
-        defaultSelectedKeys: ['R2', '6']
+        defaultSelectedKeys: ['R2', '6'],
+        onExpandCollapse: this.onExpandCollapseTree,
+        onSelect: this.onItemSelected
       }
     );
 

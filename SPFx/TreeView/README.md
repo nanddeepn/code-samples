@@ -29,7 +29,7 @@ import { TreeView, ITreeItem } from "@pnp/spfx-controls-react/lib/TreeView";
 <TreeView 
     items={treeitems}
     defaultExpanded={false}
-    selectionMode={SelectionMode.}
+    selectionMode={SelectionMode.Multiple}
     selectChildrenIfParentSelected={true}
     showCheckboxes={true}
     treeItemActionsDisplayMode={TreeItemActionsDisplayMode.ContextualMenu}

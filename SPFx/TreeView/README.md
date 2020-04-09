@@ -29,10 +29,10 @@ import { TreeView, ITreeItem } from "@pnp/spfx-controls-react/lib/TreeView";
 <TreeView 
     items={treeitems}
     defaultExpanded={false}
-    selectionMode=SelectionMode.Multiple
+    selectionMode={SelectionMode.}
     selectChildrenIfParentSelected={true}
     showCheckboxes={true}
-    treeItemActionsDisplayMode=TreeItemActionsDisplayMode.ContextualMenu
+    treeItemActionsDisplayMode={TreeItemActionsDisplayMode.ContextualMenu}
     defaultSelectedKeys=['key1', 'key2'],
     onSelect={this.onTreeItemSelect}
     onExpandCollapse={this.onTreeItemExpandCollapse}
@@ -59,27 +59,30 @@ private onTreeItemExpandCollapse(item: ITreeItem, isExpanded: boolean) {
 
 Interface `ITreeItem`
 
-| Property   | Type              | Required | Description                                                     |
-|------------|-------------------|----------|-----------------------------------------------------------------|
-| key        | string            | yes      | The unique ID of the tree item.                                 |
-| label      | string            | yes      | Text displayed next to checkbox.                                |
-| subLabel   | string            | no       | The sub label of the tree item.                                 |
-| iconProps  | IIconProps        | no       | Custom icon to be rendered before label.                        |
-| disabled   | boolean           | no       | Specify if the tree item needs to be disabled. Default is false |
-| selectable | boolean           | no       | Specify if the tree item can be selected. Default is true       |
-| data       | any               | no       | Specify an additional data of the tree item.                    |
-| actions    | ITreeItemAction[] | no       | Specify list of actions for the tree item.                      |
-| children   | ITreeItem[]       | no       | Specify list of child tree items.                               |
+| Property   | Type              | Required | Description                                                      |
+|------------|-------------------|----------|------------------------------------------------------------------|
+| key        | string            | yes      | The unique ID of the tree item.                                  |
+| label      | string            | yes      | Text displayed next to checkbox.                                 |
+| subLabel   | string            | no       | The sub label of the tree item.                                  |
+| iconProps  | IIconProps        | no       | Custom icon to be rendered before label.                         |
+| disabled   | boolean           | no       | Specify if the tree item needs to be disabled. Default is false. |
+| selectable | boolean           | no       | Specify if the tree item can be selected. Default is true.       |
+| data       | any               | no       | Specify an additional data of the tree item.                     |
+| actions    | ITreeItemAction[] | no       | Specify list of actions for the tree item.                       |
+| children   | ITreeItem[]       | no       | Specify list of child tree items.                                |
+
 
 Interface `ITreeItemAction`
+
+Specifies the list of actions for the tree item.
 | Property             | Type                                 | Required | Description                                                                                                                |
 |----------------------|--------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| id                   | string                               | yes      | Unique id of the action                                                                                                    |
-| title                | string                               | yes      | Action title                                                                                                               |
-| iconProps            | IIconProps                           | no       | Name of the icon to be used to display action                                                                              |
+| id                   | string                               | yes      | Unique id of the action.                                                                                                   |
+| title                | string                               | yes      | Title of the action.                                                                                                       |
+| iconProps            | IIconProps                           | no       | Name of the icon to be used to display action.                                                                             |
 | hidden               | boolean                              | no       | Specify if the action is hidden. This could be used for instance when you want to invoke the action right after rendering. |
-| invokeActionOnRender | boolean                              | no       | Specifies if you want to invoke the action on render                                                                       |
-| actionCallback       | (currentTreeItem: ITreeItem) => void | yes      | Method to be executed when action is fired                                                                                 |
+| invokeActionOnRender | boolean                              | no       | Specifies if you want to invoke the action on render.                                                                      |
+| actionCallback       | (currentTreeItem: ITreeItem) => void | yes      | Method to be executed when action is fired.                                                                                |
 
 Enum `TreeItemActionsDisplayMode`
 
@@ -111,22 +114,22 @@ export const renderCustomTreeItem = (item: ITreeItem): JSX.Element => {
 
 The TreeView control can be configured with the following properties:
 
-| Property                       | Type                       | Required | Description                                                                                                                       |
-|--------------------------------|----------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
-| items                          | ITreeItem[]                | yes      | An array of tree items to display. refer [example](#example-of-array-of-tree-items-used-to-render-control-as-in-first-screenshot) |
-| defaultExpanded                | boolean                    | no       | Specify if the tree items are displayed as expanded by default (defaults to false)                                                |
-| selectionMode                  | enum                       | no       | Specify the selection mode of tree view (defaults to Single selection)                                                            |
-| selectChildrenIfParentSelected | boolean                    | no       | Specify if the childrens should be selected when parent item is selected (defaults to false)                                      |
-| showCheckboxes                 | boolean                    | yes      | Specify if the checkboxes should be displayed for selection                                                                       |
-| treeItemActionsDisplayMode     | TreeItemActionsDisplayMode | no       | Specify the display mode of the tree item actions.                                                                                |
-| defaultSelectedKeys            | string[]                   | no       | Specify keys of items to be selected by default.                                                                                  |
-| onExpandCollapse               | function                   | no       | Defines a onExpandCollapse function to raise when the tree item has expanded or collapsed.                                        |
-| onSelect                       | function                   | no       | Captures the event of when the tree item selection has changed.                                                                   |
-| onRenderItem                   | function                   | no       | Optional callback to provide custom rendering of the item (default is simple text of item label and a checkbox for selection)     |
+| Property                       | Type                       | Required | Description                                                                                                                        |
+|--------------------------------|----------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------|
+| items                          | ITreeItem[]                | yes      | An array of tree items to display. refer [example](#example-of-array-of-tree-items-used-to-render-control-as-in-first-screenshot). |
+| defaultExpanded                | boolean                    | no       | Specify if the tree items are displayed as expanded by default (defaults to false).                                                |
+| selectionMode                  | enum                       | no       | Specify the selection mode of tree view (defaults to Single selection).                                                            |
+| selectChildrenIfParentSelected | boolean                    | no       | Specify if the childrens should be selected when parent item is selected (defaults to false).                                      |
+| showCheckboxes                 | boolean                    | yes      | Specify if the checkboxes should be displayed for selection.                                                                       |
+| treeItemActionsDisplayMode     | TreeItemActionsDisplayMode | no       | Specify the display mode of the tree item actions.                                                                                 |
+| defaultSelectedKeys            | string[]                   | no       | Specify keys of items to be selected by default.                                                                                   |
+| onExpandCollapse               | function                   | no       | Defines a onExpandCollapse function to raise when the tree item has expanded or collapsed.                                         |
+| onSelect                       | function                   | no       | Captures the event of when the tree item selection has changed.                                                                    |
+| onRenderItem                   | function                   | no       | Optional callback to provide custom rendering of the item (default is simple text of item label and a checkbox for selection).     |
 
 Enum `SelectionMode`
 
-Specifies the the selection mode of tree item.
+Specifies the selection mode of tree item.
 | Value    |
 |----------|
 | Single   |

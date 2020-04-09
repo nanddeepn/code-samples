@@ -33,22 +33,20 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
             key: "R1",
             label: "Root",
             subLabel: "This is a sub label for node",
-            treeItemActions: {
-              actions: [{
-                title: "Get item",
-                iconProps: {
-                  iconName: 'Warning',
-                  style: {
-                    color: 'salmon',
-                  },
+            iconProps: skypeCheckIcon,
+            actions: [{
+              title: "Get item",
+              iconProps: {
+                iconName: 'Warning',
+                style: {
+                  color: 'salmon',
                 },
-                id: "GetItem",
-                actionCallback: async (treeItem: ITreeItem) => {
-                  console.log(treeItem);
-                }
-              }],
-              treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu
-            },
+              },
+              id: "GetItem",
+              actionCallback: async (treeItem: ITreeItem) => {
+                console.log(treeItem);
+              }
+            }],
             children: [
               {
                 key: "1",
@@ -59,35 +57,29 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                     key: "3",
                     label: "Child 1",
                     subLabel: "This is a sub label for node",
-                    treeItemActions: {
-                      actions: [{
-                        iconProps: {
-                          iconName: 'Share'
-                        },
-                        id: "GetItem",
-                        actionCallback: async (treeItem: ITreeItem) => {
-                          console.log(treeItem);
-                        }
-                      }],
-                      treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
-                    },
+                    actions: [{
+                      iconProps: {
+                        iconName: 'Share'
+                      },
+                      id: "GetItem",
+                      actionCallback: async (treeItem: ITreeItem) => {
+                        console.log(treeItem);
+                      }
+                    }],
                     children: [
                       {
                         key: "gc1",
                         label: "Grand Child 1",
-                        treeItemActions: {
-                          actions: [{
-                            title: "Get Grand Child item",
-                            iconProps: {
-                              iconName: 'Mail'
-                            },
-                            id: "GetItem",
-                            actionCallback: async (treeItem: ITreeItem) => {
-                              console.log(treeItem);
-                            }
-                          }],
-                          treeItemActionsDisplayMode: TreeItemActionsDisplayMode.Buttons
-                        }
+                        actions: [{
+                          title: "Get Grand Child item",
+                          iconProps: {
+                            iconName: 'Mail'
+                          },
+                          id: "GetItem",
+                          actionCallback: async (treeItem: ITreeItem) => {
+                            console.log(treeItem);
+                          }
+                        }]
                       }
                     ]
                   },
@@ -129,8 +121,10 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
         selectionMode: SelectionMode.Multiple,
         onExpandCollapse: this.onExpandCollapseTree,
         onSelect: this.onItemSelected,
-        selectChildrenIfParentSelected: true,
-        showCheckboxes: true
+        selectChildrenIfParentSelected: false,
+        showCheckboxes: true,
+        treeItemActionsDisplayMode: TreeItemActionsDisplayMode.ContextualMenu,
+        defaultSelectedKeys: ['R2', '6']
       }
     );
 

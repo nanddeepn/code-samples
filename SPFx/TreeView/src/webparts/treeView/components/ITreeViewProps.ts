@@ -1,4 +1,5 @@
 import { ITreeItem } from './ITreeItem';
+import { TreeItemActionsDisplayMode } from './ITreeItemActions';
 
 /**
  * Selection mode of tree item
@@ -37,7 +38,17 @@ export interface ITreeViewProps {
   /**
   * Specify if the checkboxes should be displayed for selection.
   */
-  showCheckboxes: boolean;
+  showCheckboxes?: boolean;
+
+  /**
+   * Display mode of the tree item actions.
+   */
+  treeItemActionsDisplayMode?: TreeItemActionsDisplayMode;
+
+  /**
+   * Keys of items selected by default
+   */
+  defaultSelectedKeys?: string[];
 
   /**
    * Callback function called after a item is expanded / collapsed.

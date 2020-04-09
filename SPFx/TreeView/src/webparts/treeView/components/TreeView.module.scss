@@ -1,100 +1,113 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
-.listItem {
-  min-height: 36px;
-  // line-height: 36px;
-  cursor: pointer;
+.treeView {
+  padding: 15px;
 
-  > div {
-    display: inline-block;
-    margin-right: 10px;
+  .listItem {
+    // line-height: 36px;
+    display: flex;
+    margin-top: 6px;
+    align-items: flex-start;
   }
 
-  img {
-    margin-right: 5px;
+  .treeSelector {
+    //display: inline-block;
     vertical-align: middle;
-  }
-}
-
-.navLabel {
-  position: relative;
-  margin-top: 5px;
-  -webkit-font-smoothing: antialiased;
-  font-size: 14px;
-  font-weight: bold;
-  box-sizing: border-box;
-  text-align: center;
-  cursor: pointer;
-  padding: 0 20px 0 20px;
-  height: 44px;
-  color: rgb(0, 0, 0);
-  background-color: rgb(237, 235, 233);
-  line-height: 44px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  user-select: none;
-  outline: transparent;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-image: initial;
-  text-decoration: none;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.treeSelector {
-  display: inline-block;
-  margin: 0 8px 0 4px;
-  vertical-align: middle;
-}
-
-.itemLabel {
-  position: absolute;
-  height: 20px;
-}
-
-.itemSubLabelNav {
-  position: relative;
-  margin-bottom: 10px;
-  font-size: 12px;
-  color: #666666;
-}
-
-.itemSubLabel {
-  position: relative;
-  top: 20px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  color: #666666;
-}
-
-.itemMenu {
-  position: absolute;
-  // margin-top: 10px;
-}
-
-.tree {
-  padding-left: 20px;
-
-  .treeEnabled,
-  .treeDisabled {
-    background-repeat: no-repeat;
-    background-position: 30px center;
+    margin: 4px 4px 0 0;
+    cursor: pointer;
+    &>button {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+    }
   }
 
-  .treeEnabled {
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVDhPY2AYNKCoqIgTiOcD8X8S8F6wB4Aa1IH4akNDw+mPHz++/E8EuHTp0jmQRSDNCcXFxa/XrVt3gAh9KEpgBvx/9OjRLVI1g9TDDYBp3rlz5//Kysr/IJoYgGEASPPatWsbQDQxAMOAbdu2gZ0FookBcAOePHlyhxgN6GqQY+Hdhg0bDpJqCNgAaDrQAnJuNDY2nvr06dMbYgw6e/bsabgBUEN4yEiJ2wdNViLfIQC3sTh2vtJcswAAAABJRU5ErkJggg==");
+  .itemContent {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 4px;
+
+    &.disabled {
+      cursor: default;
+      color: '[theme:disabledBodyText, default:#a6a6a6]';
+
+      .labels {
+        .itemSubLabel {
+          color: '[theme:disabledSubtext, default:#d0d0d0]';
+        }
+      }
+    }
+
+    &.noCheckBox:not(.disabled) {
+        &:hover {
+        background-color: '[theme:listItemBackgroundHover, default:#f4f4f4]';
+      }
+
+      &.checked {
+        background-color: '[theme:listItemBackgroundChecked, default:#eaeaea]';
+      }
+    }
+
+    .checkbox {
+      margin-right: 8px;
+    }
+
+    .icon {
+      height: 18px;
+      line-height: 18px;
+    }
+
+    .labels {
+      line-height: 18px;
+      display: flex;
+      flex-direction: column;
+      .itemLabel {
+        padding: 0;
+      }
+
+      .itemSubLabel {
+        font-size: 12px;
+        color: '[theme:bodySubtext, default:#666666]';
+      }
+    }
   }
 
-  .treeDisabled {
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFMSURBVDhPzZPNSsNAFIULQqEQEPoSQqAg7gqC0HdwXxAElyYgBBGSZ+gDdOUyIauULATdKrgIKCKuQjbiDySCkNV4TrkzpJW2cefAxwwzc86de2em0/k3zXGcHpgC9Qeu5glAsAMefN+/K8vyVbVoWZbdMxDFY9d136Ioum6hW9iiDVSe588rxDXmJ+AAdAWOOVcbAy1O01R5nqfYoxVglyk+Hu7Z4FiwOcc1GBRMwQSnOAxDHz0jDyCwwCVQS3DO0gU0BkmSzG8A/UQiz7DxC5yLGQ1PwDeYGYOiKF6WarCPDUOJeor+A4z0m8P4SNaG+hY+4zi+aZh0scEBNeB41DTBuCcGjj6FjaM/BUFwW1XVO6vdMNiSdIzJLwN5TJZ+iSLQKYwbR9cmZyaFdX+JhZIiMue+cLFQxA0G22uusd/6I8OEb4LXRwZN4Q+3Ys8Mb9+nRgAAAABJRU5ErkJggg==");
+  .itemMenu {
+    display: flex;
+    margin-left: 8px;
+    //position: absolute;
+    // margin-top: 10px;
+
+    .actionMore {
+      width: 14px;
+      height: 20px;
+      padding: 0;
+    }
+
+    .actionButton {
+      height: 20px;
+      padding: 0;
+      background-color: transparent;
+      &:hover {
+        background-color: '[theme:buttonBackgroundHovered, default:#f4f4f4]';
+        color: '[theme:buttonTextHovered, default:#212121]';
+      }
+      &:pressed {
+        background-color: '[theme:buttonBackgroundPressed, default:#eaeaea]';
+        color: '[theme:buttonTextPressed, default:#212121]';
+      }
+    }
   }
 
-  label > span {
-    padding-left: 0px;
-  }
-  .blankspace {
-    padding-left: 35px;
+  .tree {
+
+    label > span {
+      padding-left: 0px;
+    }
+    .blankspace {
+      padding-left: 35px;
+    }
   }
 }

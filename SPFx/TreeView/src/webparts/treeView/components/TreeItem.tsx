@@ -1,13 +1,14 @@
 import * as React from 'react';
 import styles from './TreeView.module.scss';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
-import { Label } from 'office-ui-fabric-react/lib/Label';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconButton } from 'office-ui-fabric-react';
 import * as strings from 'TreeViewWebPartStrings';
 import { ITreeItem } from './ITreeItem';
 import { SelectionMode } from './ITreeViewProps';
 import TreeItemActionsControl from './TreeItemActionsControl';
+import { TreeItemActionsDisplayMode } from './ITreeItemActions';
+import { css } from 'office-ui-fabric-react/lib/Utilities';
 
 /**
  * TreeItem properties interface
@@ -30,17 +31,22 @@ export interface ITreeItemProps {
    */
   isFirstRender: boolean;
   /**
-   * Specifies whether current tree item should be rendered as an expanded. 
+   * Specifies whether current tree item should be rendered as an expanded.
    */
   defaultExpanded: boolean;
   /**
-   * Specifies whether current tree item should be rendered as an expanded. 
+   * Specifies whether current tree item should be rendered as an expanded.
    */
   showCheckboxes: boolean;
   /**
    * Stores the selected tree items
    */
   activeItems: ITreeItem[];
+
+  /**
+   * Display mode of the tree item actions.
+   */
+  treeItemActionsDisplayMode?: TreeItemActionsDisplayMode;
 
   /**
    * Callback function called when an item is expanded / collapsed.
@@ -105,7 +111,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   /**
    * Handle the checkbox change trigger
    */
-  private _itemSelected(ev: React.FormEvent<HTMLElement>, isChecked: boolean): void {
+  private _itemSelected(ev: React.FormEvent<HTMLElement | HTMLInputElement>, isChecked: boolean): void {
     this.setState({
       selected: !this.state.selected
     });
@@ -142,16 +148,16 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
   }
 
   /**
-   * Default or custom rendering of tree item 
+   * Default or custom rendering of tree item
    */
   private renderItem(item: ITreeItem): JSX.Element {
     if (typeof this.props.onRenderItem === "function") {
-      // Custom rendering of tree item 
+      // Custom rendering of tree item
       return this.props.onRenderItem(item);
     }
     else {
       return (
-        // Default rendering of tree item 
+        // Default rendering of tree item
         <React.Fragment>
           {
             item.selectable == false && !item.children &&
@@ -161,36 +167,27 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             // Rendering when item has iconProps
             item.iconProps &&
             <React.Fragment>
-              <Icon iconName={item.iconProps.iconName} style={item.iconProps.style} className="ms-IconExample" />
+              <Icon className={styles.icon} iconName={item.iconProps.iconName} style={item.iconProps.style} />
               &nbsp;
             </React.Fragment>
           }
-          {
-            // Rendering when showCheckboxes property is set to false 
-            !this.props.showCheckboxes &&
-            <Label className={`${this.state.selected && this.props.showCheckboxes == false ? styles.navLabel : ""}`}
-              onClick={(e) => this._itemSelected(e, true)}
-              style={checkBoxStyle}
-              disabled={item.disabled}>
-              {item.label}
-            </Label>
-          }
-          {
-            // Render label
-            this.props.showCheckboxes &&
-            <Label className={`${item.subLabel ? styles.itemLabel : ""}`}
-              style={this.props.showCheckboxes ? checkBoxStyle : null}>
-              {item.label}
-            </Label>
-          }
-          {
-            // Render sublabel
-            item.subLabel &&
-            <Label className={this.props.showCheckboxes ? styles.itemSubLabel : styles.itemSubLabelNav}
-              style={this.props.showCheckboxes ? checkBoxStyle : null}>
-              {item.subLabel}
-            </Label>
-          }
+          <div
+            className={styles.labels}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!item.disabled) {
+                this._itemSelected(e, !this.state.selected);
+              }
+            }}>
+            <span>{item.label}</span>
+            {
+              // Render sublabel
+              item.subLabel &&
+              <div className={styles.itemSubLabel}>
+                {item.subLabel}
+              </div>
+            }
+          </div>
         </React.Fragment>
       );
     }
@@ -201,19 +198,31 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    */
   public createChildNodes = (list, paddingLeft) => {
     if (list.length) {
+      const {
+        treeItem,
+        selectionMode,
+        activeItems,
+        parentCallbackExpandCollapse,
+        parentCallbackOnSelect,
+        onRenderItem,
+        showCheckboxes,
+        treeItemActionsDisplayMode
+      } = this.props;
+
       let childrenWithHandlers = list.map((item, index) => {
         return (
           <TreeItem
             treeItem={item}
-            defaultExpanded={this.props.treeItem.key === item.key ? this.state.expanded : false}
+            defaultExpanded={treeItem.key === item.key ? this.state.expanded : false}
             leftOffset={paddingLeft}
-            selectionMode={this.props.selectionMode}
-            activeItems={this.props.activeItems}
+            selectionMode={selectionMode}
+            activeItems={activeItems}
             isFirstRender={!paddingLeft ? true : false}
-            parentCallbackExpandCollapse={this.props.parentCallbackExpandCollapse}
-            parentCallbackOnSelect={this.props.parentCallbackOnSelect}
-            onRenderItem={this.props.onRenderItem}
-            showCheckboxes={this.props.showCheckboxes}
+            parentCallbackExpandCollapse={parentCallbackExpandCollapse}
+            parentCallbackOnSelect={parentCallbackOnSelect}
+            onRenderItem={onRenderItem}
+            showCheckboxes={showCheckboxes}
+            treeItemActionsDisplayMode={treeItemActionsDisplayMode}
           />
         );
       });
@@ -232,58 +241,84 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
    * Default React render method
    */
   public render(): React.ReactElement<ITreeItemProps> {
-    const { treeItem, leftOffset, isFirstRender } = this.props;
+    const { treeItem, leftOffset, showCheckboxes, selectionMode, treeItemActionsDisplayMode } = this.props;
+
+    const {
+      expanded,
+      selected
+    } = this.state;
 
     const styleProps: React.CSSProperties = {
-      marginLeft: isFirstRender ? '0px' : `${leftOffset}px`
+      marginLeft: `${leftOffset}px`
+    };
+
+    const contentStyles: React.CSSProperties = {
+      marginLeft: treeItem.children ? '0' : `${leftOffset}px`
     };
 
     return (
       <React.Fragment>
-        <div className={`${styles.listItem} ${styles.tree}`} style={styleProps || {}} >
+        <div className={`${styles.listItem} ${styles.tree}`}>
           <div className={`${styles.treeSelector}`}>
             {
               // Render expand / collapse icons for items which has children.
               treeItem.children &&
               <IconButton
-                iconProps={this.state.expanded ? { iconName: 'ChevronDown' } : { iconName: 'ChevronRight' }}
-                alt={this.state.expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
-                title={this.state.expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
+                iconProps={expanded ? { iconName: 'ChevronDown' } : { iconName: 'ChevronRight' }}
+                alt={expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
+                title={expanded ? strings.TreeCollapseTitle : strings.TreeExpandTitle}
                 onClick={() => this._handleExpandCollapse()}>
               </IconButton>
             }
           </div>
-          <div className={`${styles.treeSelector}`}>
+          <div
+            className={css({
+              [styles.itemContent]: true,
+              [styles.noCheckBox]: !showCheckboxes,
+              [styles.checked]: selected,
+              [styles.disabled]: !!treeItem.disabled
+            })}
+            style={contentStyles}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!treeItem.disabled && e.currentTarget === e.target) {
+                this._itemSelected(e, !this.state.selected);
+              }
+            }}
+          >
             {
               // Render checkbox (if item is selectable, Selection mode is not None, and showCheckboxes property is set to true)
-              (treeItem.selectable != false) && this.props.selectionMode != SelectionMode.None && this.props.showCheckboxes &&
+              (treeItem.selectable != false) && selectionMode != SelectionMode.None && showCheckboxes &&
               <Checkbox
-                checked={this.state.selected}
+                checked={selected}
                 disabled={treeItem.disabled}
-                className={styles.treeSelector}
-                style={checkBoxStyle}
-                onChange={this._itemSelected} />
+                className={styles.checkbox}
+                onChange={this._itemSelected}
+              />
             }
             {
               // Call default render item function
               this.renderItem(treeItem)
             }
+            {
+              // Render actions for tree item
+              treeItem.actions &&
+              <div className={styles.itemMenu}>
+                <TreeItemActionsControl treeItem={treeItem}
+                  treeItemActions={{
+                    actions: treeItem.actions,
+                    treeItemActionsDisplayMode: treeItemActionsDisplayMode
+                  }}
+                  treeItemActionCallback={this.treeItemActionCallback} />
+              </div>
+            }
           </div>
-          {
-            // Render actions for tree item
-            treeItem.treeItemActions &&
-            <div className={styles.itemMenu}>
-              <TreeItemActionsControl treeItem={this.props.treeItem}
-                treeItemActions={treeItem.treeItemActions}
-                treeItemActionCallback={this.treeItemActionCallback} />
-            </div>
-          }
         </div>
-        <div>
+        <div style={styleProps || {}}>
           {
             // Render child nodes
-            this.state.expanded && treeItem.children
-              ? this.createChildNodes(treeItem.children, 2 * leftOffset) // we double left padding on every recursion/depth
+            expanded && treeItem.children
+              ? this.createChildNodes(treeItem.children, leftOffset) // we double left padding on every recursion/depth
               : null
           }
         </div>

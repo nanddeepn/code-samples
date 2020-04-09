@@ -11,8 +11,6 @@ import TreeItem from './TreeItem';
  */
 export default class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
 
-  private unselectArray = [];
-
   /**
    * Constructor method
    * @param props properties interface
@@ -31,6 +29,26 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
+  private getSelectedItems(treeItems: ITreeItem[], selectedKeys: string[], selectedChildren: boolean): ITreeItem[] {
+    let selectedItems: ITreeItem[] = [];
+
+    treeItems.forEach(item => {
+      if (selectedKeys.indexOf(item.key) !== -1 && item.selectable !== false && !item.disabled) {
+        selectedItems.push(item);
+        if (selectedChildren) {
+          this.selectAllChildren(item, selectedItems);
+        }
+      }
+      else {
+        if (item.children) {
+          selectedItems.push(...this.getSelectedItems(item.children, selectedKeys, selectedChildren));
+        }
+      }
+    });
+
+    return selectedItems;
+  }
+
   /**
    * Fires When expand / collapse item in TreeView
    * @argument item The expanded / collapsed item
@@ -43,18 +61,18 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   }
 
   /**
-   * Selects all child nodes when parent node is selected. 
+   * Selects all child nodes when parent node is selected.
    * @param item current tree item
    */
-  private selectAllChildren(item: ITreeItem): void {
+  private selectAllChildren(item: ITreeItem, selectedItems: ITreeItem[]): void {
     if (item.children) {
       item.children.forEach(element => {
-        if (!element.disabled && element.selectable != false) {
-          this.state.activeItems.push(element);
+        if (!element.disabled && element.selectable !== false) {
+          selectedItems.push(element);
         }
 
         if (element.children) {
-          this.selectAllChildren(element);
+          this.selectAllChildren(element, selectedItems);
         }
       });
     }
@@ -63,15 +81,15 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
   /**
    * Unselects all child nodes of selected parent.
    */
-  private unSelectChildren(item): void {
+  private unSelectChildren(item, unselectArray: string[]): void {
     var tempItem: any = item;
 
     if (tempItem.children) {
       tempItem.children.forEach(element => {
-        this.unselectArray.push(element.key);
+        unselectArray.push(element.key);
 
         if (element.children) {
-          this.unSelectChildren(element);
+          this.unSelectChildren(element, unselectArray);
         }
       });
     }
@@ -88,13 +106,13 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     if (isSelected) {
       if (this.props.selectionMode == SelectionMode.Multiple) {
         // Add the checked term
-        this.state.activeItems.push(item);
+        selectedItems.push(item);
 
         if (this.props.selectChildrenIfParentSelected) {
-          this.selectAllChildren(item);
+          this.selectAllChildren(item, selectedItems);
         }
 
-        selectedItems = uniqBy(this.state.activeItems, 'key');
+        selectedItems = uniqBy(selectedItems, 'key');
 
         // Filter out the duplicate terms
         this.setState({
@@ -112,14 +130,14 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     }
     else {
       // Remove the item from the list of active nodes
-      this.unselectArray = [];
-      this.unselectArray.push(item.key);
+      let unselectArray: string[] = [];
+      unselectArray.push(item.key);
 
       if (this.props.selectChildrenIfParentSelected) {
-        this.unSelectChildren(item);
+        this.unSelectChildren(item, unselectArray);
       }
 
-      this.unselectArray.forEach(element => {
+      unselectArray.forEach(element => {
         selectedItems = selectedItems.filter(i => i.key != element);
       });
 
@@ -133,29 +151,52 @@ export default class TreeView extends React.Component<ITreeViewProps, ITreeViewS
     }
   }
 
+  public componentDidMount() {
+    const {
+      items,
+      defaultSelectedKeys,
+      selectChildrenIfParentSelected
+    } = this.props;
+    if (defaultSelectedKeys) {
+      const selectedItems = this.getSelectedItems(items, defaultSelectedKeys, selectChildrenIfParentSelected);
+      this.setState({
+        activeItems: selectedItems
+      });
+    }
+  }
+
   /**
    * Default React render method
    */
   public render(): JSX.Element {
+    const {
+      items,
+      selectionMode,
+      onRenderItem,
+      showCheckboxes,
+      treeItemActionsDisplayMode
+    } = this.props;
+
     return (
-      <React.Fragment>
+      <div className={styles.treeView}>
         {
-          this.props.items.map((treeNodeItem, index) => (
+          items.map((treeNodeItem, index) => (
             <TreeItem
               treeItem={treeNodeItem}
               leftOffset={20}
               isFirstRender={true}
               defaultExpanded={true}
-              selectionMode={this.props.selectionMode}
+              selectionMode={selectionMode}
               activeItems={this.state.activeItems}
               parentCallbackExpandCollapse={this.handleTreeExpandCollapse}
               parentCallbackOnSelect={this.handleOnSelect}
-              onRenderItem={this.props.onRenderItem}
-              showCheckboxes={this.props.showCheckboxes}
+              onRenderItem={onRenderItem}
+              showCheckboxes={showCheckboxes}
+              treeItemActionsDisplayMode={treeItemActionsDisplayMode}
             />
           ))
         }
-      </React.Fragment>
+      </div>
     );
   }
 }

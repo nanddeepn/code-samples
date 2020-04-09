@@ -1,4 +1,4 @@
-import { ITreeItemActions } from './ITreeItemActions';
+import { ITreeItemAction } from './ITreeItemActions';
 import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
 
 /**
@@ -36,7 +36,7 @@ export interface ITreeItem {
   /**
    * List of actions.
    */
-  treeItemActions?: ITreeItemActions;
+  actions?: ITreeItemAction[];
   /**
    * List of child tree items.
    */

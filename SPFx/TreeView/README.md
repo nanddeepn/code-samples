@@ -14,6 +14,10 @@ Here is an example of the control in action:
 
 ![Tree View control](assets/withoutcheckbox.png)
 
+**Without check boxes, and selection mode is multiple**
+
+![Tree View control](assets/withoutcheckbox_selectedmode.png)
+
 ## How to use this control in your solutions
 
 - Check that you installed the `@pnp/spfx-controls-react` dependency. Check out the [getting started](../../#getting-started) page for more information about installing the dependency.
@@ -136,41 +140,22 @@ Specifies the selection mode of tree item.
 | Multiple |
 | None     |
 
-## Example of array of tree items used to render control as in first screenshot
+## Example of array of tree items used to render control as in 2nd screenshot
 
 ```typescript
 items: [
-  {
-    key: "R1",
-    label: "Root",
-    subLabel: "This is a sub label for node",
-    iconProps: skypeCheckIcon,
-    actions: [{
-      title: "Get item",
-      iconProps: {
-        iconName: 'Warning',
-        style: {
-          color: 'salmon',
-        },
-      },
-      id: "GetItem",
-      actionCallback: async (treeItem: ITreeItem) => {
-        console.log(treeItem);
-      }
-    }],
-    children: [
-      {
-        key: "1",
-        label: "Parent 1",
-        selectable: false,
-        children: [
           {
-            key: "3",
-            label: "Child 1",
+            key: "R1",
+            label: "Root",
             subLabel: "This is a sub label for node",
+            iconProps: skypeCheckIcon,
             actions: [{
+              title: "Get item",
               iconProps: {
-                iconName: 'Share'
+                iconName: 'Warning',
+                style: {
+                  color: 'salmon',
+                },
               },
               id: "GetItem",
               actionCallback: async (treeItem: ITreeItem) => {
@@ -179,54 +164,74 @@ items: [
             }],
             children: [
               {
-                key: "gc1",
-                label: "Grand Child 1",
-                actions: [{
-                  title: "Get Grand Child item",
-                  iconProps: {
-                    iconName: 'Mail'
+                key: "1",
+                label: "Parent 1",
+                selectable: false,
+                children: [
+                  {
+                    key: "3",
+                    label: "Child 1",
+                    subLabel: "This is a sub label for node",
+                    actions: [{
+                      title:"Share",
+                      iconProps: {
+                        iconName: 'Share'
+                      },
+                      id: "GetItem",
+                      actionCallback: async (treeItem: ITreeItem) => {
+                        console.log(treeItem);
+                      }
+                    }],
+                    children: [
+                      {
+                        key: "gc1",
+                        label: "Grand Child 1",
+                        actions: [{
+                          title: "Get Grand Child item",
+                          iconProps: {
+                            iconName: 'Mail'
+                          },
+                          id: "GetItem",
+                          actionCallback: async (treeItem: ITreeItem) => {
+                            console.log(treeItem);
+                          }
+                        }]
+                      }
+                    ]
                   },
-                  id: "GetItem",
-                  actionCallback: async (treeItem: ITreeItem) => {
-                    console.log(treeItem);
+                  {
+                    key: "4",
+                    label: "Child 2",
+                    iconProps: skypeCheckIcon
                   }
-                }]
+                ]
+              },
+              {
+                key: "2",
+                label: "Parent 2"
+              },
+              {
+                key: "5",
+                label: "Parent 3",
+                disabled: true
+              },
+              {
+                key: "6",
+                label: "Parent 4",
+                selectable: true
               }
             ]
           },
           {
-            key: "4",
-            label: "Child 2",
-            iconProps: skypeCheckIcon
+            key: "R2",
+            label: "Root 2",
+            children: [
+              {
+                key: "8",
+                label: "Parent 5"
+              }
+            ]
           }
         ]
-      },
-      {
-        key: "2",
-        label: "Parent 2"
-      },
-      {
-        key: "5",
-        label: "Parent 3",
-        disabled: true
-      },
-      {
-        key: "6",
-        label: "Parent 4",
-        selectable: true
-      }
-    ]
-  },
-  {
-    key: "R2",
-    label: "Root 2",
-    children: [
-      {
-        key: "8",
-        label: "Parent 5"
-      }
-    ]
-  }
-]
 ```
 

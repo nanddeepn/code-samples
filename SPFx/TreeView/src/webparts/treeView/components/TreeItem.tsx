@@ -160,7 +160,7 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
         // Default rendering of tree item
         <React.Fragment>
           {
-            item.selectable == false && !item.children &&
+           this.props.showCheckboxes && item.selectable == false && !item.children &&
             <span className={styles.blankspace}>&nbsp;</span>
           }
           {
@@ -174,11 +174,13 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
           <div
             className={styles.labels}
             onClick={(e) => {
+              debugger;
+              if (this.props.selectionMode != SelectionMode.None && item.selectable != false) {
               e.stopPropagation();
               if (!item.disabled) {
                 this._itemSelected(e, !this.state.selected);
               }
-            }}>
+            }}}>
             <span>{item.label}</span>
             {
               // Render sublabel
@@ -280,11 +282,12 @@ export default class TreeItem extends React.Component<ITreeItemProps, ITreeItemS
             })}
             style={contentStyles}
             onClick={(e) => {
+              if (this.props.selectionMode != SelectionMode.None && treeItem.selectable != false) {
               e.stopPropagation();
               if (!treeItem.disabled && e.currentTarget === e.target) {
                 this._itemSelected(e, !this.state.selected);
               }
-            }}
+            }}}
           >
             {
               // Render checkbox (if item is selectable, Selection mode is not None, and showCheckboxes property is set to true)

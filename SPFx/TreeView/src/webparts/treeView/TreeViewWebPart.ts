@@ -58,6 +58,7 @@ export default class TreeViewWebPart extends BaseClientSideWebPart<ITreeViewWebP
                     label: "Child 1",
                     subLabel: "This is a sub label for node",
                     actions: [{
+                      title:"Share",
                       iconProps: {
                         iconName: 'Share'
                       },

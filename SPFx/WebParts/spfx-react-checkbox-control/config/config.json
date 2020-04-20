@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fluent-ui-checkbox-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fluentUiCheckbox/FluentUiCheckboxWebPart.js",
+          "manifest": "./src/webparts/fluentUiCheckbox/FluentUiCheckboxWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FluentUiCheckboxWebPartStrings": "lib/webparts/fluentUiCheckbox/loc/{locale}.js"
+  }
+}

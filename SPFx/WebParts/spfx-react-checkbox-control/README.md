@@ -1,6 +1,7 @@
 ## spfx-react-checkbox-control
 
-This is where you include your WebPart documentation.
+The Checkbox allows the end user to select one or more options from the list of choices. The Fluent UI (aka Office UI Fabric) controls offers nice and simple implementation for Checkbox. The Checkbox, when clicked fires the “onChange” event. When we dynamically create Checkbox collection, it is bit tricky to get the selection. The property set on Checkbox during the control creation can be retrieved from currentTarget.
+
 
 ### Building the code
 

@@ -1,6 +1,6 @@
 ## spfx-applicationextension-preallocate-space
 
-This is where you include your WebPart documentation.
+Modern SharePoint supports partial rendering. The component inside application customizer does not get an update as the page loads partially. Adding navigatedEvent listener inside onInit function re-render our component every time we navigate to another page.
 
 ### Building the code
 

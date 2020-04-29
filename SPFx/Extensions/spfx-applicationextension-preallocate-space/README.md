@@ -1,4 +1,4 @@
-## spfx-applicationextension-preallocate-space
+## Handle Navigation in SharePoint Framework Application Customizer (spfx-applicationextension-preallocate-space)
 
 Modern SharePoint supports partial rendering. The component inside application customizer does not get an update as the page loads partially. Adding navigatedEvent listener inside onInit function re-render our component every time we navigate to another page.
 

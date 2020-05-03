@@ -1,4 +1,4 @@
-## spfx-applicationcustomizer-injection
+## SPFx Extension for CSS Injection (spfx-applicationcustomizer-injection)
 
 This sample demonstrates to inject the CSS to modern SharePoint sites so that customizations can be applied to SharePoint out of box elements by overriding the default CSS classes.
 

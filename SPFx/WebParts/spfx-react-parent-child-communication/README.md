@@ -1,4 +1,4 @@
-## spfx-react-parent-child-communication
+## Passing Data between React Components in SPFx (spfx-react-parent-child-communication)
 
 This sample demonstrates how to pass data between React components with Parent and Child relationship, a common scenario in SharePoint Framework development.
 

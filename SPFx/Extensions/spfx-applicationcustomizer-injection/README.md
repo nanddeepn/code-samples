@@ -1,6 +1,6 @@
 ## spfx-applicationcustomizer-injection
 
-This is where you include your WebPart documentation.
+This sample demonstrates to inject the CSS to modern SharePoint sites so that customizations can be applied to SharePoint out of box elements by overriding the default CSS classes.
 
 ### Building the code
 

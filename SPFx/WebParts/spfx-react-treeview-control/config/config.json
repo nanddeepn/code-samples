@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "tree-view-demo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/treeViewDemo/TreeViewDemoWebPart.js",
+          "manifest": "./src/webparts/treeViewDemo/TreeViewDemoWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TreeViewDemoWebPartStrings": "lib/webparts/treeViewDemo/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+  }
+}

@@ -1,6 +1,6 @@
-## spfx-react-treeview-control
+## Reusable PnP React control: TreeView (spfx-react-treeview-control)
 
-This is where you include your WebPart documentation.
+This graphical control allows presenting a hierarchical view of information. Each tree item can have a number of subitems. This is often visualized by an indentation in a list. A tree item can be expanded to reveal subitems (if exist), and collapsed to hide subitems.
 
 ### Building the code
 

@@ -1,0 +1,9 @@
+{
+  "id": "32006ee2-684c-4eac-b7ad-1393a43cb068",
+  "alias": "MathsUtilLibrary",
+  "componentType": "Library",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2
+}

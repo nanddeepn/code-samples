@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "maths-library-consumer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/mathsLibraryConsumer/MathsLibraryConsumerWebPart.js",
+          "manifest": "./src/webparts/mathsLibraryConsumer/MathsLibraryConsumerWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MathsLibraryConsumerWebPartStrings": "lib/webparts/mathsLibraryConsumer/loc/{locale}.js"
+  }
+}

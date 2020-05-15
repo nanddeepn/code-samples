@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-library-consumer-wp-client-side-solution",
+    "id": "be01409b-1a9e-4051-b0f3-05af32b474fe",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-library-consumer-wp.sppkg"
+  }
+}

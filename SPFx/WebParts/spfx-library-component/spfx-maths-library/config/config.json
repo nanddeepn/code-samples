@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "maths-util-library": {
+      "components": [
+        {
+          "entrypoint": "./lib/libraries/mathsUtil/MathsUtilLibrary.js",
+          "manifest": "./src/libraries/mathsUtil/MathsUtilLibrary.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MathsUtilLibraryStrings": "lib/libraries/mathsUtil/loc/{locale}.js"
+  }
+}

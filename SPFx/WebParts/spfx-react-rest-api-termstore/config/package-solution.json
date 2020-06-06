@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-react-rest-api-termstore-client-side-solution",
+    "id": "a617fba4-aa51-4398-939f-3f6998f1ed00",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "Office 365 SharePoint Online",
+        "scope": "TermStore.ReadWrite.All"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-react-rest-api-termstore.sppkg"
+  }
+}

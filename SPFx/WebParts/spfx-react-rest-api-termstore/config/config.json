@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "term-store-demo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/termStoreDemo/TermStoreDemoWebPart.js",
+          "manifest": "./src/webparts/termStoreDemo/TermStoreDemoWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TermStoreDemoWebPartStrings": "lib/webparts/termStoreDemo/loc/{locale}.js"
+  }
+}

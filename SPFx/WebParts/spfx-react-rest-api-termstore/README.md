@@ -1,6 +1,6 @@
 ## SharePoint PRE-RELEASE Taxonomy Graph APIs (spfx-react-rest-api-termstore)
 
-This sample demonstrates the use of PRE-RELEASE Taxonomy Graph APIs in SharePoint Framework solution.
+This sample demonstrates the use of PRE-RELEASE Taxonomy Graph APIs in SharePoint Framework solution. (New capabilities announced during Microsoft Build 2020 event).
 
 ### Building the code
 

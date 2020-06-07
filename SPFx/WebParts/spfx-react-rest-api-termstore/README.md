@@ -1,6 +1,6 @@
-## spfx-react-rest-api-termstore
+## SharePoint PRE-RELEASE Taxonomy Graph APIs (spfx-react-rest-api-termstore)
 
-This is where you include your WebPart documentation.
+This sample demonstrates the use of PRE-RELEASE Taxonomy Graph APIs in SharePoint Framework solution.
 
 ### Building the code
 

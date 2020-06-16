@@ -19,7 +19,7 @@
     "group": { "default": "Other" },
     "title": { "default": "Timeline" },
     "description": { "default": "Displays a list of events in chronological order." },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "TimelineProgress",
     "properties": {
       "description": "Timeline"
     }

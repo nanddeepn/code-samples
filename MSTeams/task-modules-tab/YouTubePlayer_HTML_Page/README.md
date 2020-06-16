@@ -1,4 +1,4 @@
-# YouTube Player - Microsoft Teams App
+# YouTube Player - Microsoft Teams App (HTML Page)
 
 This sample is a Microsoft Teams application which explores the basics of task modules in Microsoft Teams and how to collect input from users in a custom Teams tab. A standard HTML page that accepts the ID of a video on YouTube. When the task module is invoked, it will display the video using the YouTube embedded player.
 

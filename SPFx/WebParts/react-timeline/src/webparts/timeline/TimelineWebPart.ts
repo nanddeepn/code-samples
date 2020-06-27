@@ -10,12 +10,19 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'TimelineWebPartStrings';
 import Timeline from './components/Timeline';
 import { ITimelineProps } from './components/ITimelineProps';
+import TimelineService from '../../services/TimelineService';
 
 export interface ITimelineWebPartProps {
   description: string;
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(() => {
+      TimelineService.setup(this.context);
+    });
+  }
 
   public render(): void {
     const element: React.ReactElement<ITimelineProps> = React.createElement(

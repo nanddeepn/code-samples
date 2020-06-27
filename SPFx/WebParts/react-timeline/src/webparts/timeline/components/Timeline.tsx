@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './Timeline.module.scss';
 import { ITimelineProps } from './ITimelineProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import TimelineService from '../../../services/TimelineService';
 
 export default class Timeline extends React.Component<ITimelineProps, {}> {
   public render(): React.ReactElement<ITimelineProps> {
@@ -21,5 +22,13 @@ export default class Timeline extends React.Component<ITimelineProps, {}> {
         </div>
       </div>
     );
+  }
+  
+  public componentDidMount(): void {
+    this._test();
+  }
+
+  public _test = (): void => {
+    TimelineService.test();
   }
 }

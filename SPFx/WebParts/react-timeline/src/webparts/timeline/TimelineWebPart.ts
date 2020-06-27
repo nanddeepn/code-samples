@@ -17,17 +17,18 @@ export interface ITimelineWebPartProps {
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
+  private TimelineService: TimelineService = null;
 
-  protected onInit(): Promise<void> {
-    return super.onInit().then(() => {
-      TimelineService.setup(this.context);
-    });
+  protected onInit(): Promise<void> {    
+      this.TimelineService = new TimelineService(this.context);
+      return Promise.resolve();
   }
 
   public render(): void {
     const element: React.ReactElement<ITimelineProps> = React.createElement(
       Timeline,
       {
+        context: this.context,
         description: this.properties.description
       }
     );

@@ -5,6 +5,18 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import TimelineService from '../../../services/TimelineService';
 
 export default class Timeline extends React.Component<ITimelineProps, {}> {
+  private TimelineService: TimelineService = null;
+
+  constructor(props: ITimelineProps) {
+    super(props);
+
+    // this.state = {
+    //     test: undefined
+    // };
+
+    this.TimelineService = new TimelineService(this.props.context);
+}
+
   public render(): React.ReactElement<ITimelineProps> {
     return (
       <div className={ styles.timeline }>
@@ -29,6 +41,6 @@ export default class Timeline extends React.Component<ITimelineProps, {}> {
   }
 
   public _test = (): void => {
-    TimelineService.test();
+    this.TimelineService.test();
   }
 }

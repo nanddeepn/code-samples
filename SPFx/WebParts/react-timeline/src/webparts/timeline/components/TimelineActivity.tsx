@@ -48,13 +48,11 @@ export default class TimelineActivity extends React.Component<IActivityProps, {}
         const cardTokens: ICardTokens = { childrenMargin: 12 };
         const footerCardSectionTokens: ICardSectionTokens = { padding: '0px 0px 0px 12px' };
 
+        const { activity } = this.props;
+
         return (
             <Stack tokens={sectionStackTokens}>
-                <Card aria-label="Basic horizontal card" horizontal tokens={cardTokens}>
-                    <Card.Item>
-                        <Text>Basic horizontal card</Text>
-                    </Card.Item>
-                </Card>
+                <p></p>
 
                 <Card aria-label="Clickable horizontal card " horizontal onClick={this.alertClicked} tokens={cardTokens}>
                     <Card.Item fill>
@@ -62,19 +60,23 @@ export default class TimelineActivity extends React.Component<IActivityProps, {}
                     </Card.Item>
                     <Card.Section>
                         <Text variant="small" styles={siteTextStyles}>
-                            Contoso
+                            {
+                                activity.acivityLink ? <a href={activity.acivityLink} target="_blank">{activity.activityTitle}</a> : activity.activityTitle
+                            }
                         </Text>
-                        <Text styles={descriptionTextStyles}>Contoso Denver expansion design marketing hero guidelines</Text>
-                        <Text variant="small" styles={helpfulTextStyles}>
-                            Is this recommendation helpful?
+                        <Text styles={descriptionTextStyles}>                            
+                            {activity.activityDescription}
+                        </Text>
+                        <Text variant="small" styles={helpfulTextStyles}>                            
+                            {activity.acivityDate}
                         </Text>
                     </Card.Section>
                     <Card.Section styles={footerCardSectionStyles} tokens={footerCardSectionTokens}>
-                        <Icon iconName="RedEye" styles={iconStyles} />
-                        <Icon iconName="SingleBookmark" styles={iconStyles} />
-                        <Stack.Item grow={1}>
+                        {/* <Icon iconName="RedEye" styles={iconStyles} />
+                        <Icon iconName="SingleBookmark" styles={iconStyles} /> */}
+                        {/* <Stack.Item grow={1}>
                             <span />
-                        </Stack.Item>
+                        </Stack.Item> */}
                         <Icon iconName="MoreVertical" styles={iconStyles} />
                     </Card.Section>
                 </Card>

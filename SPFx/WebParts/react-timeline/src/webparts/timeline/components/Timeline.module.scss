@@ -9,8 +9,8 @@
 
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
+    // @include ms-fontColor-white;
+    // background-color: $ms-color-themeDark;
     padding: 20px;
   }
 
@@ -22,19 +22,24 @@
     @include ms-lgPush1;
   }
 
+  .timelineSeparator {
+    border-left: 4px dotted $ms-color-themeDark;
+    padding: 0px 20px 0px 20px;
+  }
+
   .title {
     @include ms-font-xl;
-    @include ms-fontColor-white;
+    // @include ms-fontColor-white;
   }
 
   .subTitle {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    // @include ms-fontColor-white;
   }
 
   .description {
     @include ms-font-l;
-    @include ms-fontColor-white;
+    // @include ms-fontColor-white;
   }
 
   .button {

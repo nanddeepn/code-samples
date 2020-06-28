@@ -41,6 +41,6 @@ export default class Timeline extends React.Component<ITimelineProps, {}> {
   }
 
   public _test = (): void => {
-    this.TimelineService.test();
+    this.TimelineService.getTimelineActivities("Timeline");
   }
 }

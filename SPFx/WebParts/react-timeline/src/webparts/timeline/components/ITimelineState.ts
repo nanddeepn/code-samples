@@ -1,5 +1,5 @@
 import { ITimelineActivity } from "../../../models";
 
 export interface ITimelineState {
-    timelineActivities: ITimelineActivity[]
+    timelineActivities: ITimelineActivity[];
 }

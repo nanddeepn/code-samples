@@ -5,6 +5,7 @@ import { ITimelineState } from './ITimelineState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import TimelineService from '../../../services/TimelineService';
 import { ITimelineActivity } from "../../../models";
+import TimelineActivity from "./TimelineActivity";
 
 export default class Timeline extends React.Component<ITimelineProps, ITimelineState> {
   private TimelineService: TimelineService = null;
@@ -30,7 +31,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
               <p className={styles.description}>{escape(this.props.description)}</p>
               {this.state.timelineActivities.map((activity, i) => {
                 console.log("Entered");
-                return (<div>{activity.activityTitle}</div>);
+                return (<TimelineActivity activity={activity}></TimelineActivity>);
                 // Return the element. Also pass key     
                 // return (<Answer key={i} answer={answer} />)
               })}

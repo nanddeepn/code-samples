@@ -83,14 +83,23 @@ export default class TimelineService {
     public async addTimelineActivity(listTitle: string, newTimelineActivity: ITimelineActivity) {
         try {
             await sp.web.lists.getByTitle(listTitle).items.add({
-                Title: newTimelineActivity.activityTitle,
-                SPFxTimelineLink: newTimelineActivity.acivityLink,
+                Title: newTimelineActivity.activityTitle,             
                 SPFxTimelineDate: newTimelineActivity.acivityDate,
-                SPFxTimelinePicture: newTimelineActivity.activityPictureUrl,
+                // SPFxTimelinePicture: {
+                //     "__metadata": { type: "SP.FieldUrlValue" },
+                //     Description: newTimelineActivity.activityTitle,
+                //     Url: newTimelineActivity.activityPictureUrl
+                // },
+                SPFxTimelineLink: {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: newTimelineActivity.activityTitle,
+                    Url: newTimelineActivity.acivityLink
+                },
                 SPFxTimelineDescription: newTimelineActivity.activityDescription
             });
         }
         catch (error) {
+            console.log(error);
             return Promise.reject(error);
         }
     }
@@ -103,16 +112,25 @@ export default class TimelineService {
     public async updateTimelineActivity(listTitle: string, updateTimelineActivity: ITimelineActivity) {
         try {
             let updateItem: any = {
-                Title: updateTimelineActivity.activityTitle,
-                SPFxTimelineLink: updateTimelineActivity.acivityLink,
+                Title: updateTimelineActivity.activityTitle,               
                 SPFxTimelineDate: updateTimelineActivity.acivityDate,
-                SPFxTimelinePicture: updateTimelineActivity.activityPictureUrl,
+                // SPFxTimelinePicture: {
+                //     "__metadata": { type: "SP.FieldUrlValue" },
+                //     Description: updateTimelineActivity.activityTitle,
+                //     Url: updateTimelineActivity.activityPictureUrl
+                // },
+                // SPFxTimelineLink: {
+                //     "__metadata": { type: "SP.FieldUrlValue" },
+                //     Description: updateTimelineActivity.activityTitle,
+                //     Url: updateTimelineActivity.acivityLink
+                // },                
                 SPFxTimelineDescription: updateTimelineActivity.activityDescription
             };
 
             await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem);
         }
         catch (error) {
+            console.log(error);
             return Promise.reject(error);
         }
     }

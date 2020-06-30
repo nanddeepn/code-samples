@@ -4,8 +4,11 @@ import { ITimelineProps } from './ITimelineProps';
 import { ITimelineState } from './ITimelineState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import TimelineService from '../../../services/TimelineService';
-import { ITimelineActivity } from "../../../models";
+
 import TimelineActivity from "./TimelineActivity";
+import { ITimelineActivity } from "../../../models/ITimelineActivity";
+
+
 
 export default class Timeline extends React.Component<ITimelineProps, ITimelineState> {
   private TimelineService: TimelineService = null;
@@ -14,10 +17,20 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
     super(props);
 
     this.state = {
-      timelineActivities: []
+      timelineActivities: [],
+      isloading: false
     };
 
     this.TimelineService = new TimelineService(this.props.context);
+    this.onDismissPanel = this.onDismissPanel.bind(this);
+  }
+
+  private async onDismissPanel(refresh: boolean) {    
+    if (refresh === true) {
+      this.TimelineService.getTimelineActivities("Timeline").then((activities: ITimelineActivity[]) => {
+        this.setState({ timelineActivities: activities });
+      });
+    }
   }
 
   public render(): React.ReactElement<ITimelineProps> {
@@ -28,12 +41,13 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
             <div className={styles.column}>
               <div className={styles.timelineSeparator}>
                 {this.state.timelineActivities.map((activity, i) => {
-                  return (<TimelineActivity activity={activity}></TimelineActivity>);
+                  return (<TimelineActivity activity={activity} context={this.props.context} onDissmissPanel={this.onDismissPanel}></TimelineActivity>);
                 })}
               </div>
             </div>
           </div>
         </div>
+
       </div>
     );
   }

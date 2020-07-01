@@ -24,3 +24,5 @@ gulp test - TODO
 gulp serve - TODO
 gulp bundle - TODO
 gulp package-solution - TODO
+
+[![HitCount](http://hits.dwyl.com/nanddeepn/code-samples/tree/master/SPFx/WebParts/spfx-richtextcontrol.svg)](http://hits.dwyl.com/nanddeepn/code-samples/tree/master/SPFx/WebParts/spfx-richtextcontrol)

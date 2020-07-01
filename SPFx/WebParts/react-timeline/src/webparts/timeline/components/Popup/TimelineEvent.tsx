@@ -122,16 +122,16 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           await this.TimelineService.updateTimelineActivity(
             'Timeline',
             eventData           
-          );
+          ).then((value: any) => { debugger;this.props.onDissmissPanel(true);});
           break;
         case IPanelModelEnum.add:
-          await this.TimelineService.addTimelineActivity("Timeline", eventData);
+          await this.TimelineService.addTimelineActivity("Timeline", eventData).then((value: any) => { this.props.onDissmissPanel(true); });
           break;
         default:
           break;
       }
       this.setState({ isSaving: false });
-      this.props.onDissmissPanel(true);
+     
     } catch (error) {
       this.setState({ hasError: true, errorMessage: error.message, isSaving: false });
     }

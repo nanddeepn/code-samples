@@ -11,11 +11,13 @@ import { TimelineEvent } from "./Popup/TimelineEvent";
 import TimelineService from "../../../services/TimelineService";
 import { IPanelModelEnum } from "./Popup/IPanelModeEnum";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { ITimelineProps } from './ITimelineProps';
 
 export interface IActivityProps {
     activity: ITimelineActivity;
     context : WebPartContext;
-  onDissmissPanel: (refresh: boolean) => void;  
+  onDissmissPanel: (refresh: boolean) => void; 
+  displayPanel : boolean; 
 
 }
 
@@ -38,16 +40,13 @@ export interface IActivityState {
 }
 
 
-export default class TimelineActivity extends React.Component<
-                 IActivityProps,
-                 IActivityState
-               > {
+export default class TimelineActivity extends React.Component<IActivityProps,IActivityState > {
                  private TimelineService: TimelineService = null;
                  public constructor(props) {
                    super(props);
-
+debugger;
                    this.state = {
-                     showDialog: false,
+                     showDialog: this.props.displayPanel,
                      eventData: [],
                      selectedEvent: undefined,
                      isloading: true,
@@ -59,6 +58,7 @@ export default class TimelineActivity extends React.Component<
                      isDeleting: false,
                      displayDeleteDialog: false,
                      displayEventDialog: false,
+                    
                    };
                    this.TimelineService = new TimelineService(
                      this.props.context
@@ -81,15 +81,19 @@ export default class TimelineActivity extends React.Component<
                    this.setState({ displayDeleteDialog: true });
                  }
                  private async onDismissPanel(refresh: boolean) {
-                   this.setState({ showDialog: false, selectedEvent: null });
-
+                 debugger;
                    if (refresh === true) {
                     this.props.onDissmissPanel(true);
                    }
+                   //this.setState({ showDialog: false });
+
                  }
+
+  
                  private onSelectEvent(event: any) {
                    this.setState({ showDialog: true, panelMode: 1 });
                  }
+  
                  private deleteEvent(TimelineDeleteEvent:ITimelineActivity) {
                    if (confirm('Are you sure you want to delete this timeline event?')) {
                      this.TimelineService.deleteTimelineActivity(
@@ -137,6 +141,11 @@ export default class TimelineActivity extends React.Component<
       panelMode: 1,
       displayEventDialog: false,
     });
+  }
+  public  componentWillReceiveProps(nextProps: IActivityProps) {
+debugger;
+    this.setState({ showDialog: false, selectedEvent: null });
+
   }
 
                  private _dismissCardDetails() {
@@ -212,14 +221,14 @@ export default class TimelineActivity extends React.Component<
                         
                          <Card.Item fill>
                            <Image
-                             src="https://placehold.it/180x135"
+                             src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
                              alt="Placeholder image."
                            />
                          </Card.Item>
                          <Card.Section>
                            <Text variant="small" styles={siteTextStyles}>
                              {activity.acivityLink ? (
-                               <a href={activity.acivityLink} target="_blank">
+                               <a href={activity.acivityLink? activity.acivityLink["Url"]: this.props.context.pageContext.site.absoluteUrl} target="_blank">
                                  {activity.activityTitle}
                                </a>
                              ) : (

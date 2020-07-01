@@ -85,15 +85,15 @@ export default class TimelineService {
             await sp.web.lists.getByTitle(listTitle).items.add({
                 Title: newTimelineActivity.activityTitle,             
                 SPFxTimelineDate: newTimelineActivity.acivityDate,
-                // SPFxTimelinePicture: {
-                //     "__metadata": { type: "SP.FieldUrlValue" },
-                //     Description: newTimelineActivity.activityTitle,
-                //     Url: newTimelineActivity.activityPictureUrl
-                // },
+                SPFxTimelinePicture: {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: newTimelineActivity.activityTitle,
+                    Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
+                },
                 SPFxTimelineLink: {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
-                    Url: newTimelineActivity.acivityLink
+                    Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
                 },
                 SPFxTimelineDescription: newTimelineActivity.activityDescription
             });
@@ -117,17 +117,20 @@ export default class TimelineService {
                 // SPFxTimelinePicture: {
                 //     "__metadata": { type: "SP.FieldUrlValue" },
                 //     Description: updateTimelineActivity.activityTitle,
-                //     Url: updateTimelineActivity.activityPictureUrl
+                //     Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
                 // },
                 // SPFxTimelineLink: {
                 //     "__metadata": { type: "SP.FieldUrlValue" },
                 //     Description: updateTimelineActivity.activityTitle,
-                //     Url: updateTimelineActivity.acivityLink
+                //     Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
                 // },                
                 SPFxTimelineDescription: updateTimelineActivity.activityDescription
             };
 
-            await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem);
+            await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem).then((value:any) => {
+                console.log(value);
+                debugger;
+            });
         }
         catch (error) {
             console.log(error);

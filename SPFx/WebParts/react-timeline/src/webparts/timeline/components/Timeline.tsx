@@ -25,7 +25,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
     this.onDismissPanel = this.onDismissPanel.bind(this);
   }
 
-  private async onDismissPanel(refresh: boolean) {    
+  private async onDismissPanel(refresh: boolean) {
     debugger;
     if (refresh === true) {
       this.TimelineService.getTimelineActivities("Timeline").then((activities: ITimelineActivity[]) => {
@@ -33,20 +33,20 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
       });
     }
   }
-  
+
   public render(): React.ReactElement<ITimelineProps> {
     return (
       <div className={styles.timeline}>
-        <div className={styles.container}>
+        {/* <div className={styles.container}>
           <div className={styles.row}>
-            <div className={styles.column}>
-              <div className={styles.timelineContent}>
-                {this.state.timelineActivities.map((activity, i) => {
-                  return (<TimelineActivity activity={activity} context={this.props.context} onDissmissPanel={this.onDismissPanel} displayPanel={false}></TimelineActivity>);
-                })}
-              </div>
+            <div className={styles.column}> */}
+              <div className={styles.timelineContainer}>                
+                  {this.state.timelineActivities.map((activity, i) => {
+                    return (<TimelineActivity activity={activity} context={this.props.context} onDissmissPanel={this.onDismissPanel} displayPanel={false}></TimelineActivity>);
+                  })}
+              {/* </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
       </div>

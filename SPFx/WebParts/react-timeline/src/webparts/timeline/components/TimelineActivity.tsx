@@ -15,10 +15,10 @@ import { ITimelineProps } from './ITimelineProps';
 
 export interface IActivityProps {
   activity: ITimelineActivity;
+  index: number;
   context: WebPartContext;
   onDissmissPanel: (refresh: boolean) => void;
   displayPanel: boolean;
-
 }
 
 export interface IActivityState {
@@ -197,21 +197,24 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       padding: "0px 0px 0px 12px",
     };
 
-    const { activity } = this.props;
+    const { activity, index } = this.props;
 
     return (
       <div className={styles.timelineContent}>
         <div className={styles.timelineRow}>
-          <div className={styles.timelineColumn}>
-            <div className={styles.timelineDate}>
-              <Text variant="small" styles={helpfulTextStyles}>
-                {activity.acivityDate}
-              </Text>
+          <p><i className="ms-Icon ms-Icon--Add" onClick={this.createEvent} aria-hidden="true">Add</i></p>
+          {index % 2 == 1 &&
+            <div className={styles.timelineColumn}>
+              <div className={styles.timelineDate}>
+                <Text variant="small" styles={helpfulTextStyles}>
+                  {activity.acivityDate}
+                </Text>
+              </div>
             </div>
-          </div>
+          }
+          
           <div className={styles.timelineColumn}>
             <Stack tokens={sectionStackTokens}>
-              <p><i className="ms-Icon ms-Icon--Add" onClick={this.createEvent} aria-hidden="true">Add</i></p>
               {this.state.showDialog && (
                 <TimelineEvent
                   event={this.state.selectedEvent}
@@ -295,6 +298,16 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
               </div>
             </Stack>
           </div>
+
+          {index % 2 == 0 &&
+            <div className={styles.timelineColumn}>
+              <div className={styles.timelineDate}>
+                <Text variant="small" styles={helpfulTextStyles}>
+                  {activity.acivityDate}
+                </Text>
+              </div>
+            </div>
+          }
         </div>
       </div>
     );

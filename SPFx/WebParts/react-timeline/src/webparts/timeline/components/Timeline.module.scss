@@ -22,9 +22,26 @@
     @include ms-lgPush1;
   }
 
-  .timelineSeparator {
-    border-left: 4px dotted $ms-color-themeDark;
-    padding: 0px 20px 0px 20px;
+  .timelineContent {
+    position: relative;
+  }
+
+  .timelineRow {
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .timelineColumn {
+    padding: 0 0 0 40px;
   }
 
   .title {

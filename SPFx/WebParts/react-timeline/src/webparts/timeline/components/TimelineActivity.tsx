@@ -202,7 +202,13 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     return (
       <div className={styles.timelineContent}>
         <div className={styles.timelineRow}>
-          <div className={styles.timelineColumn}></div>
+          <div className={styles.timelineColumn}>
+            <div className={styles.timelineDate}>
+              <Text variant="small" styles={helpfulTextStyles}>
+                {activity.acivityDate}
+              </Text>
+            </div>
+          </div>
           <div className={styles.timelineColumn}>
             <Stack tokens={sectionStackTokens}>
               <p><i className="ms-Icon ms-Icon--Add" onClick={this.createEvent} aria-hidden="true">Add</i></p>
@@ -216,77 +222,77 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                   context={this.props.context}
                 />
               )}
-              <Card
-                aria-label="Clickable horizontal card "
-                horizontal
-                tokens={cardTokens}
-              >
-                <Card.Item fill>
-                  <Image
-                    src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
-                    alt="Placeholder image."
-                  />
-                </Card.Item>
-                <Card.Section>
-                  <Text variant="small" styles={siteTextStyles}>
-                    {activity.acivityLink ? (
-                      <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
-                        {activity.activityTitle}
-                      </a>
-                    ) : (
-                        activity.activityTitle
-                      )}
-                  </Text>
-                  <Text styles={descriptionTextStyles}>
-                    {activity.activityDescription}
-                  </Text>
-                  <Text variant="small" styles={helpfulTextStyles}>
-                    {activity.acivityDate}
-                  </Text>
-                </Card.Section>
-                <Card.Section
-                  styles={footerCardSectionStyles}
-                  tokens={footerCardSectionTokens}
+              <div className={styles.timelineCard}>
+                <Card
+                  aria-label="Clickable horizontal card "
+                  horizontal
+                  tokens={cardTokens}
                 >
-                  <IconButton
-                    id="ContextualMenuButton1"
-                    text=""
-                    width="30"
-                    split={false}
-                    iconProps={{ iconName: "MoreVertical" }}
-                    style={{ float: "right" }}
-                    menuIconProps={{ iconName: "" }}
-                    menuProps={{
-                      shouldFocusOnMount: true,
-                      items: [
-                        {
-                          key: "Edit",
-                          name: "Edit",
-                          onClick: (event) => {
+                  <Card.Item fill>
+                    <Image
+                      src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
+                      alt="Placeholder image."
+                      width="100px"
+                      height="100px"
+                    />
+                  </Card.Item>
+                  <Card.Section>
+                    <Text variant="small" styles={siteTextStyles}>
+                      {activity.acivityLink ? (
+                        <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
+                          {activity.activityTitle}
+                        </a>
+                      ) : (
+                          activity.activityTitle
+                        )}
+                    </Text>
+                    <Text styles={descriptionTextStyles}>
+                      {activity.activityDescription}
+                    </Text>
+                  </Card.Section>
+                  <Card.Section
+                    styles={footerCardSectionStyles}
+                    tokens={footerCardSectionTokens}
+                  >
+                    <IconButton
+                      id="ContextualMenuButton1"
+                      text=""
+                      split={false}
+                      iconProps={{ iconName: "MoreVertical" }}
+                      style={{ float: "right", width: "10%" }}
+                      menuIconProps={{ iconName: "" }}
+                      menuProps={{
+                        shouldFocusOnMount: true,
+                        items: [
+                          {
+                            key: "Edit",
+                            name: "Edit",
+                            onClick: (event) => {
 
-                            this.setState({ selectedEvent: activity });
-                            this.editEvent();
+                              this.setState({ selectedEvent: activity });
+                              this.editEvent();
+                            },
                           },
-                        },
-                        {
-                          key: "divider_1",
-                          itemType: ContextualMenuItemType.Divider,
-                        },
-                        {
-                          key: "Delete",
-                          name: "Delete",
-                          onClick: (event) => {
-                            this.setState({
-                              selectedEvent: activity
-                            });
-                            this.deleteEvent(activity);
+                          {
+                            key: "divider_1",
+                            itemType: ContextualMenuItemType.Divider,
                           },
-                        },
-                      ],
-                    }}
-                  />
-                </Card.Section>
-              </Card>
+                          {
+                            key: "Delete",
+                            name: "Delete",
+                            onClick: (event) => {
+                              this.setState({
+                                selectedEvent: activity
+                              });
+                              this.deleteEvent(activity);
+                            },
+                          },
+                        ],
+                      }}
+                    />
+                  </Card.Section>
+                </Card>
+              </div>
             </Stack>
           </div>
         </div>

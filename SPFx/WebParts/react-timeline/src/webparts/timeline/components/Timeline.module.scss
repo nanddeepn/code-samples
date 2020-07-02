@@ -1,27 +1,6 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
 .timeline {
-  .container {
-    max-width: 700px;
-    margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .row {
-    @include ms-Grid-row;
-    // @include ms-fontColor-white;
-    // background-color: $ms-color-themeDark;
-    padding: 20px;
-  }
-
-  .column {
-    @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
-    @include ms-xlPush2;
-    @include ms-lgPush1;
-  }
-
   .timelineContainer {
     display: block;
     width: 100%;
@@ -78,8 +57,25 @@
     width: 100%;
   }
 
+  .timelineDate {
+    text-align: right;
+  }
+
   .timelineColumn {
-    padding: 0 0 0 40px;
+    width: 50%;
+    float: left;
+
+    &:nth-child(odd) {
+      padding: 0 15px 0 0;
+    }
+
+    &:nth-child(even) {
+      padding: 0 0 0 40px;
+    }
+  }
+
+  .timelineCard {
+    padding: 5px;
   }
 
   .title {

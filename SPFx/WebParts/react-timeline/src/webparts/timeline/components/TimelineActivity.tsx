@@ -4,9 +4,8 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import { ITimelineActivity } from "../../../models";
 import { Card, ICardTokens, ICardSectionStyles, ICardSectionTokens } from '@uifabric/react-cards';
 import { FontWeights } from '@uifabric/styling';
-import { Icon, IIconStyles, Image, Stack, IStackTokens, Text, ITextStyles } from 'office-ui-fabric-react';
+import { IIconStyles, Image, Stack, IStackTokens, Text, ITextStyles, IconButton, IIconProps } from 'office-ui-fabric-react';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { Layer, IconButton, IButtonProps } from 'office-ui-fabric-react';
 import { TimelineEvent } from "./Popup/TimelineEvent";
 import TimelineService from "../../../services/TimelineService";
 import { IPanelModelEnum } from "./Popup/IPanelModeEnum";
@@ -67,29 +66,25 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     this.onSelectEvent = this.onSelectEvent.bind(this);
     this.onDismissPanel = this.onDismissPanel.bind(this);
     this.handleSelectEvent = this.handleSelectEvent.bind(this);
-    this._dismissCardDetails = this._dismissCardDetails.bind(
-      this
-    );
+    this._dismissCardDetails = this._dismissCardDetails.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.editEvent = this.editEvent.bind(this);
     this.createEvent = this.createEvent.bind(this);
     this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
-    this.confirmDeleteDialog = this.confirmDeleteDialog.bind(
-      this
-    );
+    this.confirmDeleteDialog = this.confirmDeleteDialog.bind(this);
   }
+
   private confirmDeleteDialog() {
     this.setState({ displayDeleteDialog: true });
   }
+
   private async onDismissPanel(refresh: boolean) {
     debugger;
     if (refresh === true) {
       this.props.onDissmissPanel(true);
     }
     //this.setState({ showDialog: false });
-
   }
-
 
   private onSelectEvent(event: any) {
     this.setState({ showDialog: true, panelMode: 1 });
@@ -144,12 +139,12 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   public componentWillReceiveProps(nextProps: IActivityProps) {
     debugger;
     this.setState({ showDialog: false, selectedEvent: null });
-
   }
 
   private _dismissCardDetails() {
     this.setState({ selectedEvent: null });
   }
+
   private handleSelectEvent(event: ITimelineActivity) {
     this.setState({
       selectedEvent: event,
@@ -198,116 +193,122 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     };
 
     const { activity, index } = this.props;
+    const addToIcon: IIconProps = { iconName: 'AddTo' };
 
     return (
-      <div className={styles.timelineContent}>
-        <div className={styles.timelineRow}>
-          <p><i className="ms-Icon ms-Icon--Add" onClick={this.createEvent} aria-hidden="true">Add</i></p>
-          {index % 2 == 1 &&
-            <div className={styles.timelineColumn}>
-              <div className={styles.timelineDate}>
-                <Text variant="small" styles={helpfulTextStyles}>
-                  {activity.acivityDate}
-                </Text>
+      <div>
+        <div className={styles.timelineAdd}>
+          <IconButton iconProps={addToIcon} title="Emoji" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
+        </div>
+
+        <div className={styles.timelineContent}>
+          <div className={styles.timelineRow}>
+            {index % 2 == 1 &&
+              <div className={styles.timelineColumn}>
+                <div className={styles.timelineDate}>
+                  <Text variant="small" styles={helpfulTextStyles}>
+                    {activity.acivityDate}
+                  </Text>
+                </div>
               </div>
-            </div>
-          }
-          
-          <div className={styles.timelineColumn}>
-            <Stack tokens={sectionStackTokens}>
-              {this.state.showDialog && (
-                <TimelineEvent
-                  event={this.state.selectedEvent}
-                  panelMode={this.state.panelMode}
-                  onDissmissPanel={this.onDismissPanel}
-                  showPanel={this.state.showDialog}
-                  startDate={this.state.startDateSlot}
-                  context={this.props.context}
-                />
-              )}
-              <div className={styles.timelineCard}>
-                <Card
-                  aria-label="Clickable horizontal card "
-                  horizontal
-                  tokens={cardTokens}
-                >
-                  <Card.Item fill>
-                    <Image
-                      src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
-                      alt="Placeholder image."
-                      width="100px"
-                      height="100px"
-                    />
-                  </Card.Item>
-                  <Card.Section>
-                    <Text variant="small" styles={siteTextStyles}>
-                      {activity.acivityLink ? (
-                        <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
-                          {activity.activityTitle}
-                        </a>
-                      ) : (
-                          activity.activityTitle
-                        )}
-                    </Text>
-                    <Text styles={descriptionTextStyles}>
-                      {activity.activityDescription}
-                    </Text>
-                  </Card.Section>
-                  <Card.Section
-                    styles={footerCardSectionStyles}
-                    tokens={footerCardSectionTokens}
+            }
+
+            <div className={styles.timelineColumn}>
+              <Stack tokens={sectionStackTokens}>
+                {this.state.showDialog && (
+                  <TimelineEvent
+                    event={this.state.selectedEvent}
+                    panelMode={this.state.panelMode}
+                    onDissmissPanel={this.onDismissPanel}
+                    showPanel={this.state.showDialog}
+                    startDate={this.state.startDateSlot}
+                    context={this.props.context}
+                  />
+                )}
+                <div className={styles.timelineCard}>
+                  <Card
+                    aria-label="Clickable horizontal card "
+                    horizontal
+                    tokens={cardTokens}
                   >
-                    <IconButton
-                      id="ContextualMenuButton1"
-                      text=""
-                      split={false}
-                      iconProps={{ iconName: "MoreVertical" }}
-                      style={{ float: "right", width: "10%" }}
-                      menuIconProps={{ iconName: "" }}
-                      menuProps={{
-                        shouldFocusOnMount: true,
-                        items: [
-                          {
-                            key: "Edit",
-                            name: "Edit",
-                            onClick: (event) => {
+                    <Card.Item fill>
+                      <Image
+                        src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
+                        alt="Placeholder image."
+                        width="100px"
+                        height="100px"
+                      />
+                    </Card.Item>
+                    <Card.Section>
+                      <Text variant="small" styles={siteTextStyles}>
+                        {activity.acivityLink ? (
+                          <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
+                            {activity.activityTitle}
+                          </a>
+                        ) : (
+                            activity.activityTitle
+                          )}
+                      </Text>
+                      <Text styles={descriptionTextStyles}>
+                        {activity.activityDescription}
+                      </Text>
+                    </Card.Section>
+                    <Card.Section
+                      styles={footerCardSectionStyles}
+                      tokens={footerCardSectionTokens}
+                    >
+                      <IconButton
+                        id="ContextualMenuButton1"
+                        text=""
+                        split={false}
+                        iconProps={{ iconName: "MoreVertical" }}
+                        style={{ float: "right", width: "10%" }}
+                        menuIconProps={{ iconName: "" }}
+                        menuProps={{
+                          shouldFocusOnMount: true,
+                          items: [
+                            {
+                              key: "Edit",
+                              name: "Edit",
+                              onClick: (event) => {
 
-                              this.setState({ selectedEvent: activity });
-                              this.editEvent();
+                                this.setState({ selectedEvent: activity });
+                                this.editEvent();
+                              },
                             },
-                          },
-                          {
-                            key: "divider_1",
-                            itemType: ContextualMenuItemType.Divider,
-                          },
-                          {
-                            key: "Delete",
-                            name: "Delete",
-                            onClick: (event) => {
-                              this.setState({
-                                selectedEvent: activity
-                              });
-                              this.deleteEvent(activity);
+                            {
+                              key: "divider_1",
+                              itemType: ContextualMenuItemType.Divider,
                             },
-                          },
-                        ],
-                      }}
-                    />
-                  </Card.Section>
-                </Card>
-              </div>
-            </Stack>
-          </div>
-
-          {index % 2 == 0 &&
-            <div className={styles.timelineColumn}>
-              <div className={styles.timelineDate}>
-                <Text variant="small" styles={helpfulTextStyles}>
-                  {activity.acivityDate}
-                </Text>
-              </div>
+                            {
+                              key: "Delete",
+                              name: "Delete",
+                              onClick: (event) => {
+                                this.setState({
+                                  selectedEvent: activity
+                                });
+                                this.deleteEvent(activity);
+                              },
+                            },
+                          ],
+                        }}
+                      />
+                    </Card.Section>
+                  </Card>
+                </div>
+              </Stack>
             </div>
-          }
+
+            {index % 2 == 0 &&
+              <div className={styles.timelineColumn}>
+                <div className={styles.timelineDate}>
+                  <Text variant="small" styles={helpfulTextStyles}>
+                    {activity.acivityDate}
+                  </Text>
+                </div>
+              </div>
+            }
+          </div>
         </div>
       </div>
     );

@@ -9,12 +9,15 @@ In simple words, authentication is completely independent of CSOM library now. S
 When making app-only calls to SharePoint Online, we can either use an Azure AD app registration (with the Client Certificate) or we can use SharePoint App-Only authentication created via the AppRegNew.aspx and AppInv.aspx pages.
 
 Let's start by creating an App Registration in the Azure AD portal 
+![App Registration in the Azure AD portal](assets/01.png)
 
 Configure it with the Certificate, SPO API permissions etc.
+![SPO API permissions](assets/02.png)
 
+Add the certificate (.pfx) to your local machine certificates (certmgr.msc)
+![Certificate](assets/03.png)
 
-
-### Building the code
+### VS 2019 Solution
 The solution is developed using Visual Studio 2019 as .NET Core console application.
 
 Below are the NuGet packages used:

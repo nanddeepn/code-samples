@@ -5,30 +5,24 @@ import { IEventState } from './ITimeLineEventState';
 import { ITimelineActivity } from '../../../../models/ITimelineActivity';
 import {
   TextField,
-  Label, DirectionalHint,
+  Label,
   DatePicker,
   IDatePickerStrings,
   Dropdown,
   IDropdownOption,
-  IDropdownProps,
+  
   DefaultButton,
   PrimaryButton,
-  IPersonaProps,
-  MessageBar,
-  MessageBarType,
-  Spinner,
-  SpinnerSize,
+ 
   Dialog,
   DialogType,
-  DialogFooter,
-  Checkbox
+  DialogFooter
 } from 'office-ui-fabric-react';
-import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as moment from 'moment';
 import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 import { IPanelModelEnum } from './IPanelModeEnum';
 import TimelineService from "../../../../services/TimelineService";
-import { useBoolean } from '@uifabric/react-hooks';
+
 
 const DayPickerStrings: IDatePickerStrings = {
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -79,19 +73,15 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
     this.TimelineService = new TimelineService(this.props.context);
     this.onStartChangeHour = this.onStartChangeHour.bind(this);
     this.onStartChangeMin = this.onStartChangeMin.bind(this);  
-    this.onEditorStateChange = this.onEditorStateChange.bind(this);
-   
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);   
     this.onSave = this.onSave.bind(this);
     this.onSelectDateStart = this.onSelectDateStart.bind(this);
     this.onGetErrorMessageTitle = this.onGetErrorMessageTitle.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
     this.onDelete = this.onDelete.bind(this);
-    this.closeDialog = this.closeDialog.bind(this);
-   
+    this.closeDialog = this.closeDialog.bind(this);   
     this._onEventTitleChange = this._onEventTitleChange.bind(this);
-    this._onActivityPictureURLChange = this._onActivityPictureURLChange.bind(this);
-
-    
+    this._onActivityPictureURLChange = this._onActivityPictureURLChange.bind(this);    
     }
 
   private hidePanel() {
@@ -100,18 +90,13 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
 
   private async onSave() {
     let eventData: ITimelineActivity = this.state.eventData;
-
     let panelMode = this.props.panelMode;
-    let startDate: string = null;
-   
-    startDate = `${moment(this.state.acivityDate).format('YYYY/MM/DD')}`;
-   
+    let startDate: string = null;   
+    startDate = `${moment(this.state.acivityDate).format('YYYY/MM/DD')}`;   
     const startTime = `${this.state.startSelectedHour.key}:${this.state.startSelectedMin.key}`;
     const startDateTime = `${startDate} ${startTime}`;
     const start = moment(startDateTime, 'YYYY/MM/DD HH:mm').toLocaleString();
-    eventData.acivityDate = new Date(start);
-    
-    
+    eventData.acivityDate = new Date(start);   
     eventData.activityDescription = this.state.activityDescription;
     eventData.acivityLink = this.state.eventData.acivityLink;
 
@@ -123,7 +108,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           await this.TimelineService.updateTimelineActivity(
             'Timeline',
             eventData           
-          ).then((value: any) => { debugger;this.props.onDissmissPanel(true);});
+          ).then((value: any) => { this.props.onDissmissPanel(true);});
           break;
         case IPanelModelEnum.add:
           await this.TimelineService.addTimelineActivity("Timeline", eventData).then((value: any) => { this.props.onDissmissPanel(true); });
@@ -150,15 +135,12 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
     if (this.props.panelMode == IPanelModelEnum.edit && event) {
       // Get hours of event
       const startHour = moment(event.acivityDate).format('HH').toString();
-      const startMin = moment(event.acivityDate).format("mm").toString();
-    
-      // Get Descript and covert to RichText Control
-      const html = event.activityDescription;
-      
+      const startMin = moment(event.acivityDate).format("mm").toString();    
+      let timeLineDate: Date = moment(event.acivityDate).toDate();
       // Update Component Data
       this.setState({
         eventData: event,
-        acivityDate: event.acivityDate,
+        acivityDate: timeLineDate,
         startSelectedHour: { key: startHour, text: startHour },
         startSelectedMin: { key: startMin, text: startMin },
         activityDescription: event.activityDescription,
@@ -168,9 +150,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         isloading: false      
       });
     }
-    else {
-     
-
+    else {   
       this.setState({
         acivityDate: new Date(),      
         activityDescription: '',
@@ -209,7 +189,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
     this.setState({ startSelectedMin: item });
   }
 
-  private onEditorStateChange = (e): void => {   
+  private onDescriptionChange = (e): void => {   
     this.setState({ activityDescription: e.target.value})
   }
 
@@ -223,8 +203,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       this.setState({ eventData: { ...this.state.eventData, activityTitle: value }, disableButton: false, errorMessage: '' });
     }
     return returnMessage;
-  }
-  
+  }  
 
   
   private onDelete(ev: React.MouseEvent<HTMLDivElement>) {
@@ -234,9 +213,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
 
   private closeDialog = (): void => {
     this.setState({ displayDialog: false });
-  }
-
-  
+  }  
 
   private onSelectDateStart(newDate: Date) {
     this.setState({ acivityDate: newDate });
@@ -257,7 +234,6 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
             showCloseButton: true,
           }}
           onDismiss={this.hidePanel}
-         
           modalProps={{
             className: styles.dialogOverride
             }}
@@ -358,7 +334,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
               className={controlClass.control}
               strings={DayPickerStrings}
               allowTextInput={true}
-              value={new Date()}
+              value={this.state.acivityDate}
               onSelectDate={this.onSelectDateStart}
               showMonthPickerAsOverlay={false}
               isMonthPickerVisible={false}
@@ -370,7 +346,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           <div>
             <TextField
               label="Description"
-              value={this.state.activityDescription} onChange={this.onEditorStateChange}
+              value={this.state.activityDescription} onChange={this.onDescriptionChange}
               multiline
             />
           </div>

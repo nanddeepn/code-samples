@@ -206,7 +206,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
             {index % 2 == 1 &&
               <div className={styles.timelineColumn}>
                 <div className={styles.timelineDate}>
-                  <Text variant="small" styles={helpfulTextStyles}>
+                  <Text styles={helpfulTextStyles}>
                     {activity.acivityDate}
                   </Text>
                 </div>
@@ -301,8 +301,8 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
             {index % 2 == 0 &&
               <div className={styles.timelineColumn}>
-                <div className={styles.timelineDate}>
-                  <Text variant="small" styles={helpfulTextStyles}>
+                <div className={`${styles.timelineDate} ${styles.alignLeft}`}>
+                  <Text styles={helpfulTextStyles}>
                     {activity.acivityDate}
                   </Text>
                 </div>

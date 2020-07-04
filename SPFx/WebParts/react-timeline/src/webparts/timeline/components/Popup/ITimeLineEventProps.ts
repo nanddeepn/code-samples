@@ -9,4 +9,5 @@ export interface IEventProps {
   showPanel: boolean;
   startDate?: Date; 
   context: WebPartContext; 
+  listName: string;
 }

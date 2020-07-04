@@ -18,6 +18,8 @@ export interface IActivityProps {
   context: WebPartContext;
   onDissmissPanel: (refresh: boolean) => void;
   displayPanel: boolean;
+  listName : string;
+  layout: string;
 }
 
 export interface IActivityState {
@@ -43,7 +45,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
   public constructor(props) {
     super(props);
-    debugger;
+ 
     this.state = {
       showDialog: this.props.displayPanel,
       eventData: [],
@@ -79,7 +81,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   private async onDismissPanel(refresh: boolean) {
-    debugger;
+   
     if (refresh === true) {
       this.props.onDissmissPanel(true);
     }
@@ -93,7 +95,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   private deleteEvent(TimelineDeleteEvent: ITimelineActivity) {
     if (confirm('Are you sure you want to delete this timeline event?')) {
       this.TimelineService.deleteTimelineActivity(
-        "Timeline",
+        this.props.listName,
         TimelineDeleteEvent
       );
 
@@ -137,8 +139,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public componentWillReceiveProps(nextProps: IActivityProps) {
-    debugger;
-    this.setState({ showDialog: false, selectedEvent: null });
+      this.setState({ showDialog: false, selectedEvent: null });
   }
 
   private _dismissCardDetails() {
@@ -223,6 +224,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     showPanel={this.state.showDialog}
                     startDate={this.state.startDateSlot}
                     context={this.props.context}
+                    listName={this.props.listName}
                   />
                 )}
                 <div className={styles.timelineCard}>

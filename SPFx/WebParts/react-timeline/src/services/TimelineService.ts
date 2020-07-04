@@ -134,8 +134,7 @@ export default class TimelineService {
             };
 
             await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem).then((value:any) => {
-                console.log(value);
-                debugger;
+                console.log(value);               
             });
         }
         catch (error) {

@@ -106,12 +106,12 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       switch (panelMode) {
         case IPanelModelEnum.edit:
           await this.TimelineService.updateTimelineActivity(
-            'Timeline',
+            this.props.listName,
             eventData           
           ).then((value: any) => { this.props.onDissmissPanel(true);});
           break;
         case IPanelModelEnum.add:
-          await this.TimelineService.addTimelineActivity("Timeline", eventData).then((value: any) => { this.props.onDissmissPanel(true); });
+          await this.TimelineService.addTimelineActivity(this.props.listName, eventData).then((value: any) => { this.props.onDissmissPanel(true); });
           break;
         default:
           break;

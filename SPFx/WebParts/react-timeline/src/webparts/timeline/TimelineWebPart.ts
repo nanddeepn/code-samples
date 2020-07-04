@@ -3,7 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField, PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
@@ -11,9 +11,18 @@ import * as strings from 'TimelineWebPartStrings';
 import Timeline from './components/Timeline';
 import { ITimelineProps } from './components/ITimelineProps';
 import TimelineService from '../../services/TimelineService';
+import { IDropdownOption } from 'office-ui-fabric-react/lib/components/Dropdown';
 
 export interface ITimelineWebPartProps {
   description: string;
+  listName: string;
+  layout: string;
+}
+
+export interface IAsyncDropdownState {
+  loading: boolean;
+  options: IDropdownOption[];
+  error: string;
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
@@ -29,9 +38,11 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
       Timeline,
       {
         context: this.context,
-        description: this.properties.description
+        description: this.properties.description || 'TimeLine Events',
+        listName: this.properties.listName || 'Timeline',
+        layout: this.properties.layout || 'Vertical'
       }
-    );
+    );   
 
     ReactDom.render(element, this.domElement);
   }
@@ -57,6 +68,16 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('listName', {
+                  label: strings.ListNameFieldLabel
+                }),
+                PropertyPaneDropdown('layout', {
+                  label: strings.LayoutFieldLabel,
+                  options: [                   
+                    { key: 'Vertical', text: 'Vertical' },
+                    { key: 'Horizontal', text: 'Horizontal' }            
+                  ]
                 })
               ]
             }

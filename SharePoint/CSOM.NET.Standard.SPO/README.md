@@ -11,7 +11,7 @@ When making app-only calls to SharePoint Online, we can either use an Azure AD a
 Let's start by creating an App Registration in the Azure AD portal 
 ![App Registration in the Azure AD portal](assets/01.png)
 
-Configure it with the Certificate, SPO API permissions etc.
+Configure it with the Certificate, SPO API permissions etc. Use Create-SelfSignedCertificate.ps1 to generate a certificate.
 ![SPO API permissions](assets/02.png)
 
 Add the certificate (.pfx) to your local machine certificates (certmgr.msc)

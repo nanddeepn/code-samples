@@ -34,3 +34,4 @@ dotnet restore
 2. Right click on solution > Restore NuGet Packages
 ```
 
+[![HitCount](http://hits.dwyl.com/nanddeepn/https://githubcom/nanddeepn/code-samples/tree/master/SharePoint/CSOMNETStandardSPO.svg)](http://hits.dwyl.com/nanddeepn/https://githubcom/nanddeepn/code-samples/tree/master/SharePoint/CSOMNETStandardSPO)

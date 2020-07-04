@@ -82,19 +82,22 @@ export default class TimelineService {
      */
     public async addTimelineActivity(listTitle: string, newTimelineActivity: ITimelineActivity) {
         try {
+            let linkUrl = newTimelineActivity.acivityLink["Url"] ? newTimelineActivity.acivityLink["Url"] : newTimelineActivity.acivityLink;
+            let picUrl = newTimelineActivity.activityPictureUrl["Url"] ? newTimelineActivity.activityPictureUrl["Url"] : newTimelineActivity.activityPictureUrl;
+
             await sp.web.lists.getByTitle(listTitle).items.add({
                 Title: newTimelineActivity.activityTitle,             
                 SPFxTimelineDate: newTimelineActivity.acivityDate,
                 SPFxTimelinePicture: {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
-                    Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
+                    Url: picUrl,
                 },
                 SPFxTimelineLink: {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
-                    Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
-                },
+                    Url: linkUrl,
+                },  
                 SPFxTimelineDescription: newTimelineActivity.activityDescription
             });
         }
@@ -111,19 +114,22 @@ export default class TimelineService {
      */
     public async updateTimelineActivity(listTitle: string, updateTimelineActivity: ITimelineActivity) {
         try {
+            let linkUrl = updateTimelineActivity.acivityLink["Url"] ? updateTimelineActivity.acivityLink["Url"] : updateTimelineActivity.acivityLink;
+            let picUrl = updateTimelineActivity.activityPictureUrl["Url"] ? updateTimelineActivity.activityPictureUrl["Url"] : updateTimelineActivity.activityPictureUrl;
+
             let updateItem: any = {
                 Title: updateTimelineActivity.activityTitle,               
                 SPFxTimelineDate: updateTimelineActivity.acivityDate,
-                // SPFxTimelinePicture: {
-                //     "__metadata": { type: "SP.FieldUrlValue" },
-                //     Description: updateTimelineActivity.activityTitle,
-                //     Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
-                // },
-                // SPFxTimelineLink: {
-                //     "__metadata": { type: "SP.FieldUrlValue" },
-                //     Description: updateTimelineActivity.activityTitle,
-                //     Url: "https://tspfo365.sharepoint.com/sites/SPDemo/SiteAssets/__sitelogo__spiderman.jpg"
-                // },                
+                SPFxTimelinePicture: {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: updateTimelineActivity.activityTitle,
+                    Url: picUrl,
+                },
+                SPFxTimelineLink: {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: updateTimelineActivity.activityTitle,
+                    Url: linkUrl,
+                },                
                 SPFxTimelineDescription: updateTimelineActivity.activityDescription
             };
 

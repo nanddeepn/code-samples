@@ -239,7 +239,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                         height="100px"
                       />
                     </Card.Item>
-                    <Card.Section>
+                    <Card.Section className={styles.cardSection}>
                       <Text variant="small" styles={siteTextStyles}>
                         {activity.acivityLink ? (
                           <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
@@ -256,6 +256,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     <Card.Section
                       styles={footerCardSectionStyles}
                       tokens={footerCardSectionTokens}
+                      className={styles.contextualMenuSection}
                     >
                       <IconButton
                         id="ContextualMenuButton1"

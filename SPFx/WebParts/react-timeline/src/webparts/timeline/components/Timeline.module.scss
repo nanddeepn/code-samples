@@ -86,12 +86,21 @@
     }
 
     &:nth-child(even) {
-      padding: 0 0 0 40px;
+      padding: 0 0 0 30px;
     }
   }
 
   .timelineCard {
     padding: 5px;
+    width: 95%;
+  }
+
+  .cardSection {
+    width: 100%;
+  }
+
+  .contextualMenuSection {
+    width: 5%;
   }
 
   .alignLeft {

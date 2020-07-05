@@ -19,7 +19,7 @@ export interface IActivityProps {
   context: WebPartContext;
   onDissmissPanel: (refresh: boolean) => void;
   displayPanel: boolean;
-  listName : string;
+  listName: string;
   layout: string;
   showImage: boolean;
   showDescription: boolean;
@@ -45,7 +45,7 @@ export interface IActivityState {
   displayEventDialog: boolean;
   showImage: boolean;
   showDescription: boolean;
-  layout:string;
+  layout: string;
   dateFormat: string;
 }
 
@@ -54,7 +54,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
   public constructor(props) {
     super(props);
- 
+
     this.state = {
       showDialog: this.props.displayPanel,
       eventData: [],
@@ -67,7 +67,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       isDraggable: false,
       isDeleting: false,
       displayDeleteDialog: false,
-      displayEventDialog: false,     
+      displayEventDialog: false,
       layout: this.props.layout,
       showImage: this.props.showImage,
       showDescription: this.props.showDescription,
@@ -94,11 +94,9 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   private async onDismissPanel(refresh: boolean) {
-   
     if (refresh === true) {
       this.props.onDissmissPanel(true);
     }
-    //this.setState({ showDialog: false });
   }
 
   private onSelectEvent(event: any) {
@@ -123,13 +121,14 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
         selectedEvent: null,
         displayEventDialog: false,
       });
-      this.props.onDissmissPanel(true);
 
-    } else {
+      this.props.onDissmissPanel(true);
+    }
+    else {
       // Do nothing!
     }
-
   }
+
   private closeDeleteDialog(ev: React.MouseEvent<HTMLDivElement>) {
     ev.preventDefault();
     this.setState({ displayDeleteDialog: false });
@@ -152,12 +151,14 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public componentWillReceiveProps(nextProps: IActivityProps) {
-      this.setState({ showDialog: false,
-         selectedEvent: null,
-         layout: nextProps.layout,
-         showImage:nextProps.showImage,
-         showDescription:nextProps.showDescription,
-        dateFormat:nextProps.dateFormat });
+    this.setState({
+      showDialog: false,
+      selectedEvent: null,
+      layout: nextProps.layout,
+      showImage: nextProps.showImage,
+      showDescription: nextProps.showDescription,
+      dateFormat: nextProps.dateFormat
+    });
   }
 
   private _dismissCardDetails() {
@@ -172,11 +173,6 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public render(): React.ReactElement<IActivityProps> {
-    console.log("Layout"+ this.state.layout);
-    console.log("ShowImage" + this.state.showImage);
-    console.log("ShowDescription" + this.state.showDescription);
-    console.log("DateFormat" + this.state.dateFormat);
-    
     const siteTextStyles: ITextStyles = {
       root: {
         color: "#025F52",
@@ -190,12 +186,14 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
         fontWeight: FontWeights.regular,
       },
     };
+
     const helpfulTextStyles: ITextStyles = {
       root: {
         color: "#333333",
         fontWeight: FontWeights.regular,
       },
     };
+
     const iconStyles: IIconStyles = {
       root: {
         color: "#0078D4",
@@ -203,6 +201,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
         fontWeight: FontWeights.regular,
       },
     };
+
     const footerCardSectionStyles: ICardSectionStyles = {
       root: {
         alignSelf: "stretch",
@@ -212,13 +211,12 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
     const sectionStackTokens: IStackTokens = { childrenGap: 20 };
     const cardTokens: ICardTokens = { childrenMargin: 12 };
-    const footerCardSectionTokens: ICardSectionTokens = {
-      padding: "0px 0px 0px 12px",
-    };
+    const footerCardSectionTokens: ICardSectionTokens = { padding: "0px 0px 0px 12px" };
 
-    const { activity, index } = this.props;
+    const { activity, index, canEdit, showImage, showDescription } = this.props;
     const addToIcon: IIconProps = { iconName: 'AddTo' };
     let activityDate: string = moment(activity.acivityDate).format(this.state.dateFormat);
+
     return (
       <div>
         <div className={this.state.layout == "Vertical" ? `${styles.timelineAddVertical}` : `${styles.timelineAddHorizontal}`}>
@@ -231,7 +229,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
               <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
                 <div className={styles.timelineDate}>
                   <Text styles={helpfulTextStyles}>
-                  {activityDate}
+                    {activityDate}
                   </Text>
                 </div>
               </div>
@@ -256,14 +254,17 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     horizontal
                     tokens={cardTokens}
                   >
-                    <Card.Item fill>
-                      <Image
-                        src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
-                        alt="Placeholder image."
-                        width="100px"
-                        height="100px"
-                      />
-                    </Card.Item>
+                    {
+                      showImage &&
+                      <Card.Item fill>
+                        <Image
+                          src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
+                          alt="Placeholder image."
+                          width="100px"
+                          height="100px"
+                        />
+                      </Card.Item>
+                    }
                     <Card.Section className={styles.cardSection}>
                       <Text variant="small" styles={siteTextStyles}>
                         {activity.acivityLink ? (
@@ -274,52 +275,54 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                             activity.activityTitle
                           )}
                       </Text>
-                      <Text styles={descriptionTextStyles} className={styles.description}>
-                        {activity.activityDescription}
-                      </Text>
+                      {
+                        showDescription &&
+                        <Text styles={descriptionTextStyles} className={styles.description}>
+                          {activity.activityDescription}
+                        </Text>
+                      }
                     </Card.Section>
                     <Card.Section
                       styles={footerCardSectionStyles}
                       tokens={footerCardSectionTokens}
                       className={styles.contextualMenuSection}
                     >
-                      {this.props.canEdit &&
-                      <IconButton
-                        id="ContextualMenuButton1"
-                        text=""
-                        split={false}
-                        iconProps={{ iconName: "MoreVertical" }}
-                        style={{ float: "right", width: "10%" }}
-                        menuIconProps={{ iconName: "" }}
-                        menuProps={{
-                          shouldFocusOnMount: true,
-                          items: [
-                            {
-                              key: "Edit",
-                              name: "Edit",
-                              onClick: (event) => {
-
-                                this.setState({ selectedEvent: activity });
-                                this.editEvent();
+                      {canEdit &&
+                        <IconButton
+                          id="ContextualMenuButton1"
+                          text=""
+                          split={false}
+                          iconProps={{ iconName: "MoreVertical" }}
+                          style={{ float: "right", width: "10%" }}
+                          menuIconProps={{ iconName: "" }}
+                          menuProps={{
+                            shouldFocusOnMount: true,
+                            items: [
+                              {
+                                key: "Edit",
+                                name: "Edit",
+                                onClick: (event) => {
+                                  this.setState({ selectedEvent: activity });
+                                  this.editEvent();
+                                },
                               },
-                            },
-                            {
-                              key: "divider_1",
-                              itemType: ContextualMenuItemType.Divider,
-                            },
-                            {
-                              key: "Delete",
-                              name: "Delete",
-                              onClick: (event) => {
-                                this.setState({
-                                  selectedEvent: activity
-                                });
-                                this.deleteEvent(activity);
+                              {
+                                key: "divider_1",
+                                itemType: ContextualMenuItemType.Divider,
                               },
-                            },
-                          ],
-                        }}
-                      />
+                              {
+                                key: "Delete",
+                                name: "Delete",
+                                onClick: (event) => {
+                                  this.setState({
+                                    selectedEvent: activity
+                                  });
+                                  this.deleteEvent(activity);
+                                },
+                              },
+                            ],
+                          }}
+                        />
                       }
                     </Card.Section>
                   </Card>

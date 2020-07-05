@@ -36,13 +36,13 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
       Timeline,
       {
         context: this.context,
-        description: this.properties.description || 'TimeLine Events',
-        listName: this.properties.listName || 'Timeline',
-        layout: this.properties.layout || 'Vertical',
-        showImage: this.properties.showImage || true,
-        showDescription: this.properties.showDescription || true,
-        dateFormat: this.properties.dateFormat || 'dddd, MMMM Do YYYY, h:mm:ss a',
-        sortEvents: this.properties.sortEvents || 'asc'
+        description: this.properties.description,
+        listName: this.properties.listName,
+        layout: this.properties.layout,
+        showImage: this.properties.showImage,
+        showDescription: this.properties.showDescription,
+        dateFormat: this.properties.dateFormat,
+        sortEvents: this.properties.sortEvents
       }
     );   
 

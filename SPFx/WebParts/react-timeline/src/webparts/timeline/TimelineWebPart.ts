@@ -17,12 +17,7 @@ export interface ITimelineWebPartProps {
   description: string;
   listName: string;
   layout: string;
-}
-
-export interface IAsyncDropdownState {
-  loading: boolean;
-  options: IDropdownOption[];
-  error: string;
+  position: string;
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
@@ -40,7 +35,8 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
         context: this.context,
         description: this.properties.description || 'TimeLine Events',
         listName: this.properties.listName || 'Timeline',
-        layout: this.properties.layout || 'Vertical'
+        layout: this.properties.layout || 'Vertical',
+        position: this.properties.position || 'Alternate'
       }
     );   
 
@@ -77,6 +73,13 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
                   options: [                   
                     { key: 'Vertical', text: 'Vertical' },
                     { key: 'Horizontal', text: 'Horizontal' }            
+                  ]
+                }),
+                PropertyPaneDropdown('position', {
+                  label: strings.PositionFieldLabel,
+                  options: [
+                    { key: 'Alternate', text: 'Alternate' },
+                    { key: 'One Side', text: 'One Side' }
                   ]
                 })
               ]

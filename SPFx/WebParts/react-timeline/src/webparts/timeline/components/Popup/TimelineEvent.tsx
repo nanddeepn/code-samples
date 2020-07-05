@@ -190,7 +190,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   }
 
   private onDescriptionChange = (e): void => {   
-    this.setState({ activityDescription: e.target.value})
+    this.setState({ activityDescription: e.target.value});
   }
 
   private onGetErrorMessageTitle(value: string): string {

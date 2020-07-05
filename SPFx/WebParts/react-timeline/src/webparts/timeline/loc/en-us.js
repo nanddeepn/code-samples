@@ -4,6 +4,7 @@ define([], function() {
     "BasicGroupName": "Group Name",
     "DescriptionFieldLabel": "Description Field",
     "ListNameFieldLabel":"List Name",
-    "LayoutFieldLabel":"Layout Type"
+    "LayoutFieldLabel":"Layout Type",
+    "PositionFieldLabel":"Position"
   }
 });

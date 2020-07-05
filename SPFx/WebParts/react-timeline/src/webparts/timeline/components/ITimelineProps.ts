@@ -5,4 +5,5 @@ export interface ITimelineProps {
   description: string;
   listName: string;
   layout: string;
+  position: string;
 }

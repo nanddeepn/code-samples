@@ -20,6 +20,7 @@ export interface IActivityProps {
   displayPanel: boolean;
   listName : string;
   layout: string;
+  position: string;
 }
 
 export interface IActivityState {
@@ -38,6 +39,8 @@ export interface IActivityState {
   displayDeleteDialog: boolean;
   selectedView?: string;
   displayEventDialog: boolean;
+  position: string;
+  layout:string;
 }
 
 export default class TimelineActivity extends React.Component<IActivityProps, IActivityState> {
@@ -58,7 +61,9 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       isDraggable: false,
       isDeleting: false,
       displayDeleteDialog: false,
-      displayEventDialog: false
+      displayEventDialog: false,
+      position: this.props.position,
+      layout: this.props.layout
     };
 
     this.TimelineService = new TimelineService(
@@ -139,7 +144,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public componentWillReceiveProps(nextProps: IActivityProps) {
-      this.setState({ showDialog: false, selectedEvent: null });
+      this.setState({ showDialog: false, selectedEvent: null,position: nextProps.position,layout: nextProps.layout });
   }
 
   private _dismissCardDetails() {
@@ -154,6 +159,8 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public render(): React.ReactElement<IActivityProps> {
+    console.log("Layout"+ this.state.layout);
+    console.log("Position" + this.state.position);
     const siteTextStyles: ITextStyles = {
       root: {
         color: "#025F52",

@@ -39,7 +39,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
       <div className={styles.timeline}>
         <div className={styles.timelineContainer}>
           {this.state.timelineActivities.map((activity, i) => {
-            return (<TimelineActivity activity={activity} index={i} context={this.props.context} onDissmissPanel={this.onDismissPanel} displayPanel={false} listName={this.props.listName} layout={this.props.layout} ></TimelineActivity>);
+            return (<TimelineActivity activity={activity} index={i} context={this.props.context} onDissmissPanel={this.onDismissPanel} displayPanel={false} listName={this.props.listName} layout={this.props.layout} position={this.props.position} ></TimelineActivity>);
           })}
         </div>
       </div>

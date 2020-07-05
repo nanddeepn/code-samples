@@ -7,5 +7,6 @@ export interface ITimelineProps {
   layout: string;
   showImage: boolean;
   showDescription: boolean;
-  dateFormat : string;
+  dateFormat: string;
+  sortEvents: string;
 }

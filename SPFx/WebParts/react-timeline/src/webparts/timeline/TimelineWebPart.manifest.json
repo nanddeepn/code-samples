@@ -21,7 +21,13 @@
     "description": { "default": "Displays a list of events in chronological order." },
     "officeFabricIconFontName": "TimelineProgress",
     "properties": {
-      "description": "Timeline"
+      "description": "TimeLine Events",
+      "listName": "Timeline",
+      "layout": "Vertical",
+      "showImage": true,
+      "showDescription": true,
+      "dateFormat": "MM/DD/yyyy",
+      "sortEvents": "asc"
     }
   }]
 }

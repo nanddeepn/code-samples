@@ -255,7 +255,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     tokens={cardTokens}
                   >
                     {
-                      showImage &&
+                      showImage && activity.activityPictureUrl &&
                       <Card.Item fill>
                         <Image
                           src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}

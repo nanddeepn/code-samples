@@ -10,7 +10,8 @@ import { TimelineEvent } from "./Popup/TimelineEvent";
 import TimelineService from "../../../services/TimelineService";
 import { IPanelModelEnum } from "./Popup/IPanelModeEnum";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { ITimelineProps } from './ITimelineProps';
+
+import * as moment from 'moment';
 
 export interface IActivityProps {
   activity: ITimelineActivity;
@@ -20,7 +21,10 @@ export interface IActivityProps {
   displayPanel: boolean;
   listName : string;
   layout: string;
-  position: string;
+  showImage: boolean;
+  showDescription: boolean;
+  dateFormat: string;
+  canEdit: boolean;
 }
 
 export interface IActivityState {
@@ -39,8 +43,10 @@ export interface IActivityState {
   displayDeleteDialog: boolean;
   selectedView?: string;
   displayEventDialog: boolean;
-  position: string;
+  showImage: boolean;
+  showDescription: boolean;
   layout:string;
+  dateFormat: string;
 }
 
 export default class TimelineActivity extends React.Component<IActivityProps, IActivityState> {
@@ -61,9 +67,11 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       isDraggable: false,
       isDeleting: false,
       displayDeleteDialog: false,
-      displayEventDialog: false,
-      position: this.props.position,
-      layout: this.props.layout
+      displayEventDialog: false,     
+      layout: this.props.layout,
+      showImage: this.props.showImage,
+      showDescription: this.props.showDescription,
+      dateFormat: this.props.dateFormat
     };
 
     this.TimelineService = new TimelineService(
@@ -144,7 +152,12 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   public componentWillReceiveProps(nextProps: IActivityProps) {
-      this.setState({ showDialog: false, selectedEvent: null,position: nextProps.position,layout: nextProps.layout });
+      this.setState({ showDialog: false,
+         selectedEvent: null,
+         layout: nextProps.layout,
+         showImage:nextProps.showImage,
+         showDescription:nextProps.showDescription,
+        dateFormat:nextProps.dateFormat });
   }
 
   private _dismissCardDetails() {
@@ -160,7 +173,10 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
   public render(): React.ReactElement<IActivityProps> {
     console.log("Layout"+ this.state.layout);
-    console.log("Position" + this.state.position);
+    console.log("ShowImage" + this.state.showImage);
+    console.log("ShowDescription" + this.state.showDescription);
+    console.log("DateFormat" + this.state.dateFormat);
+    
     const siteTextStyles: ITextStyles = {
       root: {
         color: "#025F52",
@@ -202,11 +218,11 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
     const { activity, index } = this.props;
     const addToIcon: IIconProps = { iconName: 'AddTo' };
-
+    let activityDate: string = moment(activity.acivityDate).format(this.state.dateFormat);
     return (
       <div>
         <div className={styles.timelineAdd}>
-          <IconButton iconProps={addToIcon} title="Emoji" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
+          <IconButton iconProps={addToIcon} title="Add TimeLine Event" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
         </div>
 
         <div className={styles.timelineContent}>
@@ -215,7 +231,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
               <div className={styles.timelineColumn}>
                 <div className={styles.timelineDate}>
                   <Text styles={helpfulTextStyles}>
-                    {activity.acivityDate}
+                  {activityDate}
                   </Text>
                 </div>
               </div>
@@ -267,6 +283,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                       tokens={footerCardSectionTokens}
                       className={styles.contextualMenuSection}
                     >
+                      {this.props.canEdit &&
                       <IconButton
                         id="ContextualMenuButton1"
                         text=""
@@ -303,6 +320,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                           ],
                         }}
                       />
+                      }
                     </Card.Section>
                   </Card>
                 </div>
@@ -313,7 +331,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
               <div className={styles.timelineColumn}>
                 <div className={`${styles.timelineDate} ${styles.alignLeft}`}>
                   <Text styles={helpfulTextStyles}>
-                    {activity.acivityDate}
+                    {activityDate}
                   </Text>
                 </div>
               </div>

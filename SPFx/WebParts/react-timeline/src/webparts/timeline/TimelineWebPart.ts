@@ -3,7 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField, PropertyPaneDropdown
+  PropertyPaneTextField, PropertyPaneDropdown, PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
@@ -17,7 +17,9 @@ export interface ITimelineWebPartProps {
   description: string;
   listName: string;
   layout: string;
-  position: string;
+  showImage: boolean;
+  showDescription: boolean;
+  dateFormat : string;
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
@@ -36,7 +38,9 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
         description: this.properties.description || 'TimeLine Events',
         listName: this.properties.listName || 'Timeline',
         layout: this.properties.layout || 'Vertical',
-        position: this.properties.position || 'Alternate'
+        showImage: this.properties.showImage || true,
+        showDescription: this.properties.showDescription || true,
+        dateFormat: this.properties.dateFormat || 'dddd, MMMM Do YYYY, h:mm:ss a'
       }
     );   
 
@@ -75,12 +79,14 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
                     { key: 'Horizontal', text: 'Horizontal' }            
                   ]
                 }),
-                PropertyPaneDropdown('position', {
-                  label: strings.PositionFieldLabel,
-                  options: [
-                    { key: 'Alternate', text: 'Alternate' },
-                    { key: 'One Side', text: 'One Side' }
-                  ]
+                PropertyPaneToggle('showImage', {
+                  label: strings.ShowImageFieldLabel,checked:true
+                }),
+                PropertyPaneToggle('showDescription', {
+                  label: strings.ShowDescriptionFieldLabel, checked: true
+                }),
+                PropertyPaneTextField('dateFormat', {
+                  label: strings.DateFormatFieldLabel
                 })
               ]
             }

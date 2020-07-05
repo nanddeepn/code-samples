@@ -2,9 +2,11 @@ define([], function() {
   return {
     "PropertyPaneDescription": "Description",
     "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
+    "DescriptionFieldLabel": "WebPart Title",
     "ListNameFieldLabel":"List Name",
     "LayoutFieldLabel":"Layout Type",
-    "PositionFieldLabel":"Position"
+    "ShowImageFieldLabel":"Show Image",
+    "ShowDescriptionFieldLabel": "Show Description",
+    "DateFormatFieldLabel": "Date Format",
   }
 });

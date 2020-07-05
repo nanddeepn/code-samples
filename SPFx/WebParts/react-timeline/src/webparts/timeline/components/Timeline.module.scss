@@ -1,7 +1,7 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
 .timeline {
-  .timelineContainer {
+  .timelineContainerVertical {
     display: block;
     width: 100%;
     max-width: 1040px;
@@ -14,7 +14,7 @@
       display: block;
       width: 3px;
       background: #ccc;
-      background: $ms-color-themeDark;
+      background: $ms-color-themePrimary;
       position: absolute;
       top: 0;
       left: 0;
@@ -24,7 +24,7 @@
     }
   }
 
-  .timelineContent {
+  .timelineContentVertical {
     position: relative;
 
     &:before {
@@ -32,7 +32,7 @@
       content: "";
       width: 20px;
       height: 20px;
-      background: $ms-color-themeDark;
+      background: $ms-color-themePrimary;
       border-radius: 50%;
       position: absolute;
       left: 0;
@@ -43,7 +43,7 @@
     }
   }
 
-  .timelineRow {
+  .timelineRowVertical {
     display: flex;
     -ms-flex-align: start;
     align-items: flex-start;
@@ -57,7 +57,88 @@
     width: 100%;
   }
 
-  .timelineAdd {
+  .timelineColumnVertical {
+    width: 50%;
+    float: left;
+
+    &:nth-child(odd) {
+      padding: 0 15px 0 0;
+    }
+
+    &:nth-child(even) {
+      padding: 0 0 0 30px;
+    }
+  }
+  
+  .timelineAddVertical {
+    display: block;
+    content: " ";
+    width: 32px;
+    height: 22px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    margin: auto;
+  }
+
+  .timelineContainerHorizontal {
+    position: relative;
+    list-style: none;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: calc(50% - -10px);
+      width: 100%;
+      height: 2px;
+      background: $ms-color-themePrimary;
+    }
+  }
+
+  // .timelineContainerHorizontal div:not(:last-child) {
+  //   margin: 0 -50px 0 0;
+  // }
+
+  .timelineContentHorizontal {
+    min-width: 200px;
+    align-self: flex-start;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: calc(50% - -10px);
+      margin-left: 100px;
+      transform: translate(-50%, -50%);
+      border: 1px $ms-color-themePrimary solid;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: $ms-color-themePrimary;
+    }
+  }
+
+  .timelineRowHorizontal {
+    display: block;
+  }
+
+  .timelineColumnHorizontal {
+    float: left;
+    position: relative;
+
+    &:nth-child(odd) {
+      padding: 0 0 50px 0;
+    }
+
+    &:nth-child(even) {
+      padding: 50px 0 0 0;
+    }
+  }
+  
+  .timelineAddHorizontal {
     display: block;
     content: " ";
     width: 32px;
@@ -75,19 +156,6 @@
   .timelineDate {
     text-align: right;
     margin-top: 20px;
-  }
-
-  .timelineColumn {
-    width: 50%;
-    float: left;
-
-    &:nth-child(odd) {
-      padding: 0 15px 0 0;
-    }
-
-    &:nth-child(even) {
-      padding: 0 0 0 30px;
-    }
   }
 
   .timelineCard {

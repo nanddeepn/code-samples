@@ -221,14 +221,14 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     let activityDate: string = moment(activity.acivityDate).format(this.state.dateFormat);
     return (
       <div>
-        <div className={styles.timelineAdd}>
+        <div className={this.state.layout == "Vertical" ? `${styles.timelineAddVertical}` : `${styles.timelineAddHorizontal}`}>
           <IconButton iconProps={addToIcon} title="Add TimeLine Event" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
         </div>
 
-        <div className={styles.timelineContent}>
-          <div className={styles.timelineRow}>
+        <div className={this.state.layout == "Vertical" ? `${styles.timelineContentVertical}` : `${styles.timelineContentHorizontal}`}>
+          <div className={this.state.layout == "Vertical" ? `${styles.timelineRowVertical}` : `${styles.timelineRowHorizontal}`}>
             {index % 2 == 1 &&
-              <div className={styles.timelineColumn}>
+              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
                 <div className={styles.timelineDate}>
                   <Text styles={helpfulTextStyles}>
                   {activityDate}
@@ -237,7 +237,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
               </div>
             }
 
-            <div className={styles.timelineColumn}>
+            <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
               <Stack tokens={sectionStackTokens}>
                 {this.state.showDialog && (
                   <TimelineEvent
@@ -328,7 +328,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
             </div>
 
             {index % 2 == 0 &&
-              <div className={styles.timelineColumn}>
+              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
                 <div className={`${styles.timelineDate} ${styles.alignLeft}`}>
                   <Text styles={helpfulTextStyles}>
                     {activityDate}

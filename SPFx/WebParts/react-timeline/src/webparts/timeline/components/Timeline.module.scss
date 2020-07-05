@@ -1,6 +1,8 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
 .timeline {
+  overflow-x: auto;
+
   .timelineContainerVertical {
     display: block;
     width: 100%;
@@ -69,7 +71,7 @@
       padding: 0 0 0 30px;
     }
   }
-  
+
   .timelineAddVertical {
     display: block;
     content: " ";
@@ -137,7 +139,7 @@
       padding: 50px 0 0 0;
     }
   }
-  
+
   .timelineAddHorizontal {
     display: block;
     content: " ";
@@ -151,6 +153,7 @@
 
   .addToButton {
     background: #ffffff;
+    top: 130px;
   }
 
   .timelineDate {
@@ -186,8 +189,12 @@
   }
 
   .description {
-    @include ms-font-l;
-    // @include ms-fontColor-white;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .button {

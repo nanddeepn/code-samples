@@ -274,7 +274,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                             activity.activityTitle
                           )}
                       </Text>
-                      <Text styles={descriptionTextStyles}>
+                      <Text styles={descriptionTextStyles} className={styles.description}>
                         {activity.activityDescription}
                       </Text>
                     </Card.Section>

@@ -196,7 +196,6 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
     const iconStyles: IIconStyles = {
       root: {
-        color: "#0078D4",
         fontSize: 16,
         fontWeight: FontWeights.regular,
       },

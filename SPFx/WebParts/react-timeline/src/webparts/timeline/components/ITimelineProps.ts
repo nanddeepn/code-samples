@@ -8,5 +8,5 @@ export interface ITimelineProps {
   showImage: boolean;
   showDescription: boolean;
   dateFormat: string;
-  sortEvents: string;
+  sortOrder: string;
 }

@@ -8,6 +8,6 @@ define([], function() {
     "ShowImageFieldLabel":"Show Image",
     "ShowDescriptionFieldLabel": "Show Description",
     "DateFormatFieldLabel": "Date Format",
-    "SortEventsFieldLabel": "Sort Direction"
+    "SortOrderFieldLabel": "Sort Direction"
   }
 });

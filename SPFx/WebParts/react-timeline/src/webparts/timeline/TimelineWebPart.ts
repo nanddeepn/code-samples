@@ -20,7 +20,7 @@ export interface ITimelineWebPartProps {
   showImage: boolean;
   showDescription: boolean;
   dateFormat : string;
-  sortEvents: string;
+  sortOrder: string;
 }
 
 export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
@@ -42,7 +42,7 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
         showImage: this.properties.showImage,
         showDescription: this.properties.showDescription,
         dateFormat: this.properties.dateFormat,
-        sortEvents: this.properties.sortEvents
+        sortOrder: this.properties.sortOrder
       }
     );   
 
@@ -90,8 +90,8 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
                 PropertyPaneTextField('dateFormat', {
                   label: strings.DateFormatFieldLabel
                 }),
-                PropertyPaneDropdown('sortEvents', {
-                  label: strings.SortEventsFieldLabel,
+                PropertyPaneDropdown('sortOrder', {
+                  label: strings.SortOrderFieldLabel,
                   options: [                   
                     { key: 'asc', text: 'Ascending' },
                     { key: 'desc', text: 'Descending' }            

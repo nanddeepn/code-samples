@@ -46,13 +46,16 @@ export default class TimelineService {
     /**
      * Get all timeline activities
      * @param listTitle 
+     * @param sortOrder 
      */
-    public async getTimelineActivities(listTitle: string): Promise<ITimelineActivity[]> {
+    public async getTimelineActivities(listTitle: string, sortOrder: string): Promise<ITimelineActivity[]> {
         let returnTimelineActivities: ITimelineActivity[] = [];
+        let sortOrderAsc: boolean = (sortOrder === "asc");
 
         try {
             let activities: any[] = await sp.web.lists.getByTitle(listTitle).items
                 .select("Id", "Title", "SPFxTimelineLink", "SPFxTimelineDate", "SPFxTimelinePicture", "SPFxTimelineDescription")
+                .orderBy("SPFxTimelineDate", sortOrderAsc)
                 .get();
 
             activities.forEach(activity => {

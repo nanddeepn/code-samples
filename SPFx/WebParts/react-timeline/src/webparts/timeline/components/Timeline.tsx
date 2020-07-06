@@ -31,7 +31,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
 
   private async onDismissPanel(refresh: boolean) {
     if (refresh === true) {
-      this.TimelineService.getTimelineActivities(this.props.listName).then((activities: ITimelineActivity[]) => {
+      this.TimelineService.getTimelineActivities(this.props.listName, this.props.sortOrder).then((activities: ITimelineActivity[]) => {
         this.setState({ timelineActivities: activities });
       });
     }
@@ -67,8 +67,16 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
   }
 
   public componentDidMount(): void {
-    this.TimelineService.getTimelineActivities(this.props.listName).then((activities: ITimelineActivity[]) => {
+    this.TimelineService.getTimelineActivities(this.props.listName, this.props.sortOrder).then((activities: ITimelineActivity[]) => {
       this.setState({ timelineActivities: activities });
     });
+  }
+
+  public componentWillReceiveProps(nextProps: ITimelineProps) {
+    if (this.props.sortOrder !== nextProps.sortOrder) {
+      this.TimelineService.getTimelineActivities(this.props.listName, nextProps.sortOrder).then((activities: ITimelineActivity[]) => {
+        this.setState({ timelineActivities: activities });
+      });
+    }
   }
 }

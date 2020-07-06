@@ -27,7 +27,7 @@
       "showImage": true,
       "showDescription": true,
       "dateFormat": "MM/DD/yyyy",
-      "sortEvents": "asc"
+      "sortOrder": "asc"
     }
   }]
 }

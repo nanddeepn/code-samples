@@ -6,6 +6,8 @@
                    Group="SPFx Content Types"
                    Description="">
         <FieldRefs>
+            <!--Title Site Column -->
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
             <!-- SPFxTimelineLink Site Column -->
 			      <FieldRef ID="{D1DD9D2D-6FBB-4419-823C-124524BB8043}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
             <!-- SPFxTimelineDate Site Column -->

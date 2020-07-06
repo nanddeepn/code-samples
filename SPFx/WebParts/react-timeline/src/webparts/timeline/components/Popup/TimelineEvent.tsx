@@ -10,10 +10,8 @@ import {
   IDatePickerStrings,
   Dropdown,
   IDropdownOption,
-  
   DefaultButton,
   PrimaryButton,
- 
   Dialog,
   DialogType,
   DialogFooter
@@ -22,7 +20,6 @@ import * as moment from 'moment';
 import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 import { IPanelModelEnum } from './IPanelModeEnum';
 import TimelineService from "../../../../services/TimelineService";
-
 
 const DayPickerStrings: IDatePickerStrings = {
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -48,10 +45,9 @@ const controlClass = mergeStyleSets({
 
 export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   private TimelineService: TimelineService = null;
-  
+
   public constructor(props) {
     super(props);
-    
 
     this.state = {
       showPanel: false,
@@ -62,7 +58,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       acivityLink: null,
       acivityDate: new Date(),
       activityPictureUrl: null,
-      activityDescription: null, 
+      activityDescription: null,
       hasError: false,
       errorMessage: '',
       disableButton: false,
@@ -70,19 +66,20 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       displayDialog: false,
       isloading: false,
     };
+
     this.TimelineService = new TimelineService(this.props.context);
     this.onStartChangeHour = this.onStartChangeHour.bind(this);
-    this.onStartChangeMin = this.onStartChangeMin.bind(this);  
-    this.onDescriptionChange = this.onDescriptionChange.bind(this);   
+    this.onStartChangeMin = this.onStartChangeMin.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onSelectDateStart = this.onSelectDateStart.bind(this);
     this.onGetErrorMessageTitle = this.onGetErrorMessageTitle.bind(this);
     this.hidePanel = this.hidePanel.bind(this);
     this.onDelete = this.onDelete.bind(this);
-    this.closeDialog = this.closeDialog.bind(this);   
+    this.closeDialog = this.closeDialog.bind(this);
     this._onEventTitleChange = this._onEventTitleChange.bind(this);
-    this._onActivityPictureURLChange = this._onActivityPictureURLChange.bind(this);    
-    }
+    this._onActivityPictureURLChange = this._onActivityPictureURLChange.bind(this);
+  }
 
   private hidePanel() {
     this.props.onDissmissPanel(true);
@@ -91,12 +88,12 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   private async onSave() {
     let eventData: ITimelineActivity = this.state.eventData;
     let panelMode = this.props.panelMode;
-    let startDate: string = null;   
-    startDate = `${moment(this.state.acivityDate).format('YYYY/MM/DD')}`;   
+    let startDate: string = null;
+    startDate = `${moment(this.state.acivityDate).format('YYYY/MM/DD')}`;
     const startTime = `${this.state.startSelectedHour.key}:${this.state.startSelectedMin.key}`;
     const startDateTime = `${startDate} ${startTime}`;
     const start = moment(startDateTime, 'YYYY/MM/DD HH:mm').toLocaleString();
-    eventData.acivityDate = new Date(start);   
+    eventData.acivityDate = new Date(start);
     eventData.activityDescription = this.state.activityDescription;
     eventData.acivityLink = this.state.eventData.acivityLink;
 
@@ -107,8 +104,8 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         case IPanelModelEnum.edit:
           await this.TimelineService.updateTimelineActivity(
             this.props.listName,
-            eventData           
-          ).then((value: any) => { this.props.onDissmissPanel(true);});
+            eventData
+          ).then((value: any) => { this.props.onDissmissPanel(true); });
           break;
         case IPanelModelEnum.add:
           await this.TimelineService.addTimelineActivity(this.props.listName, eventData).then((value: any) => { this.props.onDissmissPanel(true); });
@@ -116,9 +113,10 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         default:
           break;
       }
+
       this.setState({ isSaving: false });
-     
-    } catch (error) {
+    }
+    catch (error) {
       this.setState({ hasError: true, errorMessage: error.message, isSaving: false });
     }
   }
@@ -128,15 +126,15 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   }
 
   private async renderEventData(eventId?: number) {
-    
     this.setState({ isloading: true });
     const event: ITimelineActivity = !eventId ? this.props.event : await this.TimelineService.getTimelineActivity('Timeline', eventId);
 
     if (this.props.panelMode == IPanelModelEnum.edit && event) {
       // Get hours of event
       const startHour = moment(event.acivityDate).format('HH').toString();
-      const startMin = moment(event.acivityDate).format("mm").toString();    
+      const startMin = moment(event.acivityDate).format("mm").toString();
       let timeLineDate: Date = moment(event.acivityDate).toDate();
+
       // Update Component Data
       this.setState({
         eventData: event,
@@ -147,18 +145,18 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         activityTitle: event.activityTitle,
         acivityLink: event.acivityLink,
         activityPictureUrl: event.activityPictureUrl,
-        isloading: false      
+        isloading: false
       });
     }
-    else {   
+    else {
       this.setState({
-        acivityDate: new Date(),      
+        acivityDate: new Date(),
         activityDescription: '',
         activityTitle: '',
         acivityLink: '',
         activityPictureUrl: '',
         isloading: false,
-        eventData: { ...event},
+        eventData: { ...event },
       });
     }
   }
@@ -174,23 +172,21 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   private _onEventTitleChange = (ev: any, newText: string): void => {
     this.setState({ eventData: { ...this.state.eventData, activityTitle: newText } });
   }
+
   private _onActivityPictureURLChange = (ev: any, newText: string): void => {
-   
     this.setState({ eventData: { ...this.state.eventData, activityPictureUrl: newText } });
   }
+
   private _onActivityLinkURLChange = (ev: any, newText: string): void => {
-    
     this.setState({ eventData: { ...this.state.eventData, acivityLink: newText } });
   }
-  
-  
 
   private onStartChangeMin = (ev: React.FormEvent<HTMLDivElement>, item: IDropdownOption): void => {
     this.setState({ startSelectedMin: item });
   }
 
-  private onDescriptionChange = (e): void => {   
-    this.setState({ activityDescription: e.target.value});
+  private onDescriptionChange = (e): void => {
+    this.setState({ activityDescription: e.target.value });
   }
 
   private onGetErrorMessageTitle(value: string): string {
@@ -203,9 +199,8 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       this.setState({ eventData: { ...this.state.eventData, activityTitle: value }, disableButton: false, errorMessage: '' });
     }
     return returnMessage;
-  }  
+  }
 
-  
   private onDelete(ev: React.MouseEvent<HTMLDivElement>) {
     ev.preventDefault();
     this.setState({ displayDialog: true });
@@ -213,18 +208,18 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
 
   private closeDialog = (): void => {
     this.setState({ displayDialog: false });
-  }  
+  }
 
   private onSelectDateStart(newDate: Date) {
     this.setState({ acivityDate: newDate });
   }
 
-  public render(): React.ReactElement<IEventProps> {    
+  public render(): React.ReactElement<IEventProps> {
     return (
       <div>
         <Dialog
           isOpen={this.props.showPanel}
-       closeButtonAriaLabel="Close"
+          closeButtonAriaLabel="Close"
           dialogContentProps={{
             type: DialogType.normal,
             title:
@@ -236,7 +231,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           onDismiss={this.hidePanel}
           modalProps={{
             className: styles.dialogOverride
-            }}
+          }}
         >
           <div>
             <TextField
@@ -252,8 +247,8 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
             />
           </div>
           <Label>
-            TimeLine Date
-                  </Label>
+            Date
+          </Label>
           <React.Fragment>
             <div
               style={{
@@ -330,7 +325,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
             }}
           >
             <DatePicker
-              isRequired={false}
+              isRequired={true}
               className={controlClass.control}
               strings={DayPickerStrings}
               allowTextInput={true}
@@ -342,7 +337,6 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
             />
           </div>
 
-
           <div>
             <TextField
               label="Description"
@@ -353,7 +347,6 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           <div>
             <TextField
               label="Picture URL"
-              required
               value={
                 this.state.eventData
                   ? this.state.eventData.activityPictureUrl ? this.state.eventData.activityPictureUrl["Url"] : ''
@@ -361,12 +354,11 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
               }
               deferredValidationTime={500}
               onChange={this._onActivityPictureURLChange}
-            />  
+            />
           </div>
           <div>
             <TextField
               label="Link URL"
-              required
               value={
                 this.state.eventData
                   ? this.state.eventData.acivityLink ? this.state.eventData.acivityLink["Url"] : ''
@@ -374,7 +366,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
               }
               deferredValidationTime={500}
               onChange={this._onActivityLinkURLChange}
-            /> 
+            />
           </div>
           <DialogFooter>
             <PrimaryButton onClick={this.onSave} text={this.props.panelMode == 2 ? "Update Event" : "Create Event"} />

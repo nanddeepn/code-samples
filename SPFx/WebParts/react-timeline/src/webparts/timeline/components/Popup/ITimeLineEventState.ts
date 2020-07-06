@@ -7,7 +7,7 @@ export interface IEventState {
   startSelectedHour: IDropdownOption ;
   startSelectedMin: IDropdownOption ;
   activityTitle: string;
-  acivityLink: string;
+  activityLink: string;
   acivityDate: Date;
   activityPictureUrl: string;
   activityDescription: string; 

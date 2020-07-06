@@ -26,7 +26,6 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
     this.onDismissPanel = this.onDismissPanel.bind(this);
     let permission = new SPPermission(this.props.context.pageContext.web.permissions.value);
     this.canEdit = permission.hasPermission(SPPermission.manageWeb);
-    console.log(this.canEdit + "Edit");
   }
 
   private async onDismissPanel(refresh: boolean) {

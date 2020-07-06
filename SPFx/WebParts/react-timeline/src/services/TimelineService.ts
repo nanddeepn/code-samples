@@ -1,5 +1,6 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { sp, Web, IItem } from "@pnp/sp/presets/all";
+import { sp } from "@pnp/sp/presets/all";
+import { ITypedHash } from "@pnp/common"
 import { ITimelineActivity } from "../models";
 
 export default class TimelineService {
@@ -30,7 +31,7 @@ export default class TimelineService {
             returnTimelineActivity = {
                 id: activity.ID,
                 activityTitle: activity.Title,
-                acivityLink: activity.SPFxTimelineLink,
+                activityLink: activity.SPFxTimelineLink,
                 acivityDate: activity.SPFxTimelineDate,
                 activityPictureUrl: activity.SPFxTimelinePicture,
                 activityDescription: activity.SPFxTimelineDescription,
@@ -62,7 +63,7 @@ export default class TimelineService {
                 let timelineActivity = {
                     id: activity.ID,
                     activityTitle: activity.Title,
-                    acivityLink: activity.SPFxTimelineLink,
+                    activityLink: activity.SPFxTimelineLink,
                     acivityDate: activity.SPFxTimelineDate,
                     activityPictureUrl: activity.SPFxTimelinePicture,
                     activityDescription: activity.SPFxTimelineDescription,
@@ -85,24 +86,31 @@ export default class TimelineService {
      */
     public async addTimelineActivity(listTitle: string, newTimelineActivity: ITimelineActivity) {
         try {
-            let linkUrl = newTimelineActivity.acivityLink["Url"] ? newTimelineActivity.acivityLink["Url"] : newTimelineActivity.acivityLink;
-            let picUrl = newTimelineActivity.activityPictureUrl["Url"] ? newTimelineActivity.activityPictureUrl["Url"] : newTimelineActivity.activityPictureUrl;
-
-            await sp.web.lists.getByTitle(listTitle).items.add({
-                Title: newTimelineActivity.activityTitle,             
+            let addData: ITypedHash<any> = {
+                Title: newTimelineActivity.activityTitle,
                 SPFxTimelineDate: newTimelineActivity.acivityDate,
-                SPFxTimelinePicture: {
+                SPFxTimelineDescription: newTimelineActivity.activityDescription,
+                SPFxTimelineLink: {},
+                SPFxTimelinePicture: {}
+            }
+
+            if (newTimelineActivity.activityLink) {
+                addData.SPFxTimelineLink = {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
-                    Url: picUrl,
-                },
-                SPFxTimelineLink: {
+                    Url: newTimelineActivity.activityLink,
+                }
+            }
+
+            if (newTimelineActivity.activityPictureUrl) {
+                addData.SPFxTimelinePicture = {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
-                    Url: linkUrl,
-                },  
-                SPFxTimelineDescription: newTimelineActivity.activityDescription
-            });
+                    Url: newTimelineActivity.activityPictureUrl,
+                }
+            }
+
+            await sp.web.lists.getByTitle(listTitle).items.add(addData);
         }
         catch (error) {
             console.log(error);
@@ -117,27 +125,32 @@ export default class TimelineService {
      */
     public async updateTimelineActivity(listTitle: string, updateTimelineActivity: ITimelineActivity) {
         try {
-            let linkUrl = updateTimelineActivity.acivityLink["Url"] ? updateTimelineActivity.acivityLink["Url"] : updateTimelineActivity.acivityLink;
-            let picUrl = updateTimelineActivity.activityPictureUrl["Url"] ? updateTimelineActivity.activityPictureUrl["Url"] : updateTimelineActivity.activityPictureUrl;
-
-            let updateItem: any = {
-                Title: updateTimelineActivity.activityTitle,               
+            let updateItem: ITypedHash<any> = {
+                Title: updateTimelineActivity.activityTitle,
                 SPFxTimelineDate: updateTimelineActivity.acivityDate,
-                SPFxTimelinePicture: {
-                    "__metadata": { type: "SP.FieldUrlValue" },
-                    Description: updateTimelineActivity.activityTitle,
-                    Url: picUrl,
-                },
-                SPFxTimelineLink: {
-                    "__metadata": { type: "SP.FieldUrlValue" },
-                    Description: updateTimelineActivity.activityTitle,
-                    Url: linkUrl,
-                },                
-                SPFxTimelineDescription: updateTimelineActivity.activityDescription
+                SPFxTimelineDescription: updateTimelineActivity.activityDescription,
+                SPFxTimelineLink: {},
+                SPFxTimelinePicture: {}
             };
 
-            await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem).then((value:any) => {
-                console.log(value);               
+            if (updateTimelineActivity.activityLink) {
+                updateItem.SPFxTimelineLink = {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: updateTimelineActivity.activityTitle,
+                    Url: updateTimelineActivity.activityLink,
+                }
+            }
+
+            if (updateTimelineActivity.activityPictureUrl) {
+                updateItem.SPFxTimelinePicture = {
+                    "__metadata": { type: "SP.FieldUrlValue" },
+                    Description: updateTimelineActivity.activityTitle,
+                    Url: updateTimelineActivity.activityPictureUrl,
+                }
+            }
+
+            await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem).then((value: any) => {
+                console.log(value);
             });
         }
         catch (error) {

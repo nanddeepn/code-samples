@@ -218,9 +218,12 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
     return (
       <div>
-        <div className={this.state.layout == "Vertical" ? `${styles.timelineAddVertical}` : `${styles.timelineAddHorizontal}`}>
-          <IconButton iconProps={addToIcon} title="Add TimeLine Event" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
-        </div>
+        {
+          this.props.canEdit &&
+          <div className={this.state.layout == "Vertical" ? `${styles.timelineAddVertical}` : `${styles.timelineAddHorizontal}`}>
+            <IconButton iconProps={addToIcon} title="Add Timeline Event" ariaLabel="Add Activity" className={styles.addToButton} onClick={this.createEvent} />
+          </div>
+        }
 
         <div className={this.state.layout == "Vertical" ? `${styles.timelineContentVertical}` : `${styles.timelineContentHorizontal}`}>
           <div className={this.state.layout == "Vertical" ? `${styles.timelineRowVertical}` : `${styles.timelineRowHorizontal}`}>
@@ -266,8 +269,8 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     }
                     <Card.Section className={styles.cardSection}>
                       <Text variant="small" styles={siteTextStyles}>
-                        {activity.acivityLink ? (
-                          <a href={activity.acivityLink ? activity.acivityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
+                        {activity.activityLink ? (
+                          <a href={activity.activityLink ? activity.activityLink["Url"] : this.props.context.pageContext.site.absoluteUrl} target="_blank">
                             {activity.activityTitle}
                           </a>
                         ) : (

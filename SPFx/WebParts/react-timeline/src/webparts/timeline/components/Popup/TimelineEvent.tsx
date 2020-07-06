@@ -55,7 +55,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
       startSelectedHour: { key: '09', text: '00' },
       startSelectedMin: { key: '00', text: '00' },
       activityTitle: null,
-      acivityLink: null,
+      activityLink: null,
       acivityDate: new Date(),
       activityPictureUrl: null,
       activityDescription: null,
@@ -95,7 +95,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
     const start = moment(startDateTime, 'YYYY/MM/DD HH:mm').toLocaleString();
     eventData.acivityDate = new Date(start);
     eventData.activityDescription = this.state.activityDescription;
-    eventData.acivityLink = this.state.eventData.acivityLink;
+    eventData.activityLink = this.state.eventData.activityLink;
 
     try {
       this.setState({ isSaving: true });
@@ -143,7 +143,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         startSelectedMin: { key: startMin, text: startMin },
         activityDescription: event.activityDescription,
         activityTitle: event.activityTitle,
-        acivityLink: event.acivityLink,
+        activityLink: event.activityLink,
         activityPictureUrl: event.activityPictureUrl,
         isloading: false
       });
@@ -153,7 +153,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
         acivityDate: new Date(),
         activityDescription: '',
         activityTitle: '',
-        acivityLink: '',
+        activityLink: '',
         activityPictureUrl: '',
         isloading: false,
         eventData: { ...event },
@@ -178,7 +178,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
   }
 
   private _onActivityLinkURLChange = (ev: any, newText: string): void => {
-    this.setState({ eventData: { ...this.state.eventData, acivityLink: newText } });
+    this.setState({ eventData: { ...this.state.eventData, activityLink: newText } });
   }
 
   private onStartChangeMin = (ev: React.FormEvent<HTMLDivElement>, item: IDropdownOption): void => {
@@ -361,7 +361,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
               label="Link URL"
               value={
                 this.state.eventData
-                  ? this.state.eventData.acivityLink ? this.state.eventData.acivityLink["Url"] : ''
+                  ? this.state.eventData.activityLink ? this.state.eventData.activityLink["Url"] : ''
                   : ""
               }
               deferredValidationTime={500}

@@ -2,7 +2,7 @@
 export interface ITimelineActivity {
     id: number;
     activityTitle: string;
-    acivityLink: string;
+    activityLink: string;
     acivityDate: Date;
     activityPictureUrl: string;
     activityDescription: string;

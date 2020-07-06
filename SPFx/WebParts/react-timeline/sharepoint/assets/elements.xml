@@ -85,6 +85,18 @@
            Description="List with timeline information"
            TemplateType="100"
            Url="Lists/Timeline">
+           <Data>
+            <Rows>
+                <Row>
+                    <Field Name="Title">Timeline rolled out</Field>
+                    <Field Name="SPFxTimelineDate">2020-07-15T21:00:00Z</Field>
+                </Row>
+                <Row>
+                    <Field Name="Title">Add your first event</Field>
+                    <Field Name="SPFxTimelineDate">2020-07-22T21:00:00Z</Field>
+                </Row>
+            </Rows>
+           </Data>
    </ListInstance>
 
 </Elements>

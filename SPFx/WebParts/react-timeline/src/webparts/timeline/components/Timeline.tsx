@@ -40,9 +40,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
   public render(): React.ReactElement<ITimelineProps> {
     return (
       <div className={styles.timeline}>
-        <p>
-          <b>{this.props.description}</b>
-        </p>
+        <h1>{this.props.description}</h1>
         <div className={this.props.layout == "Vertical" ? `${styles.timelineContainerVertical}` : `${styles.timelineContainerHorizontal}`}>
           {
             this.state.timelineActivities.map((activity, i) => {

@@ -1,6 +1,6 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { sp } from "@pnp/sp/presets/all";
-import { ITypedHash } from "@pnp/common"
+import { ITypedHash } from "@pnp/common";
 import { ITimelineActivity } from "../models";
 
 export default class TimelineService {
@@ -92,14 +92,14 @@ export default class TimelineService {
                 SPFxTimelineDescription: newTimelineActivity.activityDescription,
                 SPFxTimelineLink: {},
                 SPFxTimelinePicture: {}
-            }
+            };
 
             if (newTimelineActivity.activityLink) {
                 addData.SPFxTimelineLink = {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
                     Url: newTimelineActivity.activityLink,
-                }
+                };
             }
 
             if (newTimelineActivity.activityPictureUrl) {
@@ -107,7 +107,7 @@ export default class TimelineService {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: newTimelineActivity.activityTitle,
                     Url: newTimelineActivity.activityPictureUrl,
-                }
+                };
             }
 
             await sp.web.lists.getByTitle(listTitle).items.add(addData);
@@ -138,7 +138,7 @@ export default class TimelineService {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: updateTimelineActivity.activityTitle,
                     Url: updateTimelineActivity.activityLink,
-                }
+                };
             }
 
             if (updateTimelineActivity.activityPictureUrl) {
@@ -146,7 +146,7 @@ export default class TimelineService {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: updateTimelineActivity.activityTitle,
                     Url: updateTimelineActivity.activityPictureUrl,
-                }
+                };
             }
 
             await sp.web.lists.getByTitle(listTitle).items.getById(updateTimelineActivity.id).update(updateItem).then((value: any) => {

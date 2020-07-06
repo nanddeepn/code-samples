@@ -52,7 +52,7 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
     this.state = {
       showPanel: false,
       eventData: this.props.event,
-      startSelectedHour: { key: '09', text: '00' },
+      startSelectedHour: { key: '00', text: '00' },
       startSelectedMin: { key: '00', text: '00' },
       activityTitle: null,
       activityLink: null,
@@ -249,6 +249,26 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
           <Label>
             Date
           </Label>
+          
+          <div
+            style={{
+              display: "inline-block",
+              verticalAlign: "top",
+              paddingRight: 10,
+            }}
+          >
+            <DatePicker
+              isRequired={true}
+              className={controlClass.control}
+              strings={DayPickerStrings}
+              allowTextInput={true}
+              value={this.state.acivityDate}
+              onSelectDate={this.onSelectDateStart}
+              showMonthPickerAsOverlay={false}
+              isMonthPickerVisible={false}
+              showGoToToday={false}
+            />
+          </div>
           <React.Fragment>
             <div
               style={{
@@ -316,26 +336,6 @@ export class TimelineEvent extends React.Component<IEventProps, IEventState> {
               />
             </div>
           </React.Fragment>
-
-          <div
-            style={{
-              display: "inline-block",
-              verticalAlign: "top",
-              paddingRight: 10,
-            }}
-          >
-            <DatePicker
-              isRequired={true}
-              className={controlClass.control}
-              strings={DayPickerStrings}
-              allowTextInput={true}
-              value={this.state.acivityDate}
-              onSelectDate={this.onSelectDateStart}
-              showMonthPickerAsOverlay={false}
-              isMonthPickerVisible={false}
-              showGoToToday={false}
-            />
-          </div>
 
           <div>
             <TextField

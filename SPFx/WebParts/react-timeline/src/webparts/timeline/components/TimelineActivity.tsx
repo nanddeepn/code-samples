@@ -10,6 +10,7 @@ import { TimelineEvent } from "./Popup/TimelineEvent";
 import TimelineService from "../../../services/TimelineService";
 import { IPanelModelEnum } from "./Popup/IPanelModeEnum";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
 
 import * as moment from 'moment';
 
@@ -228,7 +229,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
         <div className={this.state.layout == "Vertical" ? `${styles.timelineContentVertical}` : `${styles.timelineContentHorizontal}`}>
           <div className={this.state.layout == "Vertical" ? `${styles.timelineRowVertical}` : `${styles.timelineRowHorizontal}`}>
             {index % 2 == 1 &&
-              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
+              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal} ${styles.timelineDateHorizontalTop}`}>
                 <div className={styles.timelineDate}>
                   <Text styles={helpfulTextStyles}>
                     {activityDate}
@@ -333,8 +334,8 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
             </div>
 
             {index % 2 == 0 &&
-              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
-                <div className={`${styles.timelineDate} ${styles.alignLeft}`}>
+              <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal} ${styles.timelineDateHorizontal}`}>
+              <div className={this.state.layout == "Vertical" ? `${styles.timelineDate} ${styles.alignLeft}` : `${styles.timelineDate}`}>
                   <Text styles={helpfulTextStyles}>
                     {activityDate}
                   </Text>

@@ -131,9 +131,32 @@
     display: block;
   }
 
+  .timelineDateHorizontalTop{
+    padding-top :70px !important;
+    padding-bottom : 0px !important;
+    width:100% !important;
+
+    .timelineDate{
+      text-align:center;
+      margin-top:0px !important;
+    }
+  }
+
+  .timelineDateHorizontal{
+    padding-top :0px !important;
+    padding-bottom : 0px !important;
+    width:100% !important;
+
+    .timelineDate{
+      text-align:center;
+      margin-top:0px !important;
+    }
+  }
+
   .timelineColumnHorizontal {
     float: left;
     position: relative;
+    
 
     &:nth-child(odd) {
       padding: 0 0 50px 0;
@@ -141,24 +164,25 @@
 
     &:nth-child(even) {
       padding: 50px 0 0 0;
+      
     }
   }
 
   .timelineAddHorizontal {
     display: block;
-    content: " ";
+    content: " ";    
     width: 32px;
     height: 22px;
     left: 0;
     right: 0;
-    z-index: 3;
+    z-index: 3;  
     margin: auto;
   }
 
   .addToButton {
-    background: #ffffff;
-    top: 130px;
+    background: #ffffff;   
     z-index: 4;
+    top:130px !important;
   }
 
   .timelineDate {
@@ -169,6 +193,7 @@
   .timelineCard {
     padding: 5px;
     width: 95%;
+    min-height:100px !important;
   }
 
   .cardSection {

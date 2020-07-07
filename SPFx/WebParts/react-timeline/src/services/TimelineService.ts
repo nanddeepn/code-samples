@@ -125,9 +125,6 @@ export default class TimelineService {
      */
     public async updateTimelineActivity(listTitle: string, updateTimelineActivity: ITimelineActivity) {
         try {
-            let linkUrl = updateTimelineActivity.activityLink["Url"] ? updateTimelineActivity.activityLink["Url"] : updateTimelineActivity.activityLink;
-            let picUrl = updateTimelineActivity.activityPictureUrl["Url"] ? updateTimelineActivity.activityPictureUrl["Url"] : updateTimelineActivity.activityPictureUrl;
-
             let updateItem: ITypedHash<any> = {
                 Title: updateTimelineActivity.activityTitle,
                 SPFxTimelineDate: updateTimelineActivity.acivityDate,
@@ -137,6 +134,8 @@ export default class TimelineService {
             };
 
             if (updateTimelineActivity.activityLink) {
+                let linkUrl = updateTimelineActivity.activityLink["Url"] ? updateTimelineActivity.activityLink["Url"] : updateTimelineActivity.activityLink;
+
                 updateItem.SPFxTimelineLink = {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: updateTimelineActivity.activityTitle,
@@ -145,6 +144,8 @@ export default class TimelineService {
             }
 
             if (updateTimelineActivity.activityPictureUrl) {
+                let picUrl = updateTimelineActivity.activityPictureUrl["Url"] ? updateTimelineActivity.activityPictureUrl["Url"] : updateTimelineActivity.activityPictureUrl;
+
                 updateItem.SPFxTimelinePicture = {
                     "__metadata": { type: "SP.FieldUrlValue" },
                     Description: updateTimelineActivity.activityTitle,

@@ -109,25 +109,21 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       this.TimelineService.deleteTimelineActivity(
         this.props.listName,
         TimelineDeleteEvent
-      );
+      ).then(()=>{
+        let deletedEventIndex: number = this.state.eventData.indexOf(
+          this.state.selectedEvent
+        );
+        this.state.eventData.splice(deletedEventIndex, 1);
 
-      // Get the index of deleted event
-      let deletedEventIndex: number = this.state.eventData.indexOf(
-        this.state.selectedEvent
-      );
-      this.state.eventData.splice(deletedEventIndex, 1);
+        this.setState({
+          displayDeleteDialog: false,
+          selectedEvent: null,
+          displayEventDialog: false,
+        });
 
-      this.setState({
-        displayDeleteDialog: false,
-        selectedEvent: null,
-        displayEventDialog: false,
+        this.props.onDissmissPanel(true);
       });
-
-      this.props.onDissmissPanel(true);
-    }
-    else {
-      // Do nothing!
-    }
+    }  
   }
 
   private closeDeleteDialog(ev: React.MouseEvent<HTMLDivElement>) {

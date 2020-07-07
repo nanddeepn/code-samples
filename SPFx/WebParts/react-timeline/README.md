@@ -22,8 +22,10 @@ This sample displays list of events in chronological order. It is typically a gr
 ![Web part preview][figure1]
 
 When added to SharePoint site, the source list containing timeline information, layout, date format, and sort direction can be configured from web part properties.
+![SharePoint list schema][figure2]
+
 The sample also provisions the list called "Timeline" which can be used as an example to start using the web part.
-![SharePoint Run][figure2]
+![SharePoint list sample data][figure3]
 
 ### SharePoint Asset
 
@@ -93,7 +95,6 @@ This sample web part displays list of events in chronological order with data st
 - Using @pnp/sp
 
 
-[figure1]: ./assets/webpart-preview.png
-[figure2]: ./assets/sharepoint-run.gif
-[figure3]: ./assets/list-schema.png
-[figure4]: ./assets/list-sample-data.png
+[figure1]: ./assets/webpart-preview.gif
+[figure2]: ./assets/list-schema.png
+[figure3]: ./assets/list-sample-data.png

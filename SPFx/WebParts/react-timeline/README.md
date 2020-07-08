@@ -25,7 +25,7 @@ When added to SharePoint site, the source list containing timeline information, 
 
 ![SharePoint list schema][figure2]
 
-Users with Manage Web permissions will be able to add, edit, and delete events from web part.
+Users with "Manage Web" permissions will be able to add, edit, and delete events from web part.
 
 ![Event CRUD][figure3]
 

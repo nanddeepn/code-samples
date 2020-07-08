@@ -6,6 +6,8 @@ import { Card, ICardTokens, ICardSectionStyles, ICardSectionTokens } from '@uifa
 import { FontWeights } from '@uifabric/styling';
 import { IIconStyles, Image, Stack, IStackTokens, Text, ITextStyles, IconButton, IIconProps } from 'office-ui-fabric-react';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
+import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { TimelineEvent } from "./Popup/TimelineEvent";
 import TimelineService from "../../../services/TimelineService";
 import { IPanelModelEnum } from "./Popup/IPanelModeEnum";
@@ -30,20 +32,11 @@ export interface IActivityProps {
 
 export interface IActivityState {
   showDialog: boolean;
+  showDeleteDialog: boolean;
   eventData: ITimelineActivity[];
   selectedEvent: ITimelineActivity;
-  startDateSlot?: Date;
-  isloading: boolean;
   panelMode?: IPanelModelEnum;
-  hasError: boolean;
-  errorMessage: string;
-  showItemPopup: boolean;
-  showModal: boolean;
-  isDraggable: boolean;
-  isDeleting: boolean;
-  displayDeleteDialog: boolean;
-  selectedView?: string;
-  displayEventDialog: boolean;
+  showEventDialog: boolean;
   showImage: boolean;
   showDescription: boolean;
   layout: string;
@@ -58,17 +51,10 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
     this.state = {
       showDialog: this.props.displayPanel,
+      showDeleteDialog: false,
       eventData: [],
-      selectedEvent: undefined,
-      isloading: true,
-      hasError: false,
-      errorMessage: "",
-      showItemPopup: false,
-      showModal: false,
-      isDraggable: false,
-      isDeleting: false,
-      displayDeleteDialog: false,
-      displayEventDialog: false,
+      selectedEvent: null,
+      showEventDialog: false,
       layout: this.props.layout,
       showImage: this.props.showImage,
       showDescription: this.props.showDescription,
@@ -86,12 +72,6 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     this.deleteEvent = this.deleteEvent.bind(this);
     this.editEvent = this.editEvent.bind(this);
     this.createEvent = this.createEvent.bind(this);
-    this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
-    this.confirmDeleteDialog = this.confirmDeleteDialog.bind(this);
-  }
-
-  private confirmDeleteDialog() {
-    this.setState({ displayDeleteDialog: true });
   }
 
   private async onDismissPanel(refresh: boolean) {
@@ -105,37 +85,30 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   private deleteEvent(TimelineDeleteEvent: ITimelineActivity) {
-    if (confirm('Are you sure you want to delete this timeline event?')) {
-      this.TimelineService.deleteTimelineActivity(
-        this.props.listName,
-        TimelineDeleteEvent
-      ).then(()=>{
-        let deletedEventIndex: number = this.state.eventData.indexOf(
-          this.state.selectedEvent
-        );
-        this.state.eventData.splice(deletedEventIndex, 1);
+    this.TimelineService.deleteTimelineActivity(
+      this.props.listName,
+      TimelineDeleteEvent
+    ).then(() => {
+      let deletedEventIndex: number = this.state.eventData.indexOf(
+        this.state.selectedEvent
+      );
+      this.state.eventData.splice(deletedEventIndex, 1);
 
-        this.setState({
-          displayDeleteDialog: false,
-          selectedEvent: null,
-          displayEventDialog: false,
-        });
-
-        this.props.onDissmissPanel(true);
+      this.setState({
+        selectedEvent: null,
+        showDeleteDialog: false,
+        showEventDialog: false
       });
-    }  
-  }
 
-  private closeDeleteDialog(ev: React.MouseEvent<HTMLDivElement>) {
-    ev.preventDefault();
-    this.setState({ displayDeleteDialog: false });
+      this.props.onDissmissPanel(true);
+    });
   }
 
   private editEvent() {
     this.setState({
       showDialog: true,
       panelMode: 2,
-      displayEventDialog: false,
+      showEventDialog: false,
     });
   }
 
@@ -143,7 +116,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     this.setState({
       showDialog: true,
       panelMode: 1,
-      displayEventDialog: false,
+      showEventDialog: false,
     });
   }
 
@@ -165,7 +138,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   private handleSelectEvent(event: ITimelineActivity) {
     this.setState({
       selectedEvent: event,
-      displayEventDialog: true,
+      showEventDialog: true,
     });
   }
 
@@ -222,6 +195,18 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
           </div>
         }
 
+        <Dialog type={DialogType.normal}
+          hidden={!this.state.showDeleteDialog}
+          title='Delete event?'
+          subText='Do you want to delete this event?'
+          isBlocking={true}
+          containerClassName={'ms-dialogMainOverride'}>
+          <DialogFooter>
+            <PrimaryButton onClick={() => { this.deleteEvent(this.state.selectedEvent); }} text="Yes" />
+            <DefaultButton onClick={() => { this.setState({ selectedEvent: null, showDeleteDialog: false }); }} text="No" />
+          </DialogFooter>
+        </Dialog>
+
         <div className={this.state.layout == "Vertical" ? `${styles.timelineContentVertical}` : `${styles.timelineContentHorizontal}`}>
           <div className={this.state.layout == "Vertical" ? `${styles.timelineRowVertical}` : `${styles.timelineRowHorizontal}`}>
             {index % 2 == 1 &&
@@ -242,7 +227,6 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                     panelMode={this.state.panelMode}
                     onDissmissPanel={this.onDismissPanel}
                     showPanel={this.state.showDialog}
-                    startDate={this.state.startDateSlot}
                     context={this.props.context}
                     listName={this.props.listName}
                   />
@@ -314,9 +298,9 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                                 name: "Delete",
                                 onClick: (event) => {
                                   this.setState({
-                                    selectedEvent: activity
+                                    selectedEvent: activity,
+                                    showDeleteDialog: true
                                   });
-                                  this.deleteEvent(activity);
                                 },
                               },
                             ],
@@ -331,7 +315,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
             {index % 2 == 0 &&
               <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal} ${styles.timelineDateHorizontal}`}>
-              <div className={this.state.layout == "Vertical" ? `${styles.timelineDate} ${styles.alignLeft}` : `${styles.timelineDate}`}>
+                <div className={this.state.layout == "Vertical" ? `${styles.timelineDate} ${styles.alignLeft}` : `${styles.timelineDate}`}>
                   <Text styles={helpfulTextStyles}>
                     {activityDate}
                   </Text>

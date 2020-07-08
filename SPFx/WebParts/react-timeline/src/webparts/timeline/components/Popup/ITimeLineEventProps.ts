@@ -7,7 +7,6 @@ export interface IEventProps {
   panelMode: IPanelModelEnum;
   onDissmissPanel: (refresh: boolean) => void;
   showPanel: boolean;
-  startDate?: Date; 
   context: WebPartContext; 
   listName: string;
 }

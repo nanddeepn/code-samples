@@ -31,12 +31,10 @@ export interface IActivityProps {
 }
 
 export interface IActivityState {
-  showDialog: boolean;
+  showEventDialog: boolean;
   showDeleteDialog: boolean;
-  eventData: ITimelineActivity[];
   selectedEvent: ITimelineActivity;
   panelMode?: IPanelModelEnum;
-  showEventDialog: boolean;
   showImage: boolean;
   showDescription: boolean;
   layout: string;
@@ -50,11 +48,9 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
     super(props);
 
     this.state = {
-      showDialog: this.props.displayPanel,
+      showEventDialog: this.props.displayPanel,
       showDeleteDialog: false,
-      eventData: [],
       selectedEvent: null,
-      showEventDialog: false,
       layout: this.props.layout,
       showImage: this.props.showImage,
       showDescription: this.props.showDescription,
@@ -81,7 +77,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
   }
 
   private onSelectEvent(event: any) {
-    this.setState({ showDialog: true, panelMode: 1 });
+    this.setState({ showEventDialog: true, panelMode: 1 });
   }
 
   private deleteEvent(TimelineDeleteEvent: ITimelineActivity) {
@@ -89,15 +85,9 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
       this.props.listName,
       TimelineDeleteEvent
     ).then(() => {
-      let deletedEventIndex: number = this.state.eventData.indexOf(
-        this.state.selectedEvent
-      );
-      this.state.eventData.splice(deletedEventIndex, 1);
-
       this.setState({
         selectedEvent: null,
-        showDeleteDialog: false,
-        showEventDialog: false
+        showDeleteDialog: false
       });
 
       this.props.onDissmissPanel(true);
@@ -106,23 +96,21 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
   private editEvent() {
     this.setState({
-      showDialog: true,
-      panelMode: 2,
-      showEventDialog: false,
+      showEventDialog: true,
+      panelMode: 2
     });
   }
 
   private createEvent() {
     this.setState({
-      showDialog: true,
-      panelMode: 1,
-      showEventDialog: false,
+      showEventDialog: true,
+      panelMode: 1
     });
   }
 
   public componentWillReceiveProps(nextProps: IActivityProps) {
     this.setState({
-      showDialog: false,
+      showEventDialog: false,
       selectedEvent: null,
       layout: nextProps.layout,
       showImage: nextProps.showImage,
@@ -137,8 +125,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
   private handleSelectEvent(event: ITimelineActivity) {
     this.setState({
-      selectedEvent: event,
-      showEventDialog: true,
+      selectedEvent: event
     });
   }
 
@@ -221,12 +208,12 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
 
             <div className={this.state.layout == "Vertical" ? `${styles.timelineColumnVertical}` : `${styles.timelineColumnHorizontal}`}>
               <Stack tokens={sectionStackTokens}>
-                {this.state.showDialog && (
+                {this.state.showEventDialog && (
                   <TimelineEvent
                     event={this.state.selectedEvent}
                     panelMode={this.state.panelMode}
                     onDissmissPanel={this.onDismissPanel}
-                    showPanel={this.state.showDialog}
+                    showPanel={this.state.showEventDialog}
                     context={this.props.context}
                     listName={this.props.listName}
                   />

@@ -25,14 +25,31 @@ When added to SharePoint site, the source list containing timeline information, 
 
 ![SharePoint list schema][figure2]
 
-The sample also provisions the list called "Timeline" which can be used as an example to start using the web part.
+Users with Manage Web permissions will be able to add, edit, and delete events from web part.
 
-![SharePoint list sample data][figure3]
+![Event CRUD][figure3]
+
+### Layouts
+
+The sample helps to represent the timeline in 2 layouts:
+
+**Vertical layout**
+
+Represents the events vertically one below other.
+
+![Vertical layout][figure4]
+
+
+**Horizontal layout**
+
+Represents the events horizontally one after other.
+
+![Horizontal layout][figure5]
 
 ### SharePoint Asset
 
-A SharePoint list (named "Timeline") is provisioned to store the timeline information. The schema of the list is as below.
-![List Schema][figure3]
+A SharePoint list (named "Timeline") is provisioned to store the timeline information, along with supported site columns and content type. The schema of the list is as below.
+![List Schema][figure6]
 
 - The "Title" column stores the event title.
 - The "Event Date" column represents the date of event.
@@ -40,8 +57,8 @@ A SharePoint list (named "Timeline") is provisioned to store the timeline inform
 - The "Link" column represents the url to event.
 - The "Description" column represents the more information about the event.
 
-The solution also provisions sample data to the "Timeline" list.
-![List Sample Data][figure4]
+The sample also provisions sample data to the "Timeline" list, which can be used as an example to start using the web part.
+![List Sample Data][figure7]
 
 ### NPM Packages Used
 
@@ -98,5 +115,9 @@ This sample web part displays list of events in chronological order with data st
 
 
 [figure1]: ./assets/webpart-preview.gif
-[figure2]: ./assets/list-schema.png
-[figure3]: ./assets/list-sample-data.png
+[figure2]: ./assets/wepart-propertypane.png
+[figure3]: ./assets/event-crud.gif
+[figure4]: ./assets/layout-vertical.png
+[figure5]: ./assets/layout-horizontal.png
+[figure6]: ./assets/list-schema.png
+[figure7]: ./assets/list-sample-data.png

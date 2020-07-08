@@ -11,7 +11,7 @@ extensions:
   - SharePoint Framework
   platforms:
   - React
-  createdDate: 07/15/2020 12:00:00 AM
+  createdDate: 07/08/2020 12:00:00 AM
 ---
 # Timeline
 
@@ -85,7 +85,7 @@ react-timeline|[Nanddeep Nachan](https://www.linkedin.com/in/nanddeepnachan/) (S
 
 Version|Date|Comments
 -------|----|--------
-1.0.0|July 15, 2020|Initial release
+1.0.0|July 08, 2020|Initial release
 
 ## Disclaimer
 

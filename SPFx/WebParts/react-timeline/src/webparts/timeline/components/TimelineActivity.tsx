@@ -229,7 +229,7 @@ export default class TimelineActivity extends React.Component<IActivityProps, IA
                       <Card.Item fill>
                         <Image
                           src={activity.activityPictureUrl ? activity.activityPictureUrl["Url"] : ''}
-                          alt="Placeholder image."
+                          alt={activity.activityTitle}
                           width="100px"
                           height="100px"
                         />

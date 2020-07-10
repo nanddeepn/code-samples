@@ -12,7 +12,6 @@ import Timeline from './components/Timeline';
 import { ITimelineProps } from './components/ITimelineProps';
 import TimelineService from '../../services/TimelineService';
 import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy, ISPList } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
-import { IDropdownOption } from 'office-ui-fabric-react/lib/components/Dropdown';
 
 export interface ITimelineWebPartProps {
   description: string;

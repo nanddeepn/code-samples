@@ -22,6 +22,11 @@ define([], function () {
     "LinkURLLabel": "Link URL",
     "ConfigureWebPartLabel": "Configure your timeline",
     "ConfigureDescription": "Please select the list with timeline information",
-    "ConfigureLabel": "Configure"
+    "ConfigureLabel": "Configure",
+    "AscendingLabel": "Ascending",
+    "DescendingLabel": "Descending",
+    "VerticalLabel": "Vertical",
+    "HorizontalLabel": "Horizontal",
+    "DateFormatText": "MM/DD/yyyy"
   }
 });

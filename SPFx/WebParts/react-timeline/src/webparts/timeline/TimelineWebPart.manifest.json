@@ -25,7 +25,6 @@
       "layout": "Vertical",
       "showImage": true,
       "showDescription": true,
-      "dateFormat": "MM/DD/yyyy",
       "sortOrder": "asc"
     }
   }]

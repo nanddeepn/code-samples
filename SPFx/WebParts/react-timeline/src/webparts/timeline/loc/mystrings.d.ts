@@ -22,6 +22,11 @@ declare interface ITimelineWebPartStrings {
   ConfigureWebPartLabel: string;
   ConfigureDescription: string;
   ConfigureLabel: string;
+  AscendingLabel: string;
+  DescendingLabel: string;
+  VerticalLabel: string;
+  HorizontalLabel: string;
+  DateFormatText: string;
 }
 
 declare module 'TimelineWebPartStrings' {

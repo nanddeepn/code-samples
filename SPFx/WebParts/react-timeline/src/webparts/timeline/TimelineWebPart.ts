@@ -20,16 +20,16 @@ export interface ITimelineWebPartProps {
   layout: string;
   showImage: boolean;
   showDescription: boolean;
-  dateFormat : string;
+  dateFormat: string;
   sortOrder: string;
 }
 
-export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWebPartProps> {
+export default class TimelineWebPart extends BaseClientSideWebPart<ITimelineWebPartProps> {
   private TimelineService: TimelineService = null;
 
-  protected onInit(): Promise<void> {    
-      this.TimelineService = new TimelineService(this.context);
-      return Promise.resolve();
+  protected onInit(): Promise<void> {
+    this.TimelineService = new TimelineService(this.context);
+    return Promise.resolve();
   }
 
   public render(): void {
@@ -45,7 +45,7 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
         dateFormat: this.properties.dateFormat,
         sortOrder: this.properties.sortOrder
       }
-    );   
+    );
 
     ReactDom.render(element, this.domElement);
   }
@@ -88,25 +88,28 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
                 }),
                 PropertyPaneDropdown('layout', {
                   label: strings.LayoutFieldLabel,
-                  options: [                   
-                    { key: 'Vertical', text: 'Vertical' },
-                    { key: 'Horizontal', text: 'Horizontal' }            
+                  options: [
+                    { key: 'Vertical', text: strings.VerticalLabel },
+                    { key: 'Horizontal', text: strings.HorizontalLabel }
                   ]
                 }),
                 PropertyPaneToggle('showImage', {
-                  label: strings.ShowImageFieldLabel,checked:true
+                  label: strings.ShowImageFieldLabel,
+                  checked: true
                 }),
                 PropertyPaneToggle('showDescription', {
-                  label: strings.ShowDescriptionFieldLabel, checked: true
+                  label: strings.ShowDescriptionFieldLabel,
+                  checked: true
                 }),
                 PropertyPaneTextField('dateFormat', {
-                  label: strings.DateFormatFieldLabel
+                  label: strings.DateFormatFieldLabel,
+                  value: strings.DateFormatText
                 }),
                 PropertyPaneDropdown('sortOrder', {
                   label: strings.SortOrderFieldLabel,
-                  options: [                   
-                    { key: 'asc', text: 'Ascending' },
-                    { key: 'desc', text: 'Descending' }            
+                  options: [
+                    { key: 'asc', text: strings.AscendingLabel },
+                    { key: 'desc', text: strings.DescendingLabel }
                   ]
                 })
               ]

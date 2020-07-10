@@ -63,7 +63,9 @@ The sample also provisions sample data to the "Timeline" list, which can be used
 ### NPM Packages Used
 
 Below NPM package is used to develop this sample.
-1.	@pnp/sp (https://www.npmjs.com/package/@pnp/sp)
+1. @pnp/sp (https://www.npmjs.com/package/@pnp/sp)
+2. @pnp/spfx-controls-react (https://pnp.github.io/sp-dev-fx-controls-react/)
+3. @pnp/spfx-property-controls (https://pnp.github.io/sp-dev-fx-property-controls/)
 
 ## Used SharePoint Framework Version 
 

@@ -19,6 +19,9 @@ define([], function () {
     "DateLabel": "Date",
     "DescriptionLabel": "Description",
     "PictureURLLabel": "Picture URL",
-    "LinkURLLabel": "Link URL"
+    "LinkURLLabel": "Link URL",
+    "ConfigureWebPartLabel": "Configure your timeline",
+    "ConfigureDescription": "Please select the list with timeline information",
+    "ConfigureLabel": "Configure"
   }
 });

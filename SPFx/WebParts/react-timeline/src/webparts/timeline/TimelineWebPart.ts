@@ -11,6 +11,7 @@ import * as strings from 'TimelineWebPartStrings';
 import Timeline from './components/Timeline';
 import { ITimelineProps } from './components/ITimelineProps';
 import TimelineService from '../../services/TimelineService';
+import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy, ISPList } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 import { IDropdownOption } from 'office-ui-fabric-react/lib/components/Dropdown';
 
 export interface ITimelineWebPartProps {
@@ -71,8 +72,19 @@ export default class TimelineWebPart extends BaseClientSideWebPart <ITimelineWeb
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
                 }),
-                PropertyPaneTextField('listName', {
-                  label: strings.ListNameFieldLabel
+                PropertyFieldListPicker('listName', {
+                  label: strings.ListNameFieldLabel,
+                  selectedList: this.properties.listName,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'listPickerFieldId',
+                  baseTemplate: 100
                 }),
                 PropertyPaneDropdown('layout', {
                   label: strings.LayoutFieldLabel,

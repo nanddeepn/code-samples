@@ -19,6 +19,9 @@ declare interface ITimelineWebPartStrings {
   DescriptionLabel: string;
   PictureURLLabel: string;
   LinkURLLabel: string;
+  ConfigureWebPartLabel: string;
+  ConfigureDescription: string;
+  ConfigureLabel: string;
 }
 
 declare module 'TimelineWebPartStrings' {

@@ -22,7 +22,6 @@
     "officeFabricIconFontName": "TimelineProgress",
     "properties": {
       "description": "Timeline Events",
-      "listName": "Timeline",
       "layout": "Vertical",
       "showImage": true,
       "showDescription": true,

@@ -1,13 +1,24 @@
-define([], function() {
+define([], function () {
   return {
     "PropertyPaneDescription": "Description",
     "BasicGroupName": "Group Name",
     "DescriptionFieldLabel": "WebPart Title",
-    "ListNameFieldLabel":"List Name",
-    "LayoutFieldLabel":"Layout Type",
-    "ShowImageFieldLabel":"Show Image",
+    "ListNameFieldLabel": "List Name",
+    "LayoutFieldLabel": "Layout Type",
+    "ShowImageFieldLabel": "Show Image",
     "ShowDescriptionFieldLabel": "Show Description",
     "DateFormatFieldLabel": "Date Format",
-    "SortOrderFieldLabel": "Sort Direction"
+    "SortOrderFieldLabel": "Sort Direction",
+    "EditEventLabel": "Edit Event",
+    "UpdateEventLabel": "Update Event",
+    "AddEventLabel": "Add Event",
+    "DeleteEventLabel": "Delete Event",
+    "DeleteEventConfirmationLabel": "Do you want to delete this event?",
+    "CloseLabel": "Close",
+    "TitleLabel": "Title",
+    "DateLabel": "Date",
+    "DescriptionLabel": "Description",
+    "PictureURLLabel": "Picture URL",
+    "LinkURLLabel": "Link URL"
   }
 });

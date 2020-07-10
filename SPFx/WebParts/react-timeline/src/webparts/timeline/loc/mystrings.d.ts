@@ -8,6 +8,17 @@ declare interface ITimelineWebPartStrings {
   ShowDescriptionFieldLabel: string;
   DateFormatFieldLabel: string;
   SortOrderFieldLabel: string;
+  EditEventLabel: string;
+  UpdateEventLabel: string;
+  AddEventLabel: string;
+  DeleteEventLabel: string;
+  DeleteEventConfirmationLabel: string;
+  CloseLabel: string;
+  TitleLabel: string;
+  DateLabel: string;
+  DescriptionLabel: string;
+  PictureURLLabel: string;
+  LinkURLLabel: string;
 }
 
 declare module 'TimelineWebPartStrings' {

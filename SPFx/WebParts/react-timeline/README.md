@@ -121,3 +121,5 @@ This sample web part displays list of events in chronological order with data st
 [figure5]: ./assets/layout-horizontal.png
 [figure6]: ./assets/list-schema.png
 [figure7]: ./assets/list-sample-data.png
+
+<img src="https://telemetry.sharepointpnp.com/sp-dev-fx-webparts/samples/react-timeline" />

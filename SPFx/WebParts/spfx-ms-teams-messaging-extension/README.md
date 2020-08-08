@@ -1,8 +1,9 @@
-# spfx-ms-teams-messaging-extension
+# SPFx web part as MS Teams messaging extension
 
 ## Summary
 
-Short summary on functionality and used technologies.
+SharePoint Framework v1.11 supports to host our SPFx web parts as MS Teams messaging extension. This offers more power to the developers so that they can now extend SPFx web parts to MS Teams as messaging extension.
+In this solution, we will develop SPFx web part “Planet Explorer”, which help us to explore the planet information and later add it as MS Teams messaging extension.
 
 [picture of the solution in action, if possible]
 

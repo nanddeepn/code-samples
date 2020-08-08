@@ -1,4 +1,4 @@
-# Microsoft Teams App - Basic bot for Messaging extension
+# Microsoft Teams App - Planet Explorer bot for Messaging extension
 
 Generate a Microsoft Teams application.
 

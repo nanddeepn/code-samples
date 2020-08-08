@@ -2,7 +2,7 @@
 
 Generate a Microsoft Teams application.
 
-This bot responds to the user queries for [SPFx web part as MS Teams messaging extension](https://github.com/nanddeepn/code-samples/tree/master/SPFx/WebParts/spfx-ms-teams-messaging-extension).
+This bot responds to the user queries for [SPFx web part as MS Teams messaging extension](https://github.com/nanddeepn/code-samples/tree/master/SPFx/WebParts/spfx-ms-teams-messaging-extension) by returning the planet information.
 
 ## Getting started with Microsoft Teams Apps development
 

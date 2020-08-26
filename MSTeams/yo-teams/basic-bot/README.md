@@ -1,8 +1,8 @@
-# yo teams basic bot - Microsoft Teams App
+# Microsoft Teams App - Planet Explorer bot for Messaging extension
 
 Generate a Microsoft Teams application.
 
-TODO: Add your documentation here
+This bot responds to the user queries for [SPFx web part as MS Teams messaging extension](https://github.com/nanddeepn/code-samples/tree/master/SPFx/WebParts/spfx-ms-teams-messaging-extension) by returning the planet information.
 
 ## Getting started with Microsoft Teams Apps development
 

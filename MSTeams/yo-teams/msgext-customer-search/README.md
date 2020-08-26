@@ -3,7 +3,9 @@
 Messaging extensions enable users to execute search queries or trigger actions in external systems. The results of these actions are sent from your custom web service to the Microsoft Teams client as embedded web pages or richly formatted cards.
 In this sample, we will create search messaging extensions in a custom Microsoft Teams app using Yo Teams. The search message extension searches the Northwind database.
 
-Please refer related article [here]() 
+![](https://nanddeepnachanblogs.com/media/2020-08-19-search-messaging-extensions-ms-teams/15.gif)
+
+Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-08-19-search-messaging-extensions-ms-teams/) 
 
 ## Getting started with Microsoft Teams Apps development
 
@@ -117,3 +119,5 @@ SET DEBUG=msteams
 ```
 
 If you are using Microsoft Azure to host your Microsoft Teams app, then you can add `DEBUG` as an Application Setting with the value of `msteams`.
+
+[![HitCount](http://hits.dwyl.com/nanddeepn/https://githubcom/nanddeepn/code-samples/tree/master/MSTeams/yo-teams/msgext-customer-search.svg)](http://hits.dwyl.com/nanddeepn/https://githubcom/nanddeepn/code-samples/tree/master/MSTeams/yo-teams/msgext-customer-search)

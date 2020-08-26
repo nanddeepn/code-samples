@@ -1,8 +1,9 @@
-# CustomerSearch - Microsoft Teams App
+# Search Messaging Extensions for MS Teams with Yo Teams (CustomerSearch - Microsoft Teams App)
 
-Generate a Microsoft Teams application.
+Messaging extensions enable users to execute search queries or trigger actions in external systems. The results of these actions are sent from your custom web service to the Microsoft Teams client as embedded web pages or richly formatted cards.
+In this sample, we will create search messaging extensions in a custom Microsoft Teams app using Yo Teams. The search message extension searches the Northwind database.
 
-TODO: Add your documentation here
+Please refer related article [here]() 
 
 ## Getting started with Microsoft Teams Apps development
 

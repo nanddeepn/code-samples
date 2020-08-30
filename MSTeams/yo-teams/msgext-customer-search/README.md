@@ -5,7 +5,7 @@ In this sample, we will create search messaging extensions in a custom Microsoft
 
 ![](https://nanddeepnachanblogs.com/media/2020-08-19-search-messaging-extensions-ms-teams/15.gif)
 
-Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-08-19-search-messaging-extensions-ms-teams/) 
+Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-08-19-search-messaging-extensions-ms-teams/).
 
 ## Getting started with Microsoft Teams Apps development
 

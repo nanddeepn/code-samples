@@ -5,7 +5,7 @@ In this sample, we will create search messaging extensions in a custom Microsoft
 
 ![](https://nanddeepnachanblogs.com/media/2020-08-19-search-messaging-extensions-ms-teams/15.gif)
 
-Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-08-19-search-messaging-extensions-ms-teams/) 
+Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-08-19-search-messaging-extensions-ms-teams/).
 
 ## Getting started with Microsoft Teams Apps development
 
@@ -120,4 +120,4 @@ SET DEBUG=msteams
 
 If you are using Microsoft Azure to host your Microsoft Teams app, then you can add `DEBUG` as an Application Setting with the value of `msteams`.
 
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/nanddeepn/code-samples/edit/master/MSTeams/yo-teams/msgext-customer-search)
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/nanddeepn/code-samples/tree/master/MSTeams/yo-teams/msgext-customer-search/)

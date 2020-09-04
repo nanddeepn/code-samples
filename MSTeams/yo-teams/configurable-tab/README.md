@@ -2,7 +2,9 @@
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Configurable tabs give you the opportunity to allow the user to specify some configuration information before the tab is added.
 
+![](https://nanddeepnachanblogs.com/media/2020-09-04-implementing-configurable-tabs-for-ms-teams/07.png)
 
+Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-09-04-implementing-configurable-tabs-for-ms-teams/).
 
 ## Getting started with Microsoft Teams Apps development
 

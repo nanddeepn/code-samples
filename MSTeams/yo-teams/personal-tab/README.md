@@ -1,8 +1,10 @@
-# PersonalTab - Microsoft Teams App
+# Personal Tab - Microsoft Teams App
 
-Generate a Microsoft Teams application.
+Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs can be used to bring an existing web-based resource inside Teams or provide webpage content to users.
 
-TODO: Add your documentation here
+![](https://nanddeepnachanblogs.com/media/2020-09-02-implementing-personal-tabs-for-ms-teams/05.png)
+
+Please refer related article [here](https://nanddeepnachanblogs.com/posts/2020-09-02-implementing-personal-tabs-for-ms-teams/).
 
 ## Getting started with Microsoft Teams Apps development
 

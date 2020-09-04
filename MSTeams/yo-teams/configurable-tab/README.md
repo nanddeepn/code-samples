@@ -1,8 +1,8 @@
-# ConfigurableTab - Microsoft Teams App
+# Configurable Tab - Microsoft Teams App
 
-Generate a Microsoft Teams application.
+Tabs are Teams-aware webpages embedded in Microsoft Teams. Configurable tabs give you the opportunity to allow the user to specify some configuration information before the tab is added.
 
-TODO: Add your documentation here
+
 
 ## Getting started with Microsoft Teams Apps development
 
@@ -116,3 +116,5 @@ SET DEBUG=msteams
 ```
 
 If you are using Microsoft Azure to host your Microsoft Teams app, then you can add `DEBUG` as an Application Setting with the value of `msteams`.
+
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/nanddeepn/code-samples/tree/master/MSTeams/yo-teams/configurable-tab/)

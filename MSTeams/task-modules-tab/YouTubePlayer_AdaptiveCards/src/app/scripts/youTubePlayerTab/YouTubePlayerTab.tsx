@@ -1,22 +1,15 @@
 import * as React from "react";
-import {
-    Provider,
-    Flex,
-    Text,
-    Button,
-    Header,
-    ThemePrepared,
-    themes,
-    Input
-} from "@fluentui/react-northstar";
+import { Provider, Flex, Text, Input, Button, Header } from "@fluentui/react-northstar";
 import TeamsBaseComponent, { ITeamsBaseComponentState } from "msteams-react-base-component";
 import * as microsoftTeams from "@microsoft/teams-js";
+import * as jwt from "jsonwebtoken";
 /**
  * State for the youTubePlayerTabTab React component
  */
 export interface IYouTubePlayerTabState extends ITeamsBaseComponentState {
     entityId?: string;
-    teamsTheme: ThemePrepared;
+    name?: string;
+    error?: string;
     youTubeVideoId?: string;
 }
 
@@ -33,26 +26,32 @@ export interface IYouTubePlayerTabProps {
 export class YouTubePlayerTab extends TeamsBaseComponent<IYouTubePlayerTabProps, IYouTubePlayerTabState> {
 
     public async componentWillMount() {
-        this.updateComponentTheme(this.getQueryVariable("theme"));
-        this.setState(Object.assign({}, this.state, {
-            youTubeVideoId: "VlEH4vtaxp4"
-        }));
+        this.updateTheme(this.getQueryVariable("theme"));
 
-        if (await this.inTeams()) {
-            microsoftTeams.initialize();
-            microsoftTeams.registerOnThemeChangeHandler(this.updateComponentTheme);
+        microsoftTeams.initialize(() => {
+            microsoftTeams.registerOnThemeChangeHandler(this.updateTheme);
             microsoftTeams.getContext((context) => {
-                microsoftTeams.appInitialization.notifySuccess();
                 this.setState({
                     entityId: context.entityId
                 });
                 this.updateTheme(context.theme);
+                microsoftTeams.authentication.getAuthToken({
+                    successCallback: (token: string) => {
+                        const decoded: { [key: string]: any; } = jwt.decode(token) as { [key: string]: any; };
+                        this.setState({ name: decoded!.name });
+                        microsoftTeams.appInitialization.notifySuccess();
+                    },
+                    failureCallback: (message: string) => {
+                        this.setState({ error: message });
+                        microsoftTeams.appInitialization.notifyFailure({
+                            reason: microsoftTeams.appInitialization.FailedReason.AuthFailed,
+                            message
+                        });
+                    },
+                    resources: [process.env.YOUTUBEPLAYER_APP_URI as string]
+                });
             });
-        } else {
-            this.setState({
-                entityId: "This is not hosted in Microsoft Teams"
-            });
-        }
+        });
     }
 
     /**
@@ -119,28 +118,5 @@ export class YouTubePlayerTab extends TeamsBaseComponent<IYouTubePlayerTabProps,
             height: 700
         };
         microsoftTeams.tasks.startTask(taskModuleInfo);
-    }
-
-    private updateComponentTheme = (teamsTheme: string = "default"): void => {
-        let theme: ThemePrepared;
-
-        switch (teamsTheme) {
-            case "default":
-                theme = themes.teams;
-                break;
-            case "dark":
-                theme = themes.teamsDark;
-                break;
-            case "contrast":
-                theme = themes.teamsHighContrast;
-                break;
-            default:
-                theme = themes.teams;
-                break;
-        }
-        // update the state
-        this.setState(Object.assign({}, this.state, {
-            teamsTheme: theme
-        }));
     }
 }

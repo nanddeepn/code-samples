@@ -1,11 +1,11 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
-  "id": "3386faf0-109f-11ea-9799-77a28170bd5d",
-  "version": "1.0.0",
-  "packageName": "youtubeplayer",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.7",
+  "id": "{{APPLICATION_ID}}",
+  "version": "{{VERSION}}",
+  "packageName": "{{PACKAGE_NAME}}",
   "developer": {
-    "name": "Contoso",
+    "name": "Nanddeep Nachan",
     "websiteUrl": "https://{{HOSTNAME}}",
     "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
     "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
@@ -26,9 +26,9 @@
   "configurableTabs": [],
   "staticTabs": [
     {
-      "entityId": "default-data",
+      "entityId": "6426c0f1-db9b-416b-bb28-9f8570765e85",
       "name": "YouTube Player",
-      "contentUrl": "https://{{HOSTNAME}}/youTubePlayerTab/",
+      "contentUrl": "https://{{HOSTNAME}}/youTubePlayerTab/?name={loginHint}&tenant={tid}&theme={theme}",
       "scopes": [
         "personal"
       ]
@@ -43,5 +43,10 @@
   ],
   "validDomains": [
     "{{HOSTNAME}}"
-  ]
+  ],
+  "showLoadingIndicator": false,
+  "webApplicationInfo": {
+    "id": "{{YOUTUBEPLAYER_APP_ID}}",
+    "resource": "{{YOUTUBEPLAYER_APP_URI}}"
+  }
 }

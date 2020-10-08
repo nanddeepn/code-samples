@@ -65,7 +65,7 @@ var config = [{
             path: __dirname + '/dist/web/scripts',
             filename: '[name].js',
             libraryTarget: 'umd',
-            library: 'youTubePlayer',
+            library: 'youTubePlayerAdaptiveCards',
             publicPath: '/scripts/'
         },
         externals: {},

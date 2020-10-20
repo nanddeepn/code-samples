@@ -1,8 +1,10 @@
 # YouTube Player - Microsoft Teams App
 
-Generate a Microsoft Teams application.
+Task modules enable us to implement modal popup experiences in MS Teams applications. In this code sample, we will create task modules in a custom Microsoft Teams app using Yo Teams.
 
-TODO: Add your documentation here
+![](https://nanddeepnachanblogs.com/media/2020-10-06-implementing-task-modules-for-ms-teams-with-yo-teams/09.gif)
+
+The supported article can be found [here](https://nanddeepnachanblogs.com/posts/2020-10-06-implementing-task-modules-for-ms-teams-with-yo-teams/).
 
 ## Getting started with Microsoft Teams Apps development
 

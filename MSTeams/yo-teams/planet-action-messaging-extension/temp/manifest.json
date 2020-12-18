@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.6/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.6",
+  "id": "",
+  "version": "0.0.1",
+  "packageName": "planetmessagingextension",
+  "developer": {
+    "name": "Nanddeep Nachan",
+    "websiteUrl": "https://f15f5b0d89d8.ngrok.io",
+    "privacyUrl": "https://f15f5b0d89d8.ngrok.io/privacy.html",
+    "termsOfUseUrl": "https://f15f5b0d89d8.ngrok.io/tou.html"
+  },
+  "name": {
+    "short": "Planet Messaging",
+    "full": "Planet Messaging"
+  },
+  "description": {
+    "short": "TODO: add short description here",
+    "full": "TODO: add full description here"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [],
+  "staticTabs": [],
+  "bots": [],
+  "connectors": [],
+  "composeExtensions": [
+    {
+      "botId": "3929e79b-493f-4068-b479-f3a3cd6b6398",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "planetActionMessagingMessageExtension",
+          "title": "Planet Action Messaging",
+          "description": "Add a clever description here",
+          "initialRun": true,
+          "type": "action",
+          "context": [
+            "compose",
+            "commandBox",
+            "message"
+          ],
+          "fetchTask": true
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "f15f5b0d89d8.ngrok.io"
+  ],
+  "showLoadingIndicator": true
+}

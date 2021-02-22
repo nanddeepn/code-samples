@@ -1,0 +1,33 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+
+.shared {
+    .container {
+        box-sizing: border-box;
+        padding: 0 5px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .row {
+        background: #f8f9fc;
+    }
+
+    .column {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .title {
+        @include ms-font-xl;
+        color: #2e3031;
+    }
+
+    .subTitle {
+        @include ms-font-l;
+        color: #2e3031;
+    }
+
+    .description {
+        @include ms-font-l;
+        color: #2e3031;
+    }
+}

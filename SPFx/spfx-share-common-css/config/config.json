@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "common-css-demo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/commonCssDemo/CommonCssDemoWebPart.js",
+          "manifest": "./src/webparts/commonCssDemo/CommonCssDemoWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CommonCssDemoWebPartStrings": "lib/webparts/commonCssDemo/loc/{locale}.js"
+  }
+}

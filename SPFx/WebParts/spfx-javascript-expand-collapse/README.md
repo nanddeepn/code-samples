@@ -2,9 +2,9 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Expand / collapse (aka Accordion) is a very common requirement in SPFx web parts. In this sample, we will explore implementing expand / collapse functionality in SPFx using plain JavaScript. 
 
-[picture of the solution in action, if possible]
+![](https://nanddeepnachanblogs.com/media/2021-05-11-implement-expand-collapse-spfx/02.gif)
 
 ## Used SharePoint Framework Version
 
@@ -52,17 +52,7 @@ Version|Date|Comments
 
 ## Features
 
-Description of the extension that expands upon high-level summary above.
-
-This extension illustrates the following concepts:
-
-- topic 1
-- topic 2
-- topic 3
-
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+For more information, please read out my detailed [article](https://nanddeepnachanblogs.com/posts/2021-05-11-implement-expand-collapse-spfx/).
 
 ## References
 

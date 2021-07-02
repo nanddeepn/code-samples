@@ -70,7 +70,7 @@
               "title": "Submit",
               "verb": "createIncident",
               "data": {
-                "IncidentCreator": "${createdBy}",
+                "CreatedBy": "${createdBy}",
                 "ServiceName": "${serviceName}",
                 "ImagePath": "${imagePath}"
               }

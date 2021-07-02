@@ -10,9 +10,9 @@ namespace IncidentManagement.Models
         public string incidentTitle { get; set; }
         public string incidentDescription { get; set; }
         public string incidentCategory { get; set; }
-        public string IncidentCreator { get; set; }
+        public string CreatedBy { get; set; }
         public string ServiceName { get; set; }
-        public string ImagePath { get; set; }
+        public string imagePath { get; set; }
         public string incidentStatus { get; set; }
     }
 }

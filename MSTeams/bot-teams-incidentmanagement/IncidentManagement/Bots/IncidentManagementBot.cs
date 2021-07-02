@@ -43,6 +43,7 @@ namespace IncidentManagement
         private string serviceName = string.Empty;
         private string imagePath = string.Empty;
         private static string approverName = "Debra Berger";
+        private static string imageBasePath = "https://raw.githubusercontent.com/nanddeepn/code-samples/master/MSTeams/bot-teams-incidentmanagement/IncidentManagement/Images/";
         private List<MemberDetails> memberDetails = new List<MemberDetails> { };
 
         public IncidentManagementBot(UserState userState, IConfiguration configuration)
@@ -76,17 +77,17 @@ namespace IncidentManagement
             if (input.ToLower().Contains("raise", StringComparison.InvariantCultureIgnoreCase))
             {
                 serviceName = "Office 365";
-                imagePath = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg";
+                imagePath = $"{imageBasePath}/office365_logo.jpg";
 
                 if (input.ToLower().Contains("sharepoint", StringComparison.InvariantCultureIgnoreCase))
                 {
                     serviceName = "SharePoint";
-                    //imagePath = Path.Combine(Environment.CurrentDirectory, "Images", "sharepoint_logo.png");
+                    imagePath = $"{imageBasePath}/sharepoint_logo.png";
                 }
                 else if (input.ToLower().Contains("teams", StringComparison.InvariantCultureIgnoreCase))
                 {
                     serviceName = "MS Teams";
-                    //imagePath = Path.Combine(Environment.CurrentDirectory, "Images", "teams_logo.png");
+                    imagePath = $"{imageBasePath}/teams_logo.png";
                 }
 
                 var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
@@ -105,26 +106,8 @@ namespace IncidentManagement
             }
         }
 
-        //private async Task<string[]> GetChannelUsersMRI(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        //{
-        //    var members = new List<TeamsChannelAccount>();
-        //    string continuationToken = null;
-
-        //    do
-        //    {
-        //        var currentPage = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, continuationToken, cancellationToken);
-        //        continuationToken = currentPage.ContinuationToken;
-        //        members.AddRange(currentPage.Members);
-        //    }
-        //    while (continuationToken != null);
-
-        //    return members.Select(x => x.Id).ToArray();
-        //}
-
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            //turnContext.Activity.Name            
-
             if (AdaptiveCardInvokeValidator.IsAdaptiveCardAction(turnContext) && (turnContext.Activity.Name == "adaptiveCard/action"))
             {
                 var userSA = _userState.CreateProperty<User>(nameof(User));
@@ -206,7 +189,7 @@ namespace IncidentManagement
             return CardResponse("CreateIncident.json", new
             {
                 serviceName = cardOptions.serviceName,
-                imagePath = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
                 createdBy = cardOptions.createdBy
             });
@@ -216,12 +199,12 @@ namespace IncidentManagement
         {
             var cardData = new
             {
-                createdBy = cardOptions.incidentCreator,
+                createdBy = cardOptions.createdBy,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.serviceName,
-                imagePath = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
-                profileImage = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                profileImage = $"{imageBasePath}/profile_pic.jpg",
                 assignedToName = approverName,
                 incidentTitle = cardOptions.incidentTitle,
                 incidentDescription = cardOptions.incidentDescription,
@@ -267,10 +250,10 @@ namespace IncidentManagement
                 createdBy = cardOptions.createdBy,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.serviceName,
-                imagePath = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
                 assignedToName = approverName,
-                profileImage = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                profileImage = $"{imageBasePath}/profile_pic.jpg",
                 incidentTitle = cardOptions.incidentTitle,
                 incidentDescription = cardOptions.incidentDescription,
                 incidentCategory = cardOptions.incidentCategory,
@@ -299,12 +282,12 @@ namespace IncidentManagement
         {
             var cardData = new
             {
-                createdBy = cardOptions.IncidentCreator,
+                createdBy = cardOptions.CreatedBy,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.ServiceName,
-                imagePath = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.ServiceName,
-                profileImage = "https://nanddeepnachanblogs.com/assets/images/profile_pic.jpg",
+                profileImage = $"{imageBasePath}/profile_pic.jpg",
                 incidentTitle = cardOptions.incidentTitle,
                 incidentDescription = cardOptions.incidentDescription,
                 incidentCategory = cardOptions.incidentCategory,

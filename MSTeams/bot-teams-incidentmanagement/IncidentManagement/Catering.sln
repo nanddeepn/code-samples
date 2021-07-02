@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.809.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catering", "Catering.csproj", "{9936D79E-ACCA-475D-B857-957096B977C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentManagement", "IncidentManagement.csproj", "{9936D79E-ACCA-475D-B857-957096B977C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

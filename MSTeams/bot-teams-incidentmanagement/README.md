@@ -1,6 +1,6 @@
-# Teams Catering Bot
+# Teams IncidentManagement Bot
 
-Bot Framework v1.4 TeamsCateringBot sample.
+Bot Framework v1.4 TeamsIncidentManagementBot sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V2.
 
@@ -16,7 +16,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 # Document Manager  
 
 ## Summary
-Teams Catering bot is a sample app that provides an experience of ordering food and drinks. This sample makes use of Teams platform capabilities like `Universal Bots` to bring a restaurant ordering feature to life. 
+Teams IncidentManagement bot is a sample app that provides an experience of ordering food and drinks. This sample makes use of Teams platform capabilities like `Universal Bots` to bring a restaurant ordering feature to life. 
 
 <img src="./Assets/Images/sequentialWorkflow.gif" alt="sequential order" width="600" height="300">
 
@@ -114,7 +114,7 @@ Step 3: Run the app locally
 
 2. Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/bot-teams-catering/csharp` folder
+  A) From a terminal, navigate to `samples/bot-teams-IncidentManagement/csharp` folder
 
   ```bash
   # run the bot
@@ -125,8 +125,8 @@ Step 3: Run the app locally
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-teams-catering/csharp` folder
-  - Select `Catering.csproj` file
+  - Navigate to `samples/bot-teams-IncidentManagement/csharp` folder
+  - Select `IncidentManagement.csproj` file
   - Press `F5` to run the project
 
 3. Update the appsettings.json files. 
@@ -170,7 +170,7 @@ eg: https://smba.trafficmanager.net/amer/v3
 ### Screenshots
 **Upload the custom app in Teams**
 
-<img src="./Assets/Images/UploadTeamsCateringBot.png"  width="600" height="500">
+<img src="./Assets/Images/UploadTeamsIncidentManagementBot.png"  width="600" height="500">
 
 ### Interaction with the Bot
 - Ping the bot in 1:1 or channel scope

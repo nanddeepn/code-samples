@@ -1,0 +1,175 @@
+{
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "editOrResolveIncident",
+      "data": {
+        "CreatedBy": "${createdBy}",
+        "ServiceName": "${serviceName}",
+        "ImagePath": "${imagePath}",
+        "AssignedToName": "${assignedToName}",
+        "IncidentTitle": "${incidentTitle}",
+        "IncidentDescription": "${incidentDescription}",
+        "IncidentCategory": "${incidentCategory}",
+        "UserMRI": "${userMRI}"
+      }
+    },
+    "userIds": [ "29:1A5yjDLWO9iiGFheMqxrFIqM6WAq9Wen0aOgnqEIXEC6DAy4-Z72SbyPPWAuDlWgzIzQ61Nsia2k_dOWuybtMpw", "29:1XfuQj4TkNvCwCysiv_LbwpuAZZ_eypWhT9hmscJyuHGkOdDZUMUJmwAOjKf7cvGE2lwHGtlqT5KxbXHO7Sd37A" ]
+  },
+  "body": [
+    {
+      "type": "Image",
+      "url": "${imagePath}",
+      "altText": "${imageAlt}",
+      "size": "auto"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "style": "Person",
+              "url": "${profileImage}",
+              "size": "Small"
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "${createdBy}",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "Created ${createdUtc}",
+              "isSubtle": true,
+              "wrap": true
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "bleed": true,
+      "spacing": "Padding",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "size": "Small",
+              "text": "Incident Title",
+              "horizontalAlignment": "Center",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "separator": true,
+              "wrap": true,
+              "text": "${incidentTitle}",
+              "size": "Small",
+              "horizontalAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "bleed": true,
+      "spacing": "Padding",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "size": "Small",
+              "text": "Incident Description",
+              "horizontalAlignment": "Center",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "separator": true,
+              "wrap": true,
+              "text": "${incidentDescription}",
+              "size": "Small",
+              "horizontalAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "separator": true,
+      "bleed": true,
+      "spacing": "Padding",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "size": "Small",
+              "text": "Incident Category",
+              "horizontalAlignment": "Center",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "separator": true,
+              "wrap": true,
+              "text": "${incidentCategory}",
+              "size": "Small",
+              "horizontalAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

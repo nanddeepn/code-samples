@@ -76,7 +76,6 @@
               "weight": "Bolder",
               "size": "Small",
               "text": "Incident Title",
-              "horizontalAlignment": "Center",
               "wrap": true
             }
           ]
@@ -90,8 +89,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentTitle}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }
@@ -112,7 +110,6 @@
               "weight": "Bolder",
               "size": "Small",
               "text": "Incident Description",
-              "horizontalAlignment": "Center",
               "wrap": true
             }
           ]
@@ -126,8 +123,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentDescription}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }
@@ -148,7 +144,6 @@
               "weight": "Bolder",
               "size": "Small",
               "text": "Incident Category",
-              "horizontalAlignment": "Center",
               "wrap": true
             }
           ]
@@ -162,8 +157,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentCategory}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }

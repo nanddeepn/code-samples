@@ -58,7 +58,6 @@
               "weight": "Bolder",
               "size": "Small",
               "text": "Incident Title",
-              "horizontalAlignment": "Center",
               "wrap": true
             }
           ]
@@ -72,8 +71,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentTitle}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }
@@ -93,8 +91,7 @@
               "type": "TextBlock",
               "weight": "Bolder",
               "size": "Small",
-              "text": "Incident Description",
-              "horizontalAlignment": "Center",
+              "text": "Incident Description"
               "wrap": true
             }
           ]
@@ -108,8 +105,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentDescription}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }
@@ -129,8 +125,7 @@
               "type": "TextBlock",
               "weight": "Bolder",
               "size": "Small",
-              "text": "Incident Category",
-              "horizontalAlignment": "Center",
+              "text": "Incident Category"
               "wrap": true
             }
           ]
@@ -144,8 +139,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentCategory}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }
@@ -165,8 +159,7 @@
               "type": "TextBlock",
               "weight": "Bolder",
               "size": "Small",
-              "text": "Status",
-              "horizontalAlignment": "Center",
+              "text": "Status"
               "wrap": true
             }
           ]
@@ -180,8 +173,7 @@
               "separator": true,
               "wrap": true,
               "text": "${incidentStatus}",
-              "size": "Small",
-              "horizontalAlignment": "Center"
+              "size": "Small"
             }
           ]
         }

@@ -20,7 +20,7 @@ Teams Incident Management bot is a sample app for handling incidents in Microsof
 - Smita Nachan (right window): Member of Microsoft Teams channel. 
 This sample makes use of Teams platform capabilities like `Universal Bots`. 
 
-<img src="https://nanddeepnachanblogs.com/media/2021-07-05-universal-actions-adaptive-cards-teams/preview.gif" alt="sequential order" width="600" height="300">
+![](https://nanddeepnachanblogs.com/media/2021-07-05-universal-actions-adaptive-cards-teams/preview.gif)
 
 ## Frameworks
 

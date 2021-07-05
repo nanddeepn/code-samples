@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
   "manifestVersion": "1.10",
-  "id": "799af947-0236-4a37-99ba-1779e2000f37",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "version": "1.0.0",
   "packageName": "com.example.myapp",
   "developer": {
     "name": "Nanddeep Nachan",
-    "websiteUrl": "https://5ceba96e0ee8.ngrok.io",
-    "privacyUrl": "https://5ceba96e0ee8.ngrok.io/privacy.html",
-    "termsOfUseUrl": "https://5ceba96e0ee8.ngrok.io/tou.html"
+    "websiteUrl": "https://2d513d899e46.ngrok.io",
+    "privacyUrl": "https://2d513d899e46.ngrok.io/privacy.html",
+    "termsOfUseUrl": "https://2d513d899e46.ngrok.io/tou.html"
   },
   "name": {
     "short": "Incident Management",
@@ -27,7 +27,7 @@
   "staticTabs": [],
   "bots": [
     {
-      "botId": "799af947-0236-4a37-99ba-1779e2000f37",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "needsChannelSelector": true,
       "isNotificationOnly": false,
       "scopes": [
@@ -57,7 +57,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "5ceba96e0ee8.ngrok.io"
+    "2d513d899e46.ngrok.io"
   ],
   "showLoadingIndicator": true
 }

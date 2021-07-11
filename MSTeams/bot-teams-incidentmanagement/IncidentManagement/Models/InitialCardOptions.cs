@@ -5,6 +5,6 @@
         public string createdBy { get; set; }
         public string serviceName { get; set; }
         public string imagePath { get; set; }
-        public string createdByID { get; set; }
+        public string createdByUserID { get; set; }
     }
 }

@@ -7,12 +7,13 @@
       "verb": "initialRefresh",
       "data": {
         "CreatedBy": "${createdBy}",
+        "CreatedByUserID": "${createdByUserID}",
         "ServiceName": "${serviceName}",
         "ImagePath": "${imagePath}"
       }
     },
     "userIds": [
-      "${createdByID}"
+      "${createdByUserID}"
     ]
   },
   "body": [

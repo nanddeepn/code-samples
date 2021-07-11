@@ -7,9 +7,10 @@
       "verb": "cancelIncident",
       "data": {
         "CreatedBy": "${createdBy}",
+        "CreatedByUserID": "${createdByUserID}",
         "ServiceName": "${serviceName}",
         "ImagePath": "${imagePath}",
-        "AssignedToName": "${assignedToName}",
+        "AssignedToUserID": "${assignedToUserID}",
         "IncidentTitle": "${incidentTitle}",
         "IncidentDescription": "${incidentDescription}",
         "IncidentCategory": "${incidentCategory}",
@@ -175,11 +176,13 @@
           "fallback": "Action.Submit",
           "data": {
             "CreatedBy": "${createdBy}",
+            "CreatedByUserID": "${createdByUserID}",
             "ServiceName": "${serviceName}",
             "ImagePath": "${imagePath}",
             "IncidentTitle": "${incidentTitle}",
             "IncidentDescription": "${incidentDescription}",
             "IncidentCategory": "${incidentCategory}",
+            "AssignedToUserID": "${assignedToUserID}",
             "IncidentStatus": "Cancelled"
           }
         }

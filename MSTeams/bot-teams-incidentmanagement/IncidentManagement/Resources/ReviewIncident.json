@@ -7,16 +7,16 @@
       "verb": "editOrResolveIncident",
       "data": {
         "CreatedBy": "${createdBy}",
+        "CreatedByUserID": "${createdByUserID}",
         "ServiceName": "${serviceName}",
         "ImagePath": "${imagePath}",
-        "AssignedToName": "${assignedToName}",
+        "AssignedToUserID": "${assignedToUserID}",
         "IncidentTitle": "${incidentTitle}",
         "IncidentDescription": "${incidentDescription}",
-        "IncidentCategory": "${incidentCategory}",
-        "UserMRI": "${userMRI}"
+        "IncidentCategory": "${incidentCategory}"
       }
     },
-    "userIds": [ "29:1A5yjDLWO9iiGFheMqxrFIqM6WAq9Wen0aOgnqEIXEC6DAy4-Z72SbyPPWAuDlWgzIzQ61Nsia2k_dOWuybtMpw", "29:1XfuQj4TkNvCwCysiv_LbwpuAZZ_eypWhT9hmscJyuHGkOdDZUMUJmwAOjKf7cvGE2lwHGtlqT5KxbXHO7Sd37A" ]
+    "userIds": [ "${createdByUserID}", "${assignedToUserID}" ]
   },
   "body": [
     {

@@ -38,6 +38,16 @@
           "placeholder": "Please enter the incident description"
         },
         {
+          "type": "TextBlock",          
+          "text": "Assigned To"
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "choices": "${assignees}",
+          "id": "assignedToUserID",
+          "isMultiSelect": false
+        },
+        {
           "type": "TextBlock",
           "text": "Category"
         },
@@ -71,8 +81,10 @@
               "verb": "createIncident",
               "data": {
                 "CreatedBy": "${createdBy}",
+                "CreatedByUserID": "${createdByUserID}",
                 "ServiceName": "${serviceName}",
-                "ImagePath": "${imagePath}"
+                "ImagePath": "${imagePath}",
+                "AssignedToUserID": "${assignedToUserID}"
               }
             }
           ]

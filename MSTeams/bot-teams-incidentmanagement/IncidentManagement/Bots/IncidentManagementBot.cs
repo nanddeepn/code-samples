@@ -1,7 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using AdaptiveCards;
+﻿using AdaptiveCards;
+using AdaptiveCards.Templating;
 using IncidentManagement.Cards;
 using IncidentManagement.Models;
 using Microsoft.Bot.AdaptiveCards;
@@ -12,29 +10,17 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using AdaptiveCards.Templating;
 
 namespace IncidentManagement
 {
-    // This bot will respond to the user's input with an Adaptive Card.
-    // Adaptive Cards are a way for developers to exchange card content
-    // in a common and consistent way. A simple open card format enables
-    // an ecosystem of shared tooling, seamless integration between apps,
-    // and native cross-platform performance on any device.
-    // For each user interaction, an instance of this class is created and the OnTurnAsync method is called.
-    // This is a Transient lifetime service. Transient lifetime services are created
-    // each time they're requested. For each Activity received, a new instance of this
-    // class is created. Objects that are expensive to construct, or have a lifetime
-    // beyond the single turn, should be carefully managed.
 
     public class IncidentManagementBot : ActivityHandler
     {
@@ -42,7 +28,6 @@ namespace IncidentManagement
         private readonly IConfiguration _configuration;
         private string serviceName = string.Empty;
         private string imagePath = string.Empty;
-        private static string approverName = "Debra Berger";
         private static string imageBasePath = "https://raw.githubusercontent.com/nanddeepn/code-samples/master/MSTeams/bot-teams-incidentmanagement/IncidentManagement/Images/";
         private List<MemberDetails> memberDetails = new List<MemberDetails> { };
 
@@ -94,7 +79,7 @@ namespace IncidentManagement
                 await SendHttpToTeams(HttpMethod.Post, MessageFactory.Attachment(new CardResource("InitialCard.json").AsAttachment(
                             new
                             {
-                                createdById = member.Id,
+                                createdByUserID = member.Id,
                                 createdBy = turnContext.Activity.From.Name,
                                 serviceName = serviceName,
                                 imagePath = imagePath
@@ -134,7 +119,7 @@ namespace IncidentManagement
                         {
                             if (member.AadObjectId != turnContext.Activity.From.AadObjectId)
                             {
-                                var newMemberInfo = new MemberDetails { value = member.AadObjectId, title = member.Name };
+                                var newMemberInfo = new MemberDetails { value = member.Id, title = member.Name };
                                 memberDetails.Add(newMemberInfo);
                             }
                         }
@@ -153,12 +138,12 @@ namespace IncidentManagement
                     {
                         var cardOptions = AdaptiveCardInvokeValidator.ValidateAction<ReviewIncidentCardOptions>(request);
 
-                        if (cardOptions.createdBy == turnContext.Activity.From.Name)
+                        if (cardOptions.createdByUserID == turnContext.Activity.From.Id)
                         {
                             var responseBody = await ProcessCancelOrResolveIncident("CancelIncident.json", cardOptions, turnContext);
                             return CreateInvokeResponse(responseBody);
                         }
-                        else if (cardOptions.assignedToName == turnContext.Activity.From.Name)
+                        else if (cardOptions.assignedToUserID == turnContext.Activity.From.Id)
                         {
                             var responseBody = await ProcessCancelOrResolveIncident("ResolveIncident.json", cardOptions, turnContext);
                             return CreateInvokeResponse(responseBody);
@@ -191,7 +176,9 @@ namespace IncidentManagement
                 serviceName = cardOptions.serviceName,
                 imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
-                createdBy = cardOptions.createdBy
+                createdBy = cardOptions.createdBy,
+                createdByUserID = cardOptions.createdByUserID,
+                assignees = memberDetails
             });
         }
 
@@ -200,16 +187,16 @@ namespace IncidentManagement
             var cardData = new
             {
                 createdBy = cardOptions.createdBy,
+                createdByUserID = cardOptions.createdByUserID,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.serviceName,
                 imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
                 profileImage = $"{imageBasePath}/profile_image.png",
-                assignedToName = approverName,
+                assignedToUserID = cardOptions.assignedToUserID,
                 incidentTitle = cardOptions.incidentTitle,
                 incidentDescription = cardOptions.incidentDescription,
-                incidentCategory = cardOptions.incidentCategory,
-                userMRI = "29:1XfuQj4TkNvCwCysiv_LbwpuAZZ_eypWhT9hmscJyuHGkOdDZUMUJmwAOjKf7cvGE2lwHGtlqT5KxbXHO7Sd37A"
+                incidentCategory = cardOptions.incidentCategory
             };
 
             string cardJson;
@@ -238,21 +225,22 @@ namespace IncidentManagement
             string userMRI = string.Empty;
             if (cardName == "CancelIncident.json")
             {
-                userMRI = "29:1A5yjDLWO9iiGFheMqxrFIqM6WAq9Wen0aOgnqEIXEC6DAy4-Z72SbyPPWAuDlWgzIzQ61Nsia2k_dOWuybtMpw";
+                userMRI = cardOptions.createdByUserID;
             }
             else if (cardName == "ResolveIncident.json")
             {
-                userMRI = "29:1XfuQj4TkNvCwCysiv_LbwpuAZZ_eypWhT9hmscJyuHGkOdDZUMUJmwAOjKf7cvGE2lwHGtlqT5KxbXHO7Sd37A";
+                userMRI = cardOptions.assignedToUserID;
             }
 
             var cardData = new
             {
                 createdBy = cardOptions.createdBy,
+                createdByUserID = cardOptions.createdByUserID,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.serviceName,
                 imagePath = cardOptions.imagePath,
                 imageAlt = cardOptions.serviceName,
-                assignedToName = approverName,
+                assignedToUserID = cardOptions.assignedToUserID,
                 profileImage = $"{imageBasePath}/profile_image.png",
                 incidentTitle = cardOptions.incidentTitle,
                 incidentDescription = cardOptions.incidentDescription,
@@ -283,6 +271,7 @@ namespace IncidentManagement
             var cardData = new
             {
                 createdBy = cardOptions.CreatedBy,
+                createdByUserID = cardOptions.createdByUserID,
                 createdUtc = DateTime.Now.ToString("dddd, dd MMMM yyyy"),
                 serviceName = cardOptions.ServiceName,
                 imagePath = cardOptions.imagePath,

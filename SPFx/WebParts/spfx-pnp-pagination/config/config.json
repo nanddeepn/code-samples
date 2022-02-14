@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "pn-p-pagination-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/pnPPagination/PnPPaginationWebPart.js",
+          "manifest": "./src/webparts/pnPPagination/PnPPaginationWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PnPPaginationWebPartStrings": "lib/webparts/pnPPagination/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+  }
+}

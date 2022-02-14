@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "list-items-ace-adaptive-card-extension": {
+      "components": [
+        {
+          "entrypoint": "./lib/adaptiveCardExtensions/listItemsAce/ListItemsAceAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/listItemsAce/ListItemsAceAdaptiveCardExtension.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ListItemsAceAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/listItemsAce/loc/{locale}.js"
+  }
+}

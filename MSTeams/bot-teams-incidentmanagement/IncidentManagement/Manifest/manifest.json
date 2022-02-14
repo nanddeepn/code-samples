@@ -1,22 +1,22 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
   "manifestVersion": "1.10",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "23ce26f8-890c-492c-9e3e-bc90dc8c211c",
   "version": "1.0.0",
   "packageName": "com.example.myapp",
   "developer": {
     "name": "Nanddeep Nachan",
-    "websiteUrl": "https://2d513d899e46.ngrok.io",
-    "privacyUrl": "https://2d513d899e46.ngrok.io/privacy.html",
-    "termsOfUseUrl": "https://2d513d899e46.ngrok.io/tou.html"
+    "websiteUrl": "https://msteamsincidentmanagement.azurewebsites.net",
+    "privacyUrl": "https://msteamsincidentmanagement.azurewebsites.net/privacy.html",
+    "termsOfUseUrl": "https://msteamsincidentmanagement.azurewebsites.net/tou.html"
   },
   "name": {
     "short": "Incident Management",
     "full": "Incident Management"
   },
   "description": {
-    "short": "TODO: add short description here",
-    "full": "TODO: add full description here"
+    "short": "Teams Incident Management",
+    "full": "Teams Incident Management bot is a sample app for handling incidents in Microsoft Teams using Adaptive Cards."
   },
   "icons": {
     "outline": "bot-icon-outline-32x32.png",
@@ -27,7 +27,7 @@
   "staticTabs": [],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "23ce26f8-890c-492c-9e3e-bc90dc8c211c",
       "needsChannelSelector": true,
       "isNotificationOnly": false,
       "scopes": [
@@ -57,7 +57,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "2d513d899e46.ngrok.io"
+    "msteamsincidentmanagement.azurewebsites.net"
   ],
   "showLoadingIndicator": true
 }

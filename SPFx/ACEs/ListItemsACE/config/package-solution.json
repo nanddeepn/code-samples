@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "list-items-ace-client-side-solution",
+    "id": "d5660b07-8e2f-4f5d-8638-30c9b4edd16a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.13.0-beta.20"
+    }
+  },
+  "paths": {
+    "zippedPackage": "solution/list-items-ace.sppkg"
+  }
+}

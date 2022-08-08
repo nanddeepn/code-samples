@@ -1,0 +1,49 @@
+{
+  "schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "Bolder",
+      "text": "${title}"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "${subTitle}",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "VivaAction.GetLocation",
+      "id": "Get Location",
+      "title": "Get Location",
+      "parameters": {
+        "chooseLocationOnMap": true
+      }
+    },
+    {
+      "type": "VivaAction.ShowLocation",
+      "id": "Show Location",
+      "title": "Show Location",
+      "parameters": {
+        "locationCoordinates": {
+          "latitude": 18.5204,
+          "longitude": 73.8567
+        }
+      }
+    }
+  ]
+}

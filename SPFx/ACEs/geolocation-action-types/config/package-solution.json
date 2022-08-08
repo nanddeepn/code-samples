@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "geolocation-action-types-client-side-solution",
+    "id": "c6e4c17c-1dc2-4d52-9945-80dc749f1de6",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.15.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "geolocation-action-types description"
+      },
+      "longDescription": {
+        "default": "geolocation-action-types description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "geolocation-action-types Feature",
+        "description": "The feature that activates elements of the geolocation-action-types solution.",
+        "id": "311845a7-3607-4b45-acca-95a5282580c1",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/geolocation-action-types.sppkg"
+  }
+}

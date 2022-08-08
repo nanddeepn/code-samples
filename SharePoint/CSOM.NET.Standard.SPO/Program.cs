@@ -10,16 +10,16 @@ namespace CSOM.NET.Standard.SPO
     {
         static async Task Main(string[] args)
         {
-            string siteUrl = "https://tenant.sharepoint.com/sites/SPOSite";
-            string clientId = "<client-id-of-aad-app-registration>"; //e.g. 01e54f9a-81bc-4dee-b15d-e661ae13f382
+            string siteUrl = "https://nachan365.sharepoint.com/sites/SPDemo";
+            string clientId = "4880fe20-f156-4673-9e64-1dca3dd781ff"; //e.g. 01e54f9a-81bc-4dee-b15d-e661ae13f382
 
-            string certThumprint = "<your-cert-thumbprint>"; // e.g. 2EE4C1FA809152EC8ED73B513AE70149B140F079
+            string certThumprint = "62D913AC57F6896580496DABF9350D6E5557CDAD"; // e.g. 2EE4C1FA809152EC8ED73B513AE70149B140F079
 
             // For SharePoint app only auth, the scope will be the SharePoint tenant name followed by /.default
             var scopes = new string[] { "https://tenant.sharepoint.com/.default" };
 
             // Tenant id can be the tenant domain or it can also be the GUID found in Azure AD properties.
-            string tenantId = "tenant.onmicrosoft.com";
+            string tenantId = "nachan365.onmicrosoft.com";
 
             var accessToken = await GetApplicationAuthenticatedClient(clientId, certThumprint, scopes, tenantId);
             var clientContext = GetClientContextWithAccessToken(siteUrl, accessToken);

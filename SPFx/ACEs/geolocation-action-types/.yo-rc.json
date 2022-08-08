@@ -1,0 +1,17 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.15.0",
+    "libraryName": "geolocation-action-types",
+    "libraryId": "c6e4c17c-1dc2-4d52-9945-80dc749f1de6",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "geolocation-action-types",
+    "solutionShortDescription": "geolocation-action-types description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "adaptiveCardExtension",
+    "aceTemplateType": "PrimaryText"
+  }
+}

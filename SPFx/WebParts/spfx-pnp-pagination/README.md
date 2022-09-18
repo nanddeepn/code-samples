@@ -4,7 +4,7 @@
 
 Short summary on functionality and used technologies.
 
-[picture of the solution in action, if possible]
+![picture of the solution in action](https://nanddeepnachanblogs.com/media/2022-02-14-paging-spfx-pnp-navigation/demo.gif)
 
 ## Used SharePoint Framework Version
 

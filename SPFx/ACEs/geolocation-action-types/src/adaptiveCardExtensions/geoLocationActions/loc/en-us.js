@@ -4,8 +4,8 @@ define([], function() {
     "TitleFieldLabel": "Card title",
     "Title": "Adaptive Card Extension",
     "SubTitle": "Quick view",
-    "PrimaryText": "SPFx Adaptive Card Extension",
-    "Description": "Create your SPFx Adaptive Card Extension solution!",
-    "QuickViewButton": "Quick view"
+    "PrimaryText": "My Location",
+    "Description": "Share your location easily with SPFx",
+    "QuickViewButton": "Show options"
   }
 });

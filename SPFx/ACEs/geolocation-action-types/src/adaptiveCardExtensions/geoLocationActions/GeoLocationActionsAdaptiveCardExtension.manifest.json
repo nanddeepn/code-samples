@@ -18,9 +18,9 @@
     "group": { "default": "Dashboard" },
     "title": { "default": "GeoLocationActions" },
     "description": { "default": "GeoLocationActions description" },
-    "officeFabricIconFontName": "SharePointLogo",
+    "officeFabricIconFontName": "MapPin",
     "properties": {
-      "title": "GeoLocationActions"
+      "title": "Geo Location Actions"
     },
     "cardSize": "Medium"
   }]

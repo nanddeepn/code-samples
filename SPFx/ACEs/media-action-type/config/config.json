@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "media-action-type-adaptive-card-extension": {
+      "components": [
+        {
+          "entrypoint": "./lib/adaptiveCardExtensions/mediaActionType/MediaActionTypeAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/mediaActionType/MediaActionTypeAdaptiveCardExtension.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MediaActionTypeAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/mediaActionType/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "media-action-type-client-side-solution",
+    "id": "0261e787-c957-4d5d-bb54-b3c6f321698c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.16.0-beta.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "media-action-type description"
+      },
+      "longDescription": {
+        "default": "media-action-type description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "media-action-type Feature",
+        "description": "The feature that activates elements of the media-action-type solution.",
+        "id": "46528a2a-32f4-4ae8-a7eb-fc526a6adc70",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/media-action-type.sppkg"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": true,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.13.2",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.4.1"
+    },
+    "version": "1.16.0-beta.2",
+    "libraryName": "media-action-type",
+    "libraryId": "0261e787-c957-4d5d-bb54-b3c6f321698c",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "media-action-type",
+    "solutionShortDescription": "media-action-type description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "adaptiveCardExtension",
+    "aceTemplateType": "PrimaryText"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "wp-top-actions-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/wpTopActions/WpTopActionsWebPart.js",
+          "manifest": "./src/webparts/wpTopActions/WpTopActionsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WpTopActionsWebPartStrings": "lib/webparts/wpTopActions/loc/{locale}.js"
+  }
+}

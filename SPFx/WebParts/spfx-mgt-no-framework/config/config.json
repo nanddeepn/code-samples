@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "mgtsp-fx-no-framwork-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/mgtspFxNoFramwork/MgtspFxNoFramworkWebPart.js",
+          "manifest": "./src/webparts/mgtspFxNoFramwork/MgtspFxNoFramworkWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MgtspFxNoFramworkWebPartStrings": "lib/webparts/mgtspFxNoFramwork/loc/{locale}.js"
+  }
+}

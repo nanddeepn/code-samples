@@ -9,7 +9,7 @@ import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
-import { RetrievalQAChain } from 'langchain/chains';
+import { RetrievalQAChain } from "langchain/chains";
 
 // Split the Document into chunks for embedding and vector storage.
 const textSplitter = new RecursiveCharacterTextSplitter({
@@ -23,43 +23,56 @@ const loader = new CheerioWebBaseLoader(
 
 const model = new ChatOpenAI({
   azureOpenAIApiKey: config.openAIApiKey,
-  azureOpenAIApiVersion: "2023-07-01-preview",
-  azureOpenAIApiInstanceName: "az-nachan-oai",
-  azureOpenAIApiDeploymentName: "gpt-35-turbo"
+  azureOpenAIApiVersion: config.openAIAPIVersion,
+  azureOpenAIApiInstanceName: config.openAIInstanceName,
+  azureOpenAIApiDeploymentName: config.openAIChatModel
 });
+
+var chain: RetrievalQAChain;
 
 export class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
 
-    this.onMessage(async (context, next) => {
-      // get user message
-      const { text } = context.activity;
+    this.onMembersAdded(async (context, next) => {
+      await context.sendActivity("Hello and Welcome to the Teams Bot!");
+      await context.sendActivity("Please wait while I load the model and data...");
 
-      // send typing indicator
-      await context.sendActivities([{ type: "typing" }]);
-
+      // STEP 1: Load the data and split it into chunks for embedding and vector storage.
       const data = await loader.load();
       const splitDocs = await textSplitter.splitDocuments(data);
 
-      // Embed and store the splits in a vector database (in-memory)
+      // STEP 2: Embed and store the splits in a vector database (unoptimized, in-memory)
       const embeddings = new OpenAIEmbeddings({
         azureOpenAIApiKey: config.openAIApiKey,
-        azureOpenAIApiVersion: "2023-07-01-preview",
-        azureOpenAIApiInstanceName: "az-nachan-oai",
-        azureOpenAIApiDeploymentName: "text-embedding-ada-002",
+        azureOpenAIApiVersion: config.openAIAPIVersion,
+        azureOpenAIApiInstanceName: config.openAIInstanceName,
+        azureOpenAIApiDeploymentName: config.openAIEmbeddingModel,
         maxConcurrency: 5,
-        maxRetries: 10,
+        maxRetries: 10
       });
 
+      // STEP 3: Retrieve splits from storage 
       const vectorStore = await MemoryVectorStore.fromDocuments(splitDocs, embeddings);
+      chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
 
-      const chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
+      await context.sendActivity("I am ready to chat!");
+      await next();
+    });
+
+    this.onMessage(async (context, next) => {
+      // Get user message
+      const { text } = context.activity;
+
+      // Send typing indicator
+      await context.sendActivities([{ type: "typing" }]);
+
+      // STEP 4: Distill the retrieved documents into an answer using an LLM (e.g., gpt-3.5-turbo) with RetrievalQA chain.
       const response = await chain.call({
         query: text
       });
 
-      // send result to user
+      // Send result to user
       await context.sendActivity(response.text);
 
       // By calling next() you ensure that the next BotHandler is run.

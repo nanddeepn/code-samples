@@ -5,7 +5,7 @@ const config = {
   openAIInstanceName: process.env.OPENAI_INSTANCE_NAME,
   openAIChatModel: process.env.OPENAI_CHAT_MODEL,
   openAIEmbeddingModel: process.env.OPENAI_EMBEDDING_MODEL,
-  openAIAPIVersion: process.env.OPENAI_API_VERSION,
+  openAIAPIVersion: process.env.OPENAI_API_VERSION
 };
 
 export default config;

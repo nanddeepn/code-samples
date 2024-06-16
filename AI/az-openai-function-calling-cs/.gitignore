@@ -1,0 +1,40 @@
+# Compiled files
+*.dll
+*.exe
+*.pdb
+
+# NuGet packages
+*.nuget
+packages/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+AnyCPU/
+*.cache
+*.log
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Resharper files
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Misc
+[Tt]humbs.db
+*.DS_Store

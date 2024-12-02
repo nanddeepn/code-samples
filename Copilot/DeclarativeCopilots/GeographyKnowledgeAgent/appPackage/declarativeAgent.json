@@ -3,5 +3,19 @@
     "version": "v1.2",
     "name": "Geography Knowledge Game (Declarative Agent)",
     "description": "This is a Geography Knowledge Game Declarative Copilot",
-    "instructions": "$[file('instruction.txt')]"
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Countries Starting with A",
+            "text": "Can you name a country that starts with the letter 'A'?"
+        },
+        {
+            "title": "Most Time Zones",
+            "text": "Which country has the most time zones?"
+        },
+        {
+            "title": "Deepest Ocean",
+            "text": "Which ocean is the deepest on Earth?"
+        }
+    ]
 }

@@ -1,15 +1,15 @@
 {
     "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.2/schema.json",
     "version": "v1.2",
-    "name": "Agent",
-    "description": "This is a declarative agent to help search matching resumes",
+    "name": "RESTCountries",
+    "description": "This is a declarative agent designed to assist with searching for country information.",
     "instructions": "$[file('instruction.txt')]",
     "capabilities": [
         {
-            "name": "OneDriveAndSharePoint",
-            "items_by_url": [
+            "name": "GraphConnectors",
+            "connections": [
                 {
-                    "url": "https://contoso.sharepoint.com/sites/CopilotDemo/Resumes/"
+                    "connection_id": "restcountries"
                 }
             ]
         }

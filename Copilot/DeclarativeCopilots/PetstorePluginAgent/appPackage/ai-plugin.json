@@ -1,0 +1,29 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.2/schema.json",
+    "schema_version": "v2.2",
+    "name_for_human": "PetstorePluginAgent",
+    "description_for_human": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "namespace": "petstorepluginagent",
+    "functions": [
+        {
+            "name": "getPetById",
+            "description": "Returns a single pet"
+        }
+    ],
+    "runtimes": [
+        {
+            "type": "OpenApi",
+            "auth": {
+                "type": "ApiKeyPluginVault",
+                "reference_id": "${{API_KEY_REGISTRATION_ID}}"
+            },
+            "spec": {
+                "url": "apiSpecificationFile/openapi.json"
+            },
+            "run_for_functions": [
+                "getPetById"
+            ]
+        }
+    ],
+    "capabilities": {}
+}

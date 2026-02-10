@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@microsoft/adaptivecards-tools": "^1.0.0",
-        "botbuilder": "^4.20.0",
+        "botbuilder": "^4.23.3",
         "cheerio": "^1.0.0-rc.12",
         "langchain": "^0.0.197-rc.1",
         "restify": "^10.0.0"
